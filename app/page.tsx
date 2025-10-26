@@ -15,16 +15,16 @@ export default function HomePage() {
             <span className="font-bold text-xl">webnamiru.site</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link href="#sluzby" className="transition-colors hover:text-accent">
+            <Link href="/sluzby" className="transition-colors hover:text-accent">
               Služby
             </Link>
-            <Link href="#proces" className="transition-colors hover:text-accent">
-              Proces
-            </Link>
-            <Link href="#portfolio" className="transition-colors hover:text-accent">
+            <Link href="/portfolio" className="transition-colors hover:text-accent">
               Portfolio
             </Link>
-            <Link href="#kontakt" className="transition-colors hover:text-accent">
+            <Link href="/blog" className="transition-colors hover:text-accent">
+              Blog
+            </Link>
+            <Link href="/kontakt" className="transition-colors hover:text-accent">
               Kontakt
             </Link>
           </nav>
@@ -165,6 +165,13 @@ export default function HomePage() {
               </Card>
             ))}
           </div>
+          <div className="text-center mt-12">
+            <Button size="lg" asChild variant="outline" className="border-2 bg-transparent">
+              <Link href="/sluzby">
+                Zobrazit všechny služby <ArrowRight className="ml-2 h-4 w-4" />
+              </Link>
+            </Button>
+          </div>
         </div>
       </section>
 
@@ -295,23 +302,23 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">Služby</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="#sluzby" className="hover:text-accent transition-colors">
-                    Tvorba webů
+                  <Link href="/sluzby" className="hover:text-accent transition-colors">
+                    Všechny služby
                   </Link>
                 </li>
                 <li>
-                  <Link href="#sluzby" className="hover:text-accent transition-colors">
-                    E-commerce
+                  <Link href="/portfolio" className="hover:text-accent transition-colors">
+                    Portfolio
                   </Link>
                 </li>
                 <li>
-                  <Link href="#sluzby" className="hover:text-accent transition-colors">
-                    CMS integrace
+                  <Link href="/blog" className="hover:text-accent transition-colors">
+                    Blog
                   </Link>
                 </li>
                 <li>
-                  <Link href="#sluzby" className="hover:text-accent transition-colors">
-                    Podpora
+                  <Link href="/kontakt" className="hover:text-accent transition-colors">
+                    Kontakt
                   </Link>
                 </li>
               </ul>
