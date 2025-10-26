@@ -1,310 +1,49 @@
 # Sanity CMS Setup Guide
 
-Tento dokument popisuje, jak nastavit Sanity.io CMS pro webnamiru.site.
+Tento dokument popisuje, jak propojit frontend (webnamiru-site-osvc) s Sanity CMS (webnamiru-cms).
 
-## 1. Vytvoření Sanity projektu
+## Architektura
 
-### Instalace Sanity CLI
+Projekt je rozdělen do dvou samostatných repozitářů:
 
-\`\`\`bash
-npm install -g @sanity/cli
-\`\`\`
+1. **webnamiru-cms** - Sanity Studio (administrace)
+2. **webnamiru-site-osvc** - Next.js frontend (veřejný web)
 
-### Inicializace nového projektu
+## 1. Nastavení Environment Variables
 
-\`\`\`bash
-# V samostatném adresáři (doporučeno: webnamiru-cms)
-sanity init
-\`\`\`
-
-Při inicializaci:
-- Vyberte "Create new project"
-- Pojmenujte projekt: "webnamiru-cms"
-- Použijte dataset: "production"
-- Vyberte template: "Clean project with no predefined schemas"
-
-## 2. Definice schémat
-
-Vytvořte následující soubory ve složce `schemas/`:
-
-### schemas/sluzba.ts
-
-\`\`\`typescript
-import { defineType, defineField } from 'sanity'
-
-export default defineType({
-  name: 'sluzba',
-  title: 'Služba',
-  type: 'document',
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Název služby',
-      type: 'string',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96
-      },
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'shortDescription',
-      title: 'Krátký popis',
-      type: 'text',
-      rows: 3,
-      validation: Rule => Rule.required().max(200)
-    }),
-    defineField({
-      name: 'mainImage',
-      title: 'Hlavní obrázek',
-      type: 'image',
-      options: {
-        hotspot: true
-      },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternativní text'
-        }
-      ]
-    }),
-    defineField({
-      name: 'content',
-      title: 'Obsah služby',
-      type: 'array',
-      of: [{ type: 'block' }]
-    }),
-    defineField({
-      name: 'seoTitle',
-      title: 'SEO Titulek',
-      type: 'string'
-    }),
-    defineField({
-      name: 'seoDescription',
-      title: 'SEO Popis',
-      type: 'text',
-      rows: 2
-    })
-  ]
-})
-\`\`\`
-
-### schemas/projekt.ts
-
-\`\`\`typescript
-import { defineType, defineField } from 'sanity'
-
-export default defineType({
-  name: 'projekt',
-  title: 'Projekt',
-  type: 'document',
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Název projektu',
-      type: 'string',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96
-      },
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'clientName',
-      title: 'Jméno klienta',
-      type: 'string',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'coverImage',
-      title: 'Náhledový obrázek',
-      type: 'image',
-      options: {
-        hotspot: true
-      },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternativní text'
-        }
-      ]
-    }),
-    defineField({
-      name: 'gallery',
-      title: 'Galerie obrázků',
-      type: 'array',
-      of: [
-        {
-          type: 'image',
-          options: {
-            hotspot: true
-          },
-          fields: [
-            {
-              name: 'alt',
-              type: 'string',
-              title: 'Alternativní text'
-            }
-          ]
-        }
-      ]
-    }),
-    defineField({
-      name: 'description',
-      title: 'Popis projektu',
-      type: 'array',
-      of: [{ type: 'block' }]
-    }),
-    defineField({
-      name: 'url',
-      title: 'URL webu klienta',
-      type: 'url'
-    }),
-    defineField({
-      name: 'publishedAt',
-      title: 'Datum realizace',
-      type: 'datetime',
-      validation: Rule => Rule.required()
-    })
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      client: 'clientName',
-      media: 'coverImage'
-    },
-    prepare(selection) {
-      const { title, client } = selection
-      return {
-        ...selection,
-        subtitle: client
-      }
-    }
-  }
-})
-\`\`\`
-
-### schemas/clanek.ts
-
-\`\`\`typescript
-import { defineType, defineField } from 'sanity'
-
-export default defineType({
-  name: 'clanek',
-  title: 'Článek',
-  type: 'document',
-  fields: [
-    defineField({
-      name: 'title',
-      title: 'Název článku',
-      type: 'string',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'slug',
-      title: 'URL slug',
-      type: 'slug',
-      options: {
-        source: 'title',
-        maxLength: 96
-      },
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'publishedAt',
-      title: 'Datum publikace',
-      type: 'datetime',
-      validation: Rule => Rule.required()
-    }),
-    defineField({
-      name: 'mainImage',
-      title: 'Hlavní obrázek',
-      type: 'image',
-      options: {
-        hotspot: true
-      },
-      fields: [
-        {
-          name: 'alt',
-          type: 'string',
-          title: 'Alternativní text'
-        }
-      ]
-    }),
-    defineField({
-      name: 'summary',
-      title: 'Souhrn',
-      type: 'text',
-      rows: 3,
-      validation: Rule => Rule.required().max(300)
-    }),
-    defineField({
-      name: 'body',
-      title: 'Obsah článku',
-      type: 'array',
-      of: [{ type: 'block' }]
-    })
-  ],
-  preview: {
-    select: {
-      title: 'title',
-      media: 'mainImage'
-    }
-  }
-})
-\`\`\`
-
-### schemas/index.ts
-
-\`\`\`typescript
-import sluzba from './sluzba'
-import projekt from './projekt'
-import clanek from './clanek'
-
-export const schemaTypes = [sluzba, projekt, clanek]
-\`\`\`
-
-## 3. Environment Variables
-
-Přidejte do `.env.local` v Next.js projektu:
+V projektu `webnamiru-site-osvc` vytvořte `.env.local`:
 
 \`\`\`env
-NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id
+NEXT_PUBLIC_SANITY_PROJECT_ID=your_project_id_here
 NEXT_PUBLIC_SANITY_DATASET=production
-SANITY_API_TOKEN=your_api_token
+SANITY_API_TOKEN=your_api_token_here
 \`\`\`
 
-## 4. Nasazení Sanity Studio
+### Získání hodnot:
 
-\`\`\`bash
-# V adresáři webnamiru-cms
-sanity deploy
+1. **Project ID**: Najdete v `webnamiru-cms/sanity.config.ts` nebo na sanity.io dashboard
+2. **Dataset**: Výchozí je `production`
+3. **API Token**: 
+   - Přejděte na https://sanity.io/manage
+   - Vyberte váš projekt
+   - API → Tokens → Add API token
+   - Nastavte práva na "Read" (nebo "Editor" pokud potřebujete zapisovat z frontendu)
+
+## 2. Struktura Frontend Projektu
+
+Frontend obsahuje pouze Sanity klienta pro načítání dat:
+
+\`\`\`
+webnamiru-site-osvc/
+├── lib/
+│   ├── sanity.client.ts    # Sanity klient a image builder
+│   ├── sanity.queries.ts   # GROQ dotazy
+│   └── sanity.types.ts     # TypeScript typy
 \`\`\`
 
-Studio bude dostupné na: `https://your-project.sanity.studio`
+## 3. Použití v Next.js stránkách
 
-## 5. Použití v Next.js
-
-Sanity klient a queries jsou již připraveny v:
-- `lib/sanity.client.ts` - Konfigurace klienta
-- `lib/sanity.queries.ts` - GROQ queries
-- `lib/sanity.types.ts` - TypeScript typy
-
-### Příklad použití:
+### Načítání služeb
 
 \`\`\`typescript
 import { getServices } from '@/lib/sanity.queries'
@@ -323,23 +62,153 @@ export default async function ServicesPage() {
     </div>
   )
 }
+
+// ISR - revalidace každých 60 sekund
+export const revalidate = 60
 \`\`\`
 
-## 6. ISR (Incremental Static Regeneration)
-
-Pro automatickou aktualizaci obsahu použijte ISR v Next.js:
+### Načítání portfolia
 
 \`\`\`typescript
-export const revalidate = 60 // Revalidate každých 60 sekund
+import { getProjects } from '@/lib/sanity.queries'
+import { urlFor } from '@/lib/sanity.client'
+
+export default async function PortfolioPage() {
+  const projects = await getProjects()
+  
+  return (
+    <div>
+      {projects.map(project => (
+        <div key={project._id}>
+          <img 
+            src={urlFor(project.coverImage).width(800).url() || "/placeholder.svg"} 
+            alt={project.coverImage.alt}
+          />
+          <h2>{project.title}</h2>
+          <p>{project.clientName}</p>
+        </div>
+      ))}
+    </div>
+  )
+}
 \`\`\`
 
-## Další kroky
+### Načítání blogu
 
-1. Vytvořte Sanity projekt pomocí `sanity init`
-2. Zkopírujte schémata do složky `schemas/`
-3. Spusťte `sanity deploy`
-4. Přidejte environment variables do Vercel
-5. Začněte přidávat obsah v Sanity Studio
+\`\`\`typescript
+import { getArticles } from '@/lib/sanity.queries'
+
+export default async function BlogPage() {
+  const articles = await getArticles()
+  
+  return (
+    <div>
+      {articles.map(article => (
+        <article key={article._id}>
+          <h2>{article.title}</h2>
+          <time>{new Date(article.publishedAt).toLocaleDateString('cs-CZ')}</time>
+          <p>{article.summary}</p>
+        </article>
+      ))}
+    </div>
+  )
+}
 \`\`\`
 
-```json file="" isHidden
+## 4. Správa obsahu v Sanity Studio
+
+### Přístup k administraci
+
+Po nasazení `webnamiru-cms` pomocí `sanity deploy`:
+- URL: `https://vase-domena.sanity.studio`
+- Nebo lokálně: `cd webnamiru-cms && npm run dev` (http://localhost:3333)
+
+### První kroky
+
+1. Přihlaste se pomocí GitHub účtu
+2. Vytvořte obsah:
+   - **Služby**: Přidejte 3-5 hlavních služeb
+   - **Portfolio**: Přidejte 2-3 ukázkové projekty
+   - **Blog**: Napište první článek
+
+## 5. Nasazení
+
+### Frontend (webnamiru-site-osvc) na Vercel
+
+1. Pushněte kód na GitHub
+2. V Vercel projektu přidejte environment variables:
+   - `NEXT_PUBLIC_SANITY_PROJECT_ID`
+   - `NEXT_PUBLIC_SANITY_DATASET`
+   - `SANITY_API_TOKEN`
+3. Vercel automaticky nasadí aplikaci
+
+### Sanity Studio (webnamiru-cms)
+
+\`\`\`bash
+cd webnamiru-cms
+sanity deploy
+\`\`\`
+
+Administrace bude dostupná na `https://vase-domena.sanity.studio`
+
+## 6. Propojení domény WEDOS s Vercel
+
+1. V Vercel přidejte doménu `webnamiru.site`
+2. Vercel zobrazí DNS záznamy
+3. V WEDOS administraci přidejte tyto záznamy:
+   - A záznam: `@` → IP adresa z Vercel
+   - CNAME záznam: `www` → cname.vercel-dns.com
+
+## 7. Tipy pro optimalizaci
+
+### ISR (Incremental Static Regeneration)
+
+\`\`\`typescript
+// Revalidace každých 60 sekund
+export const revalidate = 60
+
+// Nebo použijte on-demand revalidation
+import { revalidatePath } from 'next/cache'
+\`\`\`
+
+### Image Optimization
+
+\`\`\`typescript
+import { urlFor } from '@/lib/sanity.client'
+
+// Optimalizované obrázky
+const imageUrl = urlFor(image)
+  .width(800)
+  .height(600)
+  .quality(80)
+  .format('webp')
+  .url()
+\`\`\`
+
+### Caching
+
+\`\`\`typescript
+// Cache na 1 hodinu
+export const revalidate = 3600
+
+// Nebo dynamické načítání
+export const dynamic = 'force-dynamic'
+\`\`\`
+
+## 8. Další kroky
+
+1. ✅ Nastavte environment variables
+2. ✅ Nasaďte Sanity Studio
+3. ✅ Přidejte první obsah
+4. ⬜ Vytvořte dynamické stránky pro jednotlivé služby
+5. ⬜ Vytvořte stránky pro portfolio projekty
+6. ⬜ Vytvořte blog s detaily článků
+7. ⬜ Implementujte vyhledávání
+8. ⬜ Přidejte RSS feed
+
+## Podpora
+
+Pro více informací:
+- Sanity dokumentace: https://www.sanity.io/docs
+- Next.js dokumentace: https://nextjs.org/docs
+- Vercel dokumentace: https://vercel.com/docs
