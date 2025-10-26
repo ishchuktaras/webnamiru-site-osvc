@@ -2,19 +2,25 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield, Sparkles } from "lucide-react"
 import Link from "next/link"
+import { getServices } from "@/lib/sanity.queries"
 
 export const metadata = {
   title: "Služby | webnamiru.site",
   description: "Komplexní služby pro tvorbu webů na míru - od strategického plánování přes vývoj až po podporu.",
 }
 
-export default function ServicesPage() {
-  const services = [
+export const revalidate = 3600 // Revalidate every hour
+
+export default async function ServicesPage() {
+  const sanityServices = await getServices()
+
+  // Fallback services if Sanity is not configured
+  const fallbackServices = [
     {
-      slug: "strategicke-planovani",
+      slug: { current: "strategicke-planovani-webu" },
       icon: Target,
       title: "Strategické plánování",
-      shortDesc: "Definujeme cíle, analyzujeme konkurenci a vytváříme plán pro dosažení měřitelných výsledků.",
+      shortDescription: "Definujeme cíle, analyzujeme konkurenci a vytváříme plán pro dosažení měřitelných výsledků.",
       features: [
         "Analýza cílového publika a vytvoření uživatelských person",
         "Konkurenční výzkum a identifikace USP",
@@ -25,10 +31,10 @@ export default function ServicesPage() {
         "Získáte jasný strategický plán, který zajistí, že váš web bude nástrojem pro dosažení obchodních cílů, ne jen digitální vizitkou.",
     },
     {
-      slug: "vyvoj-na-miru",
+      slug: { current: "vyvoj-webu-na-miru" },
       icon: Code2,
       title: "Vývoj na míru",
-      shortDesc: "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
+      shortDescription: "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
       features: [
         "Next.js 16 s App Router pro maximální výkon",
         "Responzivní design pro všechna zařízení",
@@ -39,10 +45,10 @@ export default function ServicesPage() {
         "Váš web bude bleskurychlý, bezpečný a postavený na nejmodernějších technologiích, které zajistí dlouhodobou udržitelnost.",
     },
     {
-      slug: "ux-ui-design",
+      slug: { current: "ux-ui-design" },
       icon: Users,
       title: "UX/UI Design",
-      shortDesc: "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
+      shortDescription: "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
       features: [
         "Uživatelský výzkum a tvorba person",
         "Wireframing a prototypování",
@@ -53,10 +59,10 @@ export default function ServicesPage() {
         "Design, který nejen skvěle vypadá, ale především vede uživatele k požadované akci a maximalizuje konverze.",
     },
     {
-      slug: "cms-integrace",
+      slug: { current: "cms-integrace" },
       icon: Rocket,
       title: "CMS integrace",
-      shortDesc: "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
+      shortDescription: "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
       features: [
         "Sanity Studio - moderní headless CMS",
         "Flexibilní obsahová schémata na míru",
@@ -66,10 +72,10 @@ export default function ServicesPage() {
       benefits: "Budete moci snadno aktualizovat obsah webu bez programátora, ušetříte čas a náklady na údržbu.",
     },
     {
-      slug: "e-commerce",
+      slug: { current: "e-commerce" },
       icon: Zap,
       title: "E-commerce řešení",
-      shortDesc: "Kompletní online obchody s platebními branami a správou produktů.",
+      shortDescription: "Kompletní online obchody s platebními branami a správou produktů.",
       features: [
         "Stripe integrace pro platby",
         "Správa produktů a inventáře",
@@ -80,10 +86,10 @@ export default function ServicesPage() {
         "Profesionální e-shop, který zvýší vaše online prodeje a poskytne zákazníkům bezproblémový nákupní zážitek.",
     },
     {
-      slug: "podpora-udrzba",
+      slug: { current: "podpora-udrzba" },
       icon: Shield,
       title: "Podpora & údržba",
-      shortDesc: "Kontinuální péče o váš web, aktualizace a technická podpora.",
+      shortDescription: "Kontinuální péče o váš web, aktualizace a technická podpora.",
       features: [
         "24/7 monitoring dostupnosti",
         "Pravidelné bezpečnostní aktualizace",
@@ -94,6 +100,25 @@ export default function ServicesPage() {
         "Váš web bude vždy aktuální, bezpečný a výkonný. Můžete se soustředit na své podnikání, o technologii se postaráme my.",
     },
   ]
+
+  const services =
+    sanityServices.length > 0
+      ? sanityServices.map((service: any) => ({
+          slug: service.slug.current,
+          title: service.title,
+          shortDesc: service.shortDescription,
+          icon: Target, // Default icon, can be customized based on service type
+          features: [], // Will be loaded from Sanity content
+          benefits: "",
+        }))
+      : fallbackServices.map((s) => ({
+          slug: s.slug.current,
+          title: s.title,
+          shortDesc: s.shortDescription,
+          icon: s.icon,
+          features: s.features,
+          benefits: s.benefits,
+        }))
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -149,50 +174,57 @@ export default function ServicesPage() {
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
-            {services.map((service, index) => (
-              <Card
-                key={index}
-                className="border-2 hover:border-accent transition-all duration-200 shadow-sm hover:shadow-md flex flex-col"
-              >
-                <CardHeader>
-                  <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                    <service.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <CardTitle className="text-2xl font-semibold">{service.title}</CardTitle>
-                </CardHeader>
-                <CardContent className="flex-1 flex flex-col space-y-6">
-                  <p className="text-muted-foreground leading-relaxed text-sm">{service.shortDesc}</p>
+            {services.map((service: any, index: number) => {
+              const IconComponent = service.icon || Target
+              return (
+                <Card
+                  key={index}
+                  className="border-2 hover:border-accent transition-all duration-200 shadow-sm hover:shadow-md flex flex-col"
+                >
+                  <CardHeader>
+                    <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
+                      <IconComponent className="h-6 w-6 text-accent" />
+                    </div>
+                    <CardTitle className="text-2xl font-semibold">{service.title}</CardTitle>
+                  </CardHeader>
+                  <CardContent className="flex-1 flex flex-col space-y-6">
+                    <p className="text-muted-foreground leading-relaxed text-sm">{service.shortDesc}</p>
 
-                  <div className="space-y-3">
-                    <h4 className="font-semibold text-sm">Co zahrnuje:</h4>
-                    <ul className="space-y-2">
-                      {service.features.map((feature, i) => (
-                        <li key={i} className="flex items-start text-sm">
-                          <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0 mt-0.5" />
-                          <span>{feature}</span>
-                        </li>
-                      ))}
-                    </ul>
-                  </div>
+                    {service.features && service.features.length > 0 && (
+                      <div className="space-y-3">
+                        <h4 className="font-semibold text-sm">Co zahrnuje:</h4>
+                        <ul className="space-y-2">
+                          {service.features.map((feature: string, i: number) => (
+                            <li key={i} className="flex items-start text-sm">
+                              <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0 mt-0.5" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
+                        </ul>
+                      </div>
+                    )}
 
-                  <div className="pt-4 border-t">
-                    <p className="text-sm text-muted-foreground leading-relaxed">
-                      <strong className="text-foreground">Přínos:</strong> {service.benefits}
-                    </p>
-                  </div>
+                    {service.benefits && (
+                      <div className="pt-4 border-t">
+                        <p className="text-sm text-muted-foreground leading-relaxed">
+                          <strong className="text-foreground">Přínos:</strong> {service.benefits}
+                        </p>
+                      </div>
+                    )}
 
-                  <Button
-                    asChild
-                    variant="outline"
-                    className="mt-auto border-2 border-accent text-accent hover:bg-accent/5 bg-transparent"
-                  >
-                    <Link href={`/sluzby/${service.slug}`}>
-                      Zjistit více <ArrowRight className="ml-2 h-4 w-4" />
-                    </Link>
-                  </Button>
-                </CardContent>
-              </Card>
-            ))}
+                    <Button
+                      asChild
+                      variant="outline"
+                      className="mt-auto border-2 border-accent text-accent hover:bg-accent/5 bg-transparent"
+                    >
+                      <Link href={`/sluzby/${service.slug}`}>
+                        Zjistit více <ArrowRight className="ml-2 h-4 w-4" />
+                      </Link>
+                    </Button>
+                  </CardContent>
+                </Card>
+              )
+            })}
           </div>
         </div>
       </section>
@@ -288,7 +320,7 @@ export default function ServicesPage() {
             <div>
               <h4 className="font-semibold mb-4">Služby</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                {services.slice(0, 4).map((service) => (
+                {services.slice(0, 4).map((service: any) => (
                   <li key={service.slug}>
                     <Link href={`/sluzby/${service.slug}`} className="hover:text-accent transition-colors">
                       {service.title}
