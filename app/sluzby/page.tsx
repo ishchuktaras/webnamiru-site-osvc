@@ -98,7 +98,7 @@ export default function ServicesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Code2 className="h-6 w-6 text-primary" />
@@ -168,7 +168,7 @@ export default function ServicesPage() {
                     <ul className="space-y-2">
                       {service.features.map((feature, i) => (
                         <li key={i} className="flex items-start text-sm">
-                          <CheckCircle2 className="h-4 w-4 mr-2 text-accent flex-shrink-0 mt-0.5" />
+                          <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0 mt-0.5" />
                           <span>{feature}</span>
                         </li>
                       ))}
@@ -246,7 +246,7 @@ export default function ServicesPage() {
       {/* CTA Section */}
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <Card className="border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-primary/5 shadow-lg">
+          <Card className="border-2 border-accent/20 bg-lanier-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
               <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
               <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">

@@ -19,7 +19,7 @@ export default async function PortfolioPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Code2 className="h-6 w-6 text-primary" />
@@ -117,7 +117,7 @@ export default async function PortfolioPage() {
       {/* CTA Section */}
       <section className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <Card className="border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-primary/5 shadow-lg">
+          <Card className="border-2 border-accent/20 bg--to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
               <h2 className="text-3xl lg:text-5xl font-bold text-balance">Chcete podobný projekt?</h2>
               <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
