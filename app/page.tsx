@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users } from "lucide-react"
+import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
 
@@ -9,76 +9,81 @@ export default function HomePage() {
     <div className="flex flex-col min-h-screen">
       {/* Header */}
       <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-[backdrop-filter]:bg-background/60">
-        <div className="container flex h-16 items-center justify-between">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
           <Link href="/" className="flex items-center space-x-2">
             <Code2 className="h-6 w-6 text-primary" />
             <span className="font-bold text-xl">webnamiru.site</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link href="#sluzby" className="transition-colors hover:text-primary">
+            <Link href="#sluzby" className="transition-colors hover:text-accent">
               Služby
             </Link>
-            <Link href="#proces" className="transition-colors hover:text-primary">
+            <Link href="#proces" className="transition-colors hover:text-accent">
               Proces
             </Link>
-            <Link href="#portfolio" className="transition-colors hover:text-primary">
+            <Link href="#portfolio" className="transition-colors hover:text-accent">
               Portfolio
             </Link>
-            <Link href="#kontakt" className="transition-colors hover:text-primary">
+            <Link href="#kontakt" className="transition-colors hover:text-accent">
               Kontakt
             </Link>
           </nav>
-          <Button asChild>
-            <Link href="#kontakt">Nezávazná poptávka</Link>
+          <Button asChild className="bg-accent hover:bg-accent/90">
+            <Link href="/kontakt">Nezávazná poptávka</Link>
           </Button>
         </div>
       </header>
 
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid lg:grid-cols-2 gap-12 items-center">
             <div className="space-y-8">
               <div className="inline-block">
-                <span className="inline-flex items-center rounded-full border px-4 py-1.5 text-sm font-medium">
+                <span className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
                   <Rocket className="mr-2 h-4 w-4" />
                   Strategický přístup k webovému vývoji
                 </span>
               </div>
-              <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-balance">
-                Weby, které <span className="text-primary">přinášejí výsledky</span>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
+                Weby, které <span className="text-accent">přinášejí výsledky</span>
               </h1>
-              <p className="text-xl text-muted-foreground text-pretty leading-relaxed">
+              <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
                 Vytváříme webové stránky na míru, které nejen skvěle vypadají, ale především pomáhají vašemu podnikání
                 růst. Od strategie přes design až po měřitelné výsledky.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild>
-                  <Link href="#kontakt">
+                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
+                  <Link href="/kontakt">
                     Začít projekt <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  asChild
+                  className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
+                >
                   <Link href="#sluzby">Zjistit více</Link>
                 </Button>
               </div>
               <div className="flex items-center gap-8 pt-4">
                 <div>
-                  <div className="text-3xl font-bold">100%</div>
+                  <div className="text-3xl font-bold text-primary">100%</div>
                   <div className="text-sm text-muted-foreground">Spokojenost</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold">Next.js</div>
+                  <div className="text-3xl font-bold text-primary">Next.js</div>
                   <div className="text-sm text-muted-foreground">Moderní technologie</div>
                 </div>
                 <div>
-                  <div className="text-3xl font-bold">ROI</div>
+                  <div className="text-3xl font-bold text-primary">ROI</div>
                   <div className="text-sm text-muted-foreground">Měřitelné výsledky</div>
                 </div>
               </div>
             </div>
             <div className="relative h-[400px] lg:h-[600px]">
-              <div className="absolute inset-0 bg-gradient-to-br from-primary/20 to-accent/20 rounded-3xl" />
+              <div className="absolute inset-0 bg-gradient-to-br from-accent/20 to-primary/10 rounded-3xl" />
               <Image
                 src="/modern-web-development-workspace-with-laptop-showi.jpg"
                 alt="Moderní webový vývoj"
@@ -92,11 +97,11 @@ export default function HomePage() {
       </section>
 
       {/* Services Section */}
-      <section id="sluzby" className="py-20 bg-muted/50">
-        <div className="container">
+      <section id="sluzby" className="py-20 bg-secondary">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance">Komplexní služby pro váš úspěch</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Komplexní služby pro váš úspěch</h2>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Od strategického plánování až po technickou realizaci a následnou podporu
             </p>
           </div>
@@ -129,29 +134,29 @@ export default function HomePage() {
                 features: ["Sanity Studio", "Flexibilní schémata", "Real-time preview"],
               },
               {
-                icon: CheckCircle2,
+                icon: Zap,
                 title: "E-commerce řešení",
                 description: "Kompletní online obchody s platebními branami a správou produktů.",
                 features: ["Stripe integrace", "Správa objednávek", "Analytika prodejů"],
               },
               {
-                icon: Target,
+                icon: Shield,
                 title: "Podpora & údržba",
                 description: "Kontinuální péče o váš web, aktualizace a technická podpora.",
                 features: ["Monitoring", "Aktualizace", "Technická podpora"],
               },
             ].map((service, index) => (
-              <Card key={index} className="border-2 hover:border-primary transition-colors">
+              <Card key={index} className="border-2 hover:border-accent transition-colors duration-200 shadow-sm">
                 <CardContent className="p-6 space-y-4">
-                  <div className="h-12 w-12 rounded-lg bg-primary/10 flex items-center justify-center">
-                    <service.icon className="h-6 w-6 text-primary" />
+                  <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
+                    <service.icon className="h-6 w-6 text-accent" />
                   </div>
-                  <h3 className="text-xl font-bold">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{service.description}</p>
+                  <h3 className="text-xl font-semibold">{service.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
                   <ul className="space-y-2">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center text-sm">
-                        <CheckCircle2 className="h-4 w-4 mr-2 text-primary flex-shrink-0" />
+                        <CheckCircle2 className="h-4 w-4 mr-2 text-accent flex-shrink-0" />
                         {feature}
                       </li>
                     ))}
@@ -165,10 +170,10 @@ export default function HomePage() {
 
       {/* Process Section */}
       <section id="proces" className="py-20">
-        <div className="container">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance">Jak spolupráce probíhá</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Jak spolupráce probíhá</h2>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Transparentní proces od první konzultace po úspěšné spuštění
             </p>
           </div>
@@ -202,9 +207,9 @@ export default function HomePage() {
             ].map((phase, index) => (
               <div key={index} className="relative">
                 <div className="space-y-4">
-                  <div className="text-5xl font-bold text-primary/20">{phase.step}</div>
-                  <h3 className="text-xl font-bold">{phase.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed">{phase.description}</p>
+                  <div className="text-5xl font-bold text-accent/20">{phase.step}</div>
+                  <h3 className="text-xl font-semibold">{phase.title}</h3>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{phase.description}</p>
                 </div>
                 {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />}
               </div>
@@ -214,11 +219,11 @@ export default function HomePage() {
       </section>
 
       {/* Technology Stack */}
-      <section className="py-20 bg-muted/50">
-        <div className="container">
+      <section className="py-20 bg-secondary">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl md:text-4xl font-bold text-balance">Moderní technologie</h2>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Moderní technologie</h2>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Používáme osvědčené nástroje pro maximální výkon a spolehlivost
             </p>
           </div>
@@ -234,9 +239,9 @@ export default function HomePage() {
               { name: "Stripe", desc: "Payments" },
               { name: "Resend", desc: "Email API" },
             ].map((tech, index) => (
-              <Card key={index} className="text-center p-6">
+              <Card key={index} className="text-center p-6 hover:border-accent transition-colors duration-200">
                 <CardContent className="p-0 space-y-2">
-                  <div className="text-lg font-bold">{tech.name}</div>
+                  <div className="text-lg font-semibold text-primary">{tech.name}</div>
                   <div className="text-sm text-muted-foreground">{tech.desc}</div>
                 </CardContent>
               </Card>
@@ -247,20 +252,25 @@ export default function HomePage() {
 
       {/* CTA Section */}
       <section id="kontakt" className="py-20">
-        <div className="container">
-          <Card className="border-2 border-primary/20 bg-gradient-to-br from-primary/5 to-accent/5">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
+          <Card className="border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl md:text-4xl font-bold text-balance">Připraveni začít váš projekt?</h2>
-              <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty">
+              <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
+              <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
                 Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" asChild>
+                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
                   <Link href="/kontakt">
                     Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
                 </Button>
-                <Button size="lg" variant="outline" asChild>
+                <Button
+                  size="lg"
+                  variant="outline"
+                  asChild
+                  className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
+                >
                   <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
                 </Button>
               </div>
@@ -269,13 +279,12 @@ export default function HomePage() {
         </div>
       </section>
 
-      {/* Footer */}
-      <footer className="border-t py-12 bg-muted/50">
-        <div className="container">
+      <footer className="border-t py-12 bg-secondary">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid md:grid-cols-4 gap-8">
             <div className="space-y-4">
               <div className="flex items-center space-x-2">
-                <Code2 className="h-6 w-6 text-primary" />
+                <Code2 className="h-6 w-6 text-accent" />
                 <span className="font-bold text-lg">webnamiru.site</span>
               </div>
               <p className="text-sm text-muted-foreground leading-relaxed">
@@ -286,22 +295,22 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">Služby</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="#sluzby" className="hover:text-primary transition-colors">
+                  <Link href="#sluzby" className="hover:text-accent transition-colors">
                     Tvorba webů
                   </Link>
                 </li>
                 <li>
-                  <Link href="#sluzby" className="hover:text-primary transition-colors">
+                  <Link href="#sluzby" className="hover:text-accent transition-colors">
                     E-commerce
                   </Link>
                 </li>
                 <li>
-                  <Link href="#sluzby" className="hover:text-primary transition-colors">
+                  <Link href="#sluzby" className="hover:text-accent transition-colors">
                     CMS integrace
                   </Link>
                 </li>
                 <li>
-                  <Link href="#sluzby" className="hover:text-primary transition-colors">
+                  <Link href="#sluzby" className="hover:text-accent transition-colors">
                     Podpora
                   </Link>
                 </li>
@@ -311,22 +320,17 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">Společnost</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="/o-nas" className="hover:text-primary transition-colors">
-                    O nás
+                  <Link href="#proces" className="hover:text-accent transition-colors">
+                    Proces
                   </Link>
                 </li>
                 <li>
-                  <Link href="#portfolio" className="hover:text-primary transition-colors">
+                  <Link href="#portfolio" className="hover:text-accent transition-colors">
                     Portfolio
                   </Link>
                 </li>
                 <li>
-                  <Link href="/blog" className="hover:text-primary transition-colors">
-                    Blog
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/kontakt" className="hover:text-primary transition-colors">
+                  <Link href="/kontakt" className="hover:text-accent transition-colors">
                     Kontakt
                   </Link>
                 </li>
@@ -335,8 +339,13 @@ export default function HomePage() {
             <div>
               <h4 className="font-semibold mb-4">Kontakt</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>info@webnamiru.site</li>
+                <li>
+                  <a href="mailto:info@webnamiru.site" className="hover:text-accent transition-colors">
+                    info@webnamiru.site
+                  </a>
+                </li>
                 <li>IČO: 21609845</li>
+                <li>Taras Ishchuk</li>
                 <li>Česká republika</li>
               </ul>
             </div>
