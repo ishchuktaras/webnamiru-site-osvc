@@ -12,7 +12,6 @@ import {
 } from "lucide-react";
 import Link from "next/link";
 import Image from "next/image";
-import { Footer } from "@/components/Footer";
 
 export default function HomePage() {
   return (
@@ -374,8 +373,6 @@ export default function HomePage() {
           </Card>
         </div>
       </section>
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }
