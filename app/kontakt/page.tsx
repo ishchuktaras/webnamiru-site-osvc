@@ -1,6 +1,8 @@
 import { ContactForm } from "@/components/contact-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
-import { Mail, MapPin, Phone } from "lucide-react"
+import { Mail, MapPin, Phone, Code2 } from "lucide-react"
+import Link from "next/link"
+import { Button } from "@/components/ui/button"
 
 export const metadata = {
   title: "Kontakt | webnamiru.site",
@@ -9,17 +11,34 @@ export const metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="min-h-screen">
-      {/* Header */}
-      <header className="border-b">
-        <div className="container flex h-16 items-center justify-between">
-          <a href="/" className="font-bold text-xl">
-            webnamiru.site
-          </a>
+    <div className="flex flex-col min-h-screen">
+      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
+          <Link href="/" className="flex items-center space-x-2">
+            <Code2 className="h-6 w-6 text-primary" />
+            <span className="font-bold text-xl">webnamiru.site</span>
+          </Link>
+          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+            <Link href="/sluzby" className="transition-colors hover:text-accent">
+              Služby
+            </Link>
+            <Link href="/portfolio" className="transition-colors hover:text-accent">
+              Portfolio
+            </Link>
+            <Link href="/blog" className="transition-colors hover:text-accent">
+              Blog
+            </Link>
+            <Link href="/kontakt" className="transition-colors hover:text-accent">
+              Kontakt
+            </Link>
+          </nav>
+          <Button asChild className="bg-accent hover:bg-accent/90">
+            <Link href="/kontakt">Nezávazná poptávka</Link>
+          </Button>
         </div>
       </header>
 
-      <div className="container py-20">
+      <div className="container max-w-7xl mx-auto px-4 lg:px-8 py-20">
         <div className="max-w-5xl mx-auto">
           <div className="text-center space-y-4 mb-16">
             <h1 className="text-4xl md:text-5xl font-bold text-balance">Pojďme si promluvit o vašem projektu</h1>

@@ -1,39 +1,48 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { getServiceBySlug, getServices } from "@/lib/sanity.queries"
-import { ArrowLeft, Code2 } from "lucide-react"
-import Link from "next/link"
-import { notFound } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import { getServiceBySlug, getServices } from "@/lib/sanity.queries";
+import { ArrowLeft, Code2 } from "lucide-react";
+import Link from "next/link";
+import { notFound } from "next/navigation";
+import { Footer } from "@/components/Footer";
 
-export const revalidate = 3600 // Revalidate every hour
+export const revalidate = 3600; // Revalidate every hour
 
 export async function generateStaticParams() {
-  const services = await getServices()
+  const services = await getServices();
   return services.map((service: any) => ({
     slug: service.slug.current,
-  }))
+  }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const service = await getServiceBySlug(params.slug)
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const service = await getServiceBySlug(params.slug);
 
   if (!service) {
     return {
       title: "Služba nenalezena | webnamiru.site",
-    }
+    };
   }
 
   return {
     title: service.seoTitle || `${service.title} | webnamiru.site`,
     description: service.seoDescription || service.shortDescription,
-  }
+  };
 }
 
-export default async function ServiceDetailPage({ params }: { params: { slug: string } }) {
-  const service = await getServiceBySlug(params.slug)
+export default async function ServiceDetailPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const service = await getServiceBySlug(params.slug);
 
   if (!service) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -46,16 +55,28 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
             <span className="font-bold text-xl">webnamiru.site</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link href="/#sluzby" className="transition-colors hover:text-accent">
+            <Link
+              href="/#sluzby"
+              className="transition-colors hover:text-accent"
+            >
               Služby
             </Link>
-            <Link href="/#proces" className="transition-colors hover:text-accent">
+            <Link
+              href="/#proces"
+              className="transition-colors hover:text-accent"
+            >
               Proces
             </Link>
-            <Link href="/#portfolio" className="transition-colors hover:text-accent">
+            <Link
+              href="/#portfolio"
+              className="transition-colors hover:text-accent"
+            >
               Portfolio
             </Link>
-            <Link href="/kontakt" className="transition-colors hover:text-accent">
+            <Link
+              href="/kontakt"
+              className="transition-colors hover:text-accent"
+            >
               Kontakt
             </Link>
           </nav>
@@ -83,7 +104,9 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-balance">
                 {service.title}
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">{service.shortDescription}</p>
+              <p className="text-lg text-muted-foreground leading-relaxed">
+                {service.shortDescription}
+              </p>
             </div>
 
             {service.content && (
@@ -93,12 +116,17 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
                     {service.content.map((block: any, index: number) => {
                       if (block._type === "block") {
                         return (
-                          <p key={index} className="leading-relaxed text-muted-foreground">
-                            {block.children?.map((child: any) => child.text).join("")}
+                          <p
+                            key={index}
+                            className="leading-relaxed text-muted-foreground"
+                          >
+                            {block.children
+                              ?.map((child: any) => child.text)
+                              .join("")}
                           </p>
-                        )
+                        );
                       }
-                      return null
+                      return null;
                     })}
                   </div>
                 </CardContent>
@@ -108,9 +136,17 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
             {/* CTA */}
             <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5">
               <CardContent className="p-8 text-center space-y-4">
-                <h2 className="text-2xl font-bold">Máte zájem o tuto službu?</h2>
-                <p className="text-muted-foreground">Kontaktujte nás pro nezávaznou konzultaci a cenovou nabídku</p>
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
+                <h2 className="text-2xl font-bold">
+                  Máte zájem o tuto službu?
+                </h2>
+                <p className="text-muted-foreground">
+                  Kontaktujte nás pro nezávaznou konzultaci a cenovou nabídku
+                </p>
+                <Button
+                  asChild
+                  size="lg"
+                  className="bg-accent hover:bg-accent/90"
+                >
                   <Link href="/kontakt">Kontaktovat nás</Link>
                 </Button>
               </CardContent>
@@ -120,73 +156,7 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
       </section>
 
       {/* Footer */}
-      <footer className="border-t py-12 bg-secondary mt-auto">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-4 gap-8">
-            <div className="space-y-4">
-              <div className="flex items-center space-x-2">
-                <Code2 className="h-6 w-6 text-accent" />
-                <span className="font-bold text-lg">webnamiru.site</span>
-              </div>
-              <p className="text-sm text-muted-foreground leading-relaxed">
-                Strategický partner pro tvorbu webů s vysokou hodnotou
-              </p>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Služby</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/sluzby" className="hover:text-accent transition-colors">
-                    Všechny služby
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Společnost</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <Link href="/#proces" className="hover:text-accent transition-colors">
-                    Proces
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/#portfolio" className="hover:text-accent transition-colors">
-                    Portfolio
-                  </Link>
-                </li>
-                <li>
-                  <Link href="/kontakt" className="hover:text-accent transition-colors">
-                    Kontakt
-                  </Link>
-                </li>
-              </ul>
-            </div>
-            <div>
-              <h4 className="font-semibold mb-4">Kontakt</h4>
-              <ul className="space-y-2 text-sm text-muted-foreground">
-                <li>
-                  <a href="mailto:info@webnamiru.site" className="hover:text-accent transition-colors">
-                    info@webnamiru.site
-                  </a>
-                </li>
-                <li>
-                  <a href="tel:+420777596216" className="hover:text-accent transition-colors">
-                    +420 777 596 216
-                  </a>
-                </li>
-                <li>IČO: 23874694</li>
-                <li>Taras Ishchuk</li>
-                <li>Rantířovská 123/36</li>
-                <li>586 01 Jihlava - Horní Kosov</li>
-              </ul>
-            </div>
-          </div>
-          <div className="border-t mt-8 pt-8 text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} webnamiru.site - Taras Ishchuk, OSVČ. Všechna práva vyhrazena.</p>
-          </div>
-        </div>
-      </footer>
+      <Footer />
     </div>
-  )
+  );
 }
