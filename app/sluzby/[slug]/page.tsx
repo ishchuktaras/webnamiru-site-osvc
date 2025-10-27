@@ -102,7 +102,7 @@ export default async function ServiceDetailPage({
                   src={urlFor(service.mainImage).width(1200).height(600).url() || "/placeholder.svg"}
                   alt={service.title}
                   fill
-                  className="object-cover"
+                  className="object-contain bg-muted"
                   priority
                 />
               </div>
