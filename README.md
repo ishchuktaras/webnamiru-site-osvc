@@ -196,7 +196,7 @@ Web je postaven podle strategického rámce pro tvorbu webů s vysokou hodnotou:
    - Reálné portfolio projekty
    - Profesionální fotografie
    - Blog články pro SEO
-   - Případové studie
+   - Př��padové studie
 
 4. **Propojte doménu** (priorita 4):
    - Nastavte DNS v WEDOS
