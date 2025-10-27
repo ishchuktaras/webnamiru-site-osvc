@@ -12,7 +12,7 @@ export function Footer() {
               <span className="font-bold text-lg">webnamiru.site</span>
             </div>
             <p className="text-sm text-muted-foreground leading-relaxed">
-              Strategický partner pro tvorbu webů s vysokou hodnotou
+              Webové řešení na míru pro vaše podnikání - Taras Ishchuk, OSVČ
             </p>
           </div>
           <div>

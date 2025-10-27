@@ -52,30 +52,21 @@ export const metadata: Metadata = {
   title: "webnamiru.site | Tvorba webů na míru s vysokou hodnotou",
   description:
     "Strategický partner pro tvorbu profesionálních webových stránek. Next.js, Sanity.io, měřitelné výsledky. Pomáhame českým firmám růst online.",
-  keywords: [
-    "tvorba webů",
-    "web na míru",
-    "Next.js",
-    "Sanity.io",
-    "webový vývoj",
-    "e-commerce",
-    "CMS",
-  ],
+  keywords: ["tvorba webů", "web na míru", "Next.js", "Sanity.io", "webový vývoj", "e-commerce", "CMS"],
   authors: [{ name: "Taras Ishchuk" }],
   openGraph: {
     title: "webnamiru.site | Tvorba webů na míru",
-    description:
-      "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
+    description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
     type: "website",
     locale: "cs_CZ",
   },
   generator: "v0.app",
-};
+}
 
 export default function RootLayout({
   children,
 }: Readonly<{
-  children: React.ReactNode;
+  children: React.ReactNode
 }>) {
   return (
     <html lang="cs">
@@ -89,5 +80,5 @@ export default function RootLayout({
         <Analytics />
       </body>
     </html>
-  );
+  )
 }
