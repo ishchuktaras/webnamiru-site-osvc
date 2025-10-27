@@ -140,8 +140,6 @@ export default async function BlogPage() {
           )}
         </div>
       </section>
-      {/* Footer */}
-      <Footer /> {/* Using shared Footer component */}
     </div>
   );
 }

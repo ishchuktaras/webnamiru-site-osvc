@@ -363,9 +363,6 @@ export default async function ServicesPage() {
           </Card>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

@@ -154,9 +154,6 @@ export default async function ServiceDetailPage({
           </div>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }

@@ -177,9 +177,6 @@ export default async function PortfolioPage() {
           </Card>
         </div>
       </section>
-
-      {/* Footer */}
-      <Footer />
     </div>
   );
 }
