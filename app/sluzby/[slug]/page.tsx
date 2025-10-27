@@ -1,48 +1,49 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent } from "@/components/ui/card";
-import { getServiceBySlug, getServices } from "@/lib/sanity.queries";
-import { ArrowLeft, Code2 } from "lucide-react";
-import Link from "next/link";
-import { notFound } from "next/navigation";
-import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent } from "@/components/ui/card"
+import { getServiceBySlug, getServices } from "@/lib/sanity.queries"
+import { urlFor } from "@/lib/sanity.client"
+import { ArrowLeft, Code2 } from "lucide-react"
+import Link from "next/link"
+import Image from "next/image"
+import { notFound } from "next/navigation"
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 3600 // Revalidate every hour
 
 export async function generateStaticParams() {
-  const services = await getServices();
+  const services = await getServices()
   return services.map((service: any) => ({
     slug: service.slug.current,
-  }));
+  }))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const service = await getServiceBySlug(params.slug);
+  const service = await getServiceBySlug(params.slug)
 
   if (!service) {
     return {
       title: "Služba nenalezena | webnamiru.site",
-    };
+    }
   }
 
   return {
     title: service.seoTitle || `${service.title} | webnamiru.site`,
     description: service.seoDescription || service.shortDescription,
-  };
+  }
 }
 
 export default async function ServiceDetailPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const service = await getServiceBySlug(params.slug);
+  const service = await getServiceBySlug(params.slug)
 
   if (!service) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -55,28 +56,16 @@ export default async function ServiceDetailPage({
             <span className="font-bold text-xl">webnamiru.site</span>
           </Link>
           <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/#sluzby"
-              className="transition-colors hover:text-accent"
-            >
+            <Link href="/#sluzby" className="transition-colors hover:text-accent">
               Služby
             </Link>
-            <Link
-              href="/#proces"
-              className="transition-colors hover:text-accent"
-            >
+            <Link href="/#proces" className="transition-colors hover:text-accent">
               Proces
             </Link>
-            <Link
-              href="/#portfolio"
-              className="transition-colors hover:text-accent"
-            >
+            <Link href="/#portfolio" className="transition-colors hover:text-accent">
               Portfolio
             </Link>
-            <Link
-              href="/kontakt"
-              className="transition-colors hover:text-accent"
-            >
+            <Link href="/kontakt" className="transition-colors hover:text-accent">
               Kontakt
             </Link>
           </nav>
@@ -104,10 +93,20 @@ export default async function ServiceDetailPage({
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-balance">
                 {service.title}
               </h1>
-              <p className="text-lg text-muted-foreground leading-relaxed">
-                {service.shortDescription}
-              </p>
+              <p className="text-lg text-muted-foreground leading-relaxed">{service.shortDescription}</p>
             </div>
+
+            {service.mainImage && (
+              <div className="relative w-full h-[400px] rounded-lg overflow-hidden">
+                <Image
+                  src={urlFor(service.mainImage).width(1200).height(600).url() || "/placeholder.svg"}
+                  alt={service.title}
+                  fill
+                  className="object-cover"
+                  priority
+                />
+              </div>
+            )}
 
             {service.content && (
               <Card>
@@ -116,17 +115,12 @@ export default async function ServiceDetailPage({
                     {service.content.map((block: any, index: number) => {
                       if (block._type === "block") {
                         return (
-                          <p
-                            key={index}
-                            className="leading-relaxed text-muted-foreground"
-                          >
-                            {block.children
-                              ?.map((child: any) => child.text)
-                              .join("")}
+                          <p key={index} className="leading-relaxed text-muted-foreground">
+                            {block.children?.map((child: any) => child.text).join("")}
                           </p>
-                        );
+                        )
                       }
-                      return null;
+                      return null
                     })}
                   </div>
                 </CardContent>
@@ -136,18 +130,10 @@ export default async function ServiceDetailPage({
             {/* CTA */}
             <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5">
               <CardContent className="p-8 text-center space-y-4">
-                <h2 className="text-2xl font-bold">
-                  Máte zájem o tuto službu?
-                </h2>
-                <p className="text-muted-foreground">
-                  Kontaktujte nás pro nezávaznou konzultaci a cenovou nabídku
-                </p>
-                <Button
-                  asChild
-                  size="lg"
-                  className="bg-accent hover:bg-accent/90"
-                >
-                  <Link href="/kontakt">Kontaktovat nás</Link>
+                <h2 className="text-2xl font-bold">Máte zájem o tuto službu?</h2>
+                <p className="text-muted-foreground">Kontaktujte mě pro nezávaznou konzultaci a cenovou nabídku</p>
+                <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
+                  <Link href="/kontakt">Kontaktovat mě</Link>
                 </Button>
               </CardContent>
             </Card>
@@ -155,5 +141,5 @@ export default async function ServiceDetailPage({
         </div>
       </section>
     </div>
-  );
+  )
 }

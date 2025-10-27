@@ -5,7 +5,6 @@ import Link from "next/link";
 import { getProjects } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
 import Image from "next/image";
-import { Footer } from "@/components/Footer";
 
 export const metadata = {
   title: "Portfolio | webnamiru.site",

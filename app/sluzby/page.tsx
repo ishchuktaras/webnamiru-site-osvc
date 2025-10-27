@@ -14,6 +14,9 @@ import {
 import Link from "next/link";
 import { getServices } from "@/lib/sanity.queries";
 import { Footer } from "@/components/Footer";
+import Image from "next/image";
+import { urlFor } from "@/lib/sanity.client";
+
 export const metadata = {
   title: "Služby | webnamiru.site",
   description:
@@ -125,6 +128,7 @@ export default async function ServicesPage() {
           slug: service.slug.current,
           title: service.title,
           shortDesc: service.shortDescription,
+          mainImage: service.mainImage,
           icon: Target, // Default icon, can be customized based on service type
           features: [], // Will be loaded from Sanity content
           benefits: "",
@@ -133,6 +137,7 @@ export default async function ServicesPage() {
           slug: s.slug.current,
           title: s.title,
           shortDesc: s.shortDescription,
+          mainImage: null,
           icon: s.icon,
           features: s.features,
           benefits: s.benefits,
@@ -210,8 +215,24 @@ export default async function ServicesPage() {
               return (
                 <Card
                   key={index}
-                  className="border-2 hover:border-accent transition-all duration-200 shadow-sm hover:shadow-md flex flex-col"
+                  className="border-2 hover:border-accent transition-all duration-200 shadow-sm hover:shadow-md flex flex-col overflow-hidden"
                 >
+                  {service.mainImage && (
+                    <div className="relative w-full h-48">
+                      <Image
+                        src={
+                          urlFor(service.mainImage)
+                            .width(600)
+                            .height(400)
+                            .url() || "/placeholder.svg"
+                        }
+                        alt={service.title}
+                        fill
+                        className="object-cover"
+                      />
+                    </div>
+                  )}
+
                   <CardHeader>
                     <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
                       <IconComponent className="h-6 w-6 text-accent" />
