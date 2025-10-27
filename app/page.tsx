@@ -69,10 +69,6 @@ export default function HomePage() {
               </div>
               <div className="flex items-center gap-8 pt-4">
                 <div>
-                  <div className="text-3xl font-bold text-primary">100%</div>
-                  <div className="text-sm text-muted-foreground">Spokojenost</div>
-                </div>
-                <div>
                   <div className="text-3xl font-bold text-primary">Next.js</div>
                   <div className="text-sm text-muted-foreground">Moderní technologie</div>
                 </div>
@@ -83,7 +79,7 @@ export default function HomePage() {
               </div>
             </div>
             <div className="relative h-[400px] lg:h-[600px]">
-              <div className="absolute inset-0 bg-lanier-to-br from-accent/20 to-primary/10 rounded-3xl" />
+              <div className="absolute inset-0 bg-linear-to-br from-accent/20 to-primary/10 rounded-3xl" />
               <Image
                 src="/modern-web-development-workspace-with-laptop-showi.jpg"
                 alt="Moderní webový vývoj"
@@ -260,7 +256,7 @@ export default function HomePage() {
       {/* CTA Section */}
       <section id="kontakt" className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <Card className="border-2 border-accent/20 bg-lanier-to-br from-accent/5 to-primary/5 shadow-lg">
+          <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
               <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
               <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
@@ -327,18 +323,23 @@ export default function HomePage() {
               <h4 className="font-semibold mb-4">Společnost</h4>
               <ul className="space-y-2 text-sm text-muted-foreground">
                 <li>
-                  <Link href="#proces" className="hover:text-accent transition-colors">
-                    Proces
+                  <Link href="/pravni-informace" className="hover:text-accent transition-colors">
+                    Právní informace
                   </Link>
                 </li>
                 <li>
-                  <Link href="#portfolio" className="hover:text-accent transition-colors">
-                    Portfolio
+                  <Link href="/obchodni-podminky" className="hover:text-accent transition-colors">
+                    Obchodní podmínky
                   </Link>
                 </li>
                 <li>
-                  <Link href="/kontakt" className="hover:text-accent transition-colors">
-                    Kontakt
+                  <Link href="/ochrana-osobnich-udaju" className="hover:text-accent transition-colors">
+                    Ochrana osobních údajů
+                  </Link>
+                </li>
+                <li>
+                  <Link href="/cookies" className="hover:text-accent transition-colors">
+                    Cookies
                   </Link>
                 </li>
               </ul>
@@ -351,9 +352,15 @@ export default function HomePage() {
                     info@webnamiru.site
                   </a>
                 </li>
-                <li>IČO: 21609845</li>
-                <li>Taras Ishchuk</li>
-                <li>Česká republika</li>
+                <li>
+                  <a href="tel:+420777596216" className="hover:text-accent transition-colors">
+                    +420 777 596 216
+                  </a>
+                </li>
+                <li>IČO: 23874694</li>
+                <li>Taras Ishchuk, OSVČ</li>
+                <li>Rantířovská 123/36</li>
+                <li>586 01 Jihlava - Horní Kosov</li>
               </ul>
             </div>
           </div>

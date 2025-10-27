@@ -170,9 +170,15 @@ export default async function ServiceDetailPage({ params }: { params: { slug: st
                     info@webnamiru.site
                   </a>
                 </li>
-                <li>IČO: 21609845</li>
+                <li>
+                  <a href="tel:+420777596216" className="hover:text-accent transition-colors">
+                    +420 777 596 216
+                  </a>
+                </li>
+                <li>IČO: 23874694</li>
                 <li>Taras Ishchuk</li>
-                <li>Česká republika</li>
+                <li>Rantířovská 123/36</li>
+                <li>586 01 Jihlava - Horní Kosov</li>
               </ul>
             </div>
           </div>

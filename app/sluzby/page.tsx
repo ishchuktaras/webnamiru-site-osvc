@@ -278,7 +278,7 @@ export default async function ServicesPage() {
       {/* CTA Section */}
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <Card className="border-2 border-accent/20 bg-lanier-to-br from-accent/5 to-primary/5 shadow-lg">
+          <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
               <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
               <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
@@ -357,9 +357,15 @@ export default async function ServicesPage() {
                     info@webnamiru.site
                   </a>
                 </li>
-                <li>IČO: 21609845</li>
+                <li>
+                  <a href="tel:+420777596216" className="hover:text-accent transition-colors">
+                    +420 777 596 216
+                  </a>
+                </li>
+                <li>IČO: 23874694</li>
                 <li>Taras Ishchuk</li>
-                <li>Česká republika</li>
+                <li>Rantířovská 123/36</li>
+                <li>586 01 Jihlava - Horní Kosov</li>
               </ul>
             </div>
           </div>

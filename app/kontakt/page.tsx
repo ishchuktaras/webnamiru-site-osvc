@@ -57,14 +57,17 @@ export default function ContactPage() {
                     <Phone className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <div className="font-semibold">Telefon</div>
-                      <div className="text-sm text-muted-foreground">Na vyžádání</div>
+                      <a href="tel:+420777596216" className="text-sm text-muted-foreground hover:text-primary">
+                        +420 777 596 216
+                      </a>
                     </div>
                   </div>
                   <div className="flex items-start gap-4">
                     <MapPin className="h-5 w-5 text-primary mt-1" />
                     <div>
                       <div className="font-semibold">Sídlo</div>
-                      <div className="text-sm text-muted-foreground">Česká republika</div>
+                      <div className="text-sm text-muted-foreground">Rantířovská 123/36</div>
+                      <div className="text-sm text-muted-foreground">586 01 Jihlava - Horní Kosov</div>
                     </div>
                   </div>
                 </CardContent>
@@ -76,6 +79,17 @@ export default function ContactPage() {
                   <p className="text-sm text-muted-foreground leading-relaxed">
                     Odpovídáme na všechny poptávky do 24 hodin. Pro urgentní záležitosti nás kontaktujte přímo emailem.
                   </p>
+                </CardContent>
+              </Card>
+
+              <Card>
+                <CardContent className="p-6 space-y-2">
+                  <div className="font-semibold text-sm">Identifikační údaje</div>
+                  <div className="text-xs text-muted-foreground space-y-1">
+                    <p>Taras Ishchuk</p>
+                    <p>IČO: 23874694</p>
+                    <p>Fyzická osoba zapsaná v Živnostenském rejstříku</p>
+                  </div>
                 </CardContent>
               </Card>
             </div>
