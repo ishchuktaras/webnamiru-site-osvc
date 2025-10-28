@@ -10,6 +10,7 @@ export async function getServices() {
       shortDescription,
       mainImage,
       content,
+      priceFrom,
       seoTitle,
       seoDescription
     }`,
@@ -26,6 +27,8 @@ export async function getServiceBySlug(slug: string) {
       shortDescription,
       mainImage,
       content,
+      priceFrom,
+      features,
       seoTitle,
       seoDescription
     }`,
@@ -96,5 +99,18 @@ export async function getArticleBySlug(slug: string) {
       body
     }`,
     { slug },
+  )
+}
+
+// Fetch all FAQ items
+export async function getFAQs() {
+  return client.fetch(
+    `*[_type == "faq"] | order(order asc) {
+      _id,
+      question,
+      answer,
+      category,
+      order
+    }`,
   )
 }

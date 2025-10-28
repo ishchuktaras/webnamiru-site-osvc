@@ -1,32 +1,20 @@
-import { Button } from "@/components/ui/button";
-import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card";
-import {
-  ArrowRight,
-  CheckCircle2,
-  Code2,
-  Rocket,
-  Target,
-  Users,
-  Zap,
-  Shield,
-  Sparkles,
-} from "lucide-react";
-import Link from "next/link";
-import { getServices } from "@/lib/sanity.queries";
-import { Footer } from "@/components/Footer";
-import Image from "next/image";
-import { urlFor } from "@/lib/sanity.client";
+import { Button } from "@/components/ui/button"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
+import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield, Sparkles } from "lucide-react"
+import Link from "next/link"
+import { getServices } from "@/lib/sanity.queries"
+import Image from "next/image"
+import { urlFor } from "@/lib/sanity.client"
 
 export const metadata = {
   title: "Služby | webnamiru.site",
-  description:
-    "Komplexní služby pro tvorbu webů na míru - od strategického plánování přes vývoj až po podporu.",
-};
+  description: "Komplexní služby pro tvorbu webů na míru - od strategického plánování přes vývoj až po podporu.",
+}
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 60 // Revalidate every minute
 
 export default async function ServicesPage() {
-  const sanityServices = await getServices();
+  const sanityServices = await getServices()
 
   // Fallback services if Sanity is not configured
   const fallbackServices = [
@@ -34,8 +22,7 @@ export default async function ServicesPage() {
       slug: { current: "strategicke-planovani-webu" },
       icon: Target,
       title: "Strategické plánování",
-      shortDescription:
-        "Definujeme cíle, analyzujeme konkurenci a vytváříme plán pro dosažení měřitelných výsledků.",
+      shortDescription: "Definujeme cíle, analyzujeme konkurenci a vytváříme plán pro dosažení měřitelných výsledků.",
       features: [
         "Analýza cílového publika a vytvoření uživatelských person",
         "Konkurenční výzkum a identifikace USP",
@@ -49,8 +36,7 @@ export default async function ServicesPage() {
       slug: { current: "vyvoj-webu-na-miru" },
       icon: Code2,
       title: "Vývoj na míru",
-      shortDescription:
-        "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
+      shortDescription: "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
       features: [
         "Next.js 16 s App Router pro maximální výkon",
         "Responzivní design pro všechna zařízení",
@@ -64,8 +50,7 @@ export default async function ServicesPage() {
       slug: { current: "ux-ui-design" },
       icon: Users,
       title: "UX/UI Design",
-      shortDescription:
-        "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
+      shortDescription: "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
       features: [
         "Uživatelský výzkum a tvorba person",
         "Wireframing a prototypování",
@@ -79,23 +64,20 @@ export default async function ServicesPage() {
       slug: { current: "cms-integrace" },
       icon: Rocket,
       title: "CMS integrace",
-      shortDescription:
-        "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
+      shortDescription: "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
       features: [
         "Sanity Studio - moderní headless CMS",
         "Flexibilní obsahová schémata na míru",
         "Real-time preview změn",
         "Školení týmu pro správu obsahu",
       ],
-      benefits:
-        "Budete moci snadno aktualizovat obsah webu bez programátora, ušetříte čas a náklady na údržbu.",
+      benefits: "Budete moci snadno aktualizovat obsah webu bez programátora, ušetříte čas a náklady na údržbu.",
     },
     {
       slug: { current: "e-commerce" },
       icon: Zap,
       title: "E-commerce řešení",
-      shortDescription:
-        "Kompletní online obchody s platebními branami a správou produktů.",
+      shortDescription: "Kompletní online obchody s platebními branami a správou produktů.",
       features: [
         "Stripe integrace pro platby",
         "Správa produktů a inventáře",
@@ -109,8 +91,7 @@ export default async function ServicesPage() {
       slug: { current: "podpora-udrzba" },
       icon: Shield,
       title: "Podpora & údržba",
-      shortDescription:
-        "Kontinuální péče o váš web, aktualizace a technická podpora.",
+      shortDescription: "Kontinuální péče o váš web, aktualizace a technická podpora.",
       features: [
         "24/7 monitoring dostupnosti",
         "Pravidelné bezpečnostní aktualizace",
@@ -120,7 +101,7 @@ export default async function ServicesPage() {
       benefits:
         "Váš web bude vždy aktuální, bezpečný a výkonný. Můžete se soustředit na své podnikání, o technologii se postaráme my.",
     },
-  ];
+  ]
 
   const services =
     sanityServices.length > 0
@@ -129,6 +110,7 @@ export default async function ServicesPage() {
           title: service.title,
           shortDesc: service.shortDescription,
           mainImage: service.mainImage,
+          priceFrom: service.priceFrom, // Added priceFrom field
           icon: Target, // Default icon, can be customized based on service type
           features: [], // Will be loaded from Sanity content
           benefits: "",
@@ -138,10 +120,11 @@ export default async function ServicesPage() {
           title: s.title,
           shortDesc: s.shortDescription,
           mainImage: null,
+          priceFrom: null, // Added priceFrom field
           icon: s.icon,
           features: s.features,
           benefits: s.benefits,
-        }));
+        }))
 
   return (
     <div className="flex flex-col min-h-screen">
@@ -159,9 +142,8 @@ export default async function ServicesPage() {
               Služby šité na míru vašemu podnikání
             </h1>
             <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-              Od strategického plánování přes technickou realizaci až po
-              dlouhodobou podporu. Poskytuju komplexní služby, které zajistí
-              úspěch vašeho webového projektu.
+              Od strategického plánování přes technickou realizaci až po dlouhodobou podporu. Poskytuju komplexní
+              služby, které zajistí úspěch vašeho webového projektu.
             </p>
           </div>
         </div>
@@ -172,7 +154,7 @@ export default async function ServicesPage() {
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service: any, index: number) => {
-              const IconComponent = service.icon || Target;
+              const IconComponent = service.icon || Target
               return (
                 <Card
                   key={index}
@@ -181,12 +163,7 @@ export default async function ServicesPage() {
                   {service.mainImage && (
                     <div className="relative w-full h-48">
                       <Image
-                        src={
-                          urlFor(service.mainImage)
-                            .width(1024)
-                            .height(1024)
-                            .url() || "/placeholder.svg"
-                        }
+                        src={urlFor(service.mainImage).width(1024).height(1024).url() || "/placeholder.svg"}
                         alt={service.title}
                         fill
                         className="object-cover"
@@ -195,27 +172,28 @@ export default async function ServicesPage() {
                   )}
 
                   <CardHeader>
-                    <CardTitle className="text-2xl font-semibold">
-                      {service.title}
-                    </CardTitle>
+                    <CardTitle className="text-2xl font-semibold">{service.title}</CardTitle>
+                    {service.priceFrom && (
+                      <div className="text-sm text-muted-foreground mt-2">
+                        <span className="font-semibold text-accent text-lg">
+                          od {service.priceFrom.toLocaleString("cs-CZ")} Kč
+                        </span>
+                      </div>
+                    )}
                   </CardHeader>
                   <CardContent className="flex-1 flex flex-col space-y-6">
-                    <p className="text-muted-foreground leading-relaxed text-sm">
-                      {service.shortDesc}
-                    </p>
+                    <p className="text-muted-foreground leading-relaxed text-sm">{service.shortDesc}</p>
 
                     {service.features && service.features.length > 0 && (
                       <div className="space-y-3">
                         <h4 className="font-semibold text-sm">Co zahrnuje:</h4>
                         <ul className="space-y-2">
-                          {service.features.map(
-                            (feature: string, i: number) => (
-                              <li key={i} className="flex items-start text-sm">
-                                <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0 mt-0.5" />
-                                <span>{feature}</span>
-                              </li>
-                            )
-                          )}
+                          {service.features.map((feature: string, i: number) => (
+                            <li key={i} className="flex items-start text-sm">
+                              <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0 mt-0.5" />
+                              <span>{feature}</span>
+                            </li>
+                          ))}
                         </ul>
                       </div>
                     )}
@@ -223,8 +201,7 @@ export default async function ServicesPage() {
                     {service.benefits && (
                       <div className="pt-4 border-t">
                         <p className="text-sm text-muted-foreground leading-relaxed">
-                          <strong className="text-foreground">Přínos:</strong>{" "}
-                          {service.benefits}
+                          <strong className="text-foreground">Přínos:</strong> {service.benefits}
                         </p>
                       </div>
                     )}
@@ -240,7 +217,7 @@ export default async function ServicesPage() {
                     </Button>
                   </CardContent>
                 </Card>
-              );
+              )
             })}
           </div>
         </div>
@@ -250,9 +227,7 @@ export default async function ServicesPage() {
       <section className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-balance">
-              Jak spolupráce probíhá
-            </h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Jak spolupráce probíhá</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Transparentní proces od první konzultace po úspěšné spuštění
             </p>
@@ -263,41 +238,31 @@ export default async function ServicesPage() {
               {
                 step: "01",
                 title: "Zjišťování potřeb",
-                description:
-                  "Hloubková analýza vašeho podnikání, cílů a cílového publika.",
+                description: "Hloubková analýza vašeho podnikání, cílů a cílového publika.",
               },
               {
                 step: "02",
                 title: "Strategie & Design",
-                description:
-                  "Vytvoříme wireframy, uživatelské persony a vizuální design.",
+                description: "Vytvoříme wireframy, uživatelské persony a vizuální design.",
               },
               {
                 step: "03",
                 title: "Vývoj & Testování",
-                description:
-                  "Implementace pomocí Next.js a Sanity.io s průběžným testováním.",
+                description: "Implementace pomocí Next.js a Sanity.io s průběžným testováním.",
               },
               {
                 step: "04",
                 title: "Spuštění & Podpora",
-                description:
-                  "Nasazení na Vercel a následná podpora a optimalizace.",
+                description: "Nasazení na Vercel a následná podpora a optimalizace.",
               },
             ].map((phase, index) => (
               <div key={index} className="relative">
                 <div className="space-y-4">
-                  <div className="text-5xl font-bold text-accent/20">
-                    {phase.step}
-                  </div>
+                  <div className="text-5xl font-bold text-accent/20">{phase.step}</div>
                   <h3 className="text-xl font-semibold">{phase.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">
-                    {phase.description}
-                  </p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">{phase.description}</p>
                 </div>
-                {index < 3 && (
-                  <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />
-                )}
+                {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />}
               </div>
             ))}
           </div>
@@ -309,19 +274,12 @@ export default async function ServicesPage() {
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl lg:text-5xl font-bold text-balance">
-                Připraveni začít váš projekt?
-              </h2>
+              <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
               <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-                Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci
-                vašemu podnikání růst
+                Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button
-                  size="lg"
-                  asChild
-                  className="bg-accent hover:bg-accent/90 shadow-md"
-                >
+                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
                   <Link href="/kontakt">
                     Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -332,9 +290,7 @@ export default async function ServicesPage() {
                   asChild
                   className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
                 >
-                  <Link href="mailto:info@webnamiru.site">
-                    info@webnamiru.site
-                  </Link>
+                  <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
                 </Button>
               </div>
             </CardContent>
@@ -342,5 +298,5 @@ export default async function ServicesPage() {
         </div>
       </section>
     </div>
-  );
+  )
 }
