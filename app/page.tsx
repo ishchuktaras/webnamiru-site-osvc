@@ -1,16 +1,22 @@
-import { Button } from "@/components/ui/button"
-import { Card, CardContent } from "@/components/ui/card"
-import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield } from "lucide-react"
-import Link from "next/link"
-import Image from "next/image"
-import { Header } from "@/components/Header"
+import { Button } from "@/components/ui/button";
+import { Card, CardContent } from "@/components/ui/card";
+import {
+  ArrowRight,
+  CheckCircle2,
+  Code2,
+  Rocket,
+  Target,
+  Users,
+  Zap,
+  Shield,
+} from "lucide-react";
+import Link from "next/link";
+import Image from "next/image";
+import { Header } from "@/components/Header";
 
 export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <Header />
-
       {/* Hero Section */}
       <section className="relative py-20 md:py-32 overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
@@ -23,14 +29,20 @@ export default function Home() {
                 </span>
               </div>
               <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
-                Weby, které <span className="text-accent">přinášejí výsledky</span>
+                Weby, které{" "}
+                <span className="text-accent">přinášejí výsledky</span>
               </h1>
               <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-                Vytvářím webové stránky na míru, které nejen skvěle vypadají, ale především pomáhají vašemu podnikání
-                růst. Od strategie přes design až po měřitelné výsledky.
+                Vytvářím webové stránky na míru, které nejen skvěle vypadají,
+                ale především pomáhají vašemu podnikání růst. Od strategie přes
+                design až po měřitelné výsledky.
               </p>
               <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
+                <Button
+                  size="lg"
+                  asChild
+                  className="bg-accent hover:bg-accent/90 shadow-md"
+                >
                   <Link href="/kontakt">
                     Začít projekt <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -47,11 +59,15 @@ export default function Home() {
               <div className="flex items-center gap-8 pt-4">
                 <div>
                   <div className="text-3xl font-bold text-primary">Next.js</div>
-                  <div className="text-sm text-muted-foreground">Moderní technologie</div>
+                  <div className="text-sm text-muted-foreground">
+                    Moderní technologie
+                  </div>
                 </div>
                 <div>
                   <div className="text-3xl font-bold text-primary">ROI</div>
-                  <div className="text-sm text-muted-foreground">Měřitelné výsledky</div>
+                  <div className="text-sm text-muted-foreground">
+                    Měřitelné výsledky
+                  </div>
                 </div>
               </div>
             </div>
@@ -73,9 +89,12 @@ export default function Home() {
       <section id="sluzby" className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Komplexní služby pro váš úspěch</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">
+              Komplexní služby pro váš úspěch
+            </h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Od strategického plánování až po technickou realizaci a následnou podporu
+              Od strategického plánování až po technickou realizaci a následnou
+              podporu
             </p>
           </div>
 
@@ -86,46 +105,76 @@ export default function Home() {
                 title: "Strategické plánování",
                 description:
                   "Definujeme cíle, analyzujeme konkurenci a vytváříme plán pro dosažení měřitelných výsledků.",
-                features: ["Analýza cílového publika", "Konkurenční výzkum", "SMART cíle"],
+                features: [
+                  "Analýza cílového publika",
+                  "Konkurenční výzkum",
+                  "SMART cíle",
+                ],
               },
               {
                 icon: Code2,
                 title: "Vývoj na míru",
-                description: "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
-                features: ["Next.js 16", "Responzivní design", "SEO optimalizace"],
+                description:
+                  "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
+                features: [
+                  "Next.js 16",
+                  "Responzivní design",
+                  "SEO optimalizace",
+                ],
               },
               {
                 icon: Users,
                 title: "UX/UI Design",
-                description: "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
-                features: ["Uživatelské persony", "Wireframing", "Prototypování"],
+                description:
+                  "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
+                features: [
+                  "Uživatelské persony",
+                  "Wireframing",
+                  "Prototypování",
+                ],
               },
               {
                 icon: Rocket,
                 title: "CMS integrace",
-                description: "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
-                features: ["Sanity Studio", "Flexibilní schémata", "Real-time preview"],
+                description:
+                  "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
+                features: [
+                  "Sanity Studio",
+                  "Flexibilní schémata",
+                  "Real-time preview",
+                ],
               },
               {
                 icon: Zap,
                 title: "E-commerce řešení",
-                description: "Kompletní online obchody s platebními branami a správou produktů.",
-                features: ["Stripe integrace", "Správa objednávek", "Analytika prodejů"],
+                description:
+                  "Kompletní online obchody s platebními branami a správou produktů.",
+                features: [
+                  "Stripe integrace",
+                  "Správa objednávek",
+                  "Analytika prodejů",
+                ],
               },
               {
                 icon: Shield,
                 title: "Podpora & údržba",
-                description: "Kontinuální péče o váš web, aktualizace a technická podpora.",
+                description:
+                  "Kontinuální péče o váš web, aktualizace a technická podpora.",
                 features: ["Monitoring", "Aktualizace", "Technická podpora"],
               },
             ].map((service, index) => (
-              <Card key={index} className="border-2 hover:border-accent transition-colors duration-200 shadow-sm">
+              <Card
+                key={index}
+                className="border-2 hover:border-accent transition-colors duration-200 shadow-sm"
+              >
                 <CardContent className="p-6 space-y-4">
                   <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
                     <service.icon className="h-6 w-6 text-accent" />
                   </div>
                   <h3 className="text-xl font-semibold">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {service.description}
+                  </p>
                   <ul className="space-y-2">
                     {service.features.map((feature, i) => (
                       <li key={i} className="flex items-center text-sm">
@@ -139,7 +188,12 @@ export default function Home() {
             ))}
           </div>
           <div className="text-center mt-12">
-            <Button size="lg" asChild variant="outline" className="border-2 bg-transparent">
+            <Button
+              size="lg"
+              asChild
+              variant="outline"
+              className="border-2 bg-transparent"
+            >
               <Link href="/sluzby">
                 Zobrazit všechny služby <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
@@ -152,7 +206,9 @@ export default function Home() {
       <section id="proces" className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Jak spolupráce probíhá</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">
+              Jak spolupráce probíhá
+            </h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Transparentní proces od první konzultace po úspěšné spuštění
             </p>
@@ -187,11 +243,17 @@ export default function Home() {
             ].map((phase, index) => (
               <div key={index} className="relative">
                 <div className="space-y-4">
-                  <div className="text-5xl font-bold text-accent/20">{phase.step}</div>
+                  <div className="text-5xl font-bold text-accent/20">
+                    {phase.step}
+                  </div>
                   <h3 className="text-xl font-semibold">{phase.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{phase.description}</p>
+                  <p className="text-muted-foreground leading-relaxed text-sm">
+                    {phase.description}
+                  </p>
                 </div>
-                {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />}
+                {index < 3 && (
+                  <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />
+                )}
               </div>
             ))}
           </div>
@@ -202,7 +264,9 @@ export default function Home() {
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Moderní technologie</h2>
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">
+              Moderní technologie
+            </h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Používáme osvědčené nástroje pro maximální výkon a spolehlivost
             </p>
@@ -219,10 +283,17 @@ export default function Home() {
               { name: "Stripe", desc: "Payments" },
               { name: "Resend", desc: "Email API" },
             ].map((tech, index) => (
-              <Card key={index} className="text-center p-6 hover:border-accent transition-colors duration-200">
+              <Card
+                key={index}
+                className="text-center p-6 hover:border-accent transition-colors duration-200"
+              >
                 <CardContent className="p-0 space-y-2">
-                  <div className="text-lg font-semibold text-primary">{tech.name}</div>
-                  <div className="text-sm text-muted-foreground">{tech.desc}</div>
+                  <div className="text-lg font-semibold text-primary">
+                    {tech.name}
+                  </div>
+                  <div className="text-sm text-muted-foreground">
+                    {tech.desc}
+                  </div>
                 </CardContent>
               </Card>
             ))}
@@ -235,12 +306,19 @@ export default function Home() {
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
+              <h2 className="text-3xl lg:text-5xl font-bold text-balance">
+                Připraveni začít váš projekt?
+              </h2>
               <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-                Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
+                Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci
+                vašemu podnikání růst
               </p>
               <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
+                <Button
+                  size="lg"
+                  asChild
+                  className="bg-accent hover:bg-accent/90 shadow-md"
+                >
                   <Link href="/kontakt">
                     Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
                   </Link>
@@ -251,7 +329,9 @@ export default function Home() {
                   asChild
                   className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
                 >
-                  <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
+                  <Link href="mailto:info@webnamiru.site">
+                    info@webnamiru.site
+                  </Link>
                 </Button>
               </div>
             </CardContent>
@@ -259,5 +339,5 @@ export default function Home() {
         </div>
       </section>
     </div>
-  )
+  );
 }
