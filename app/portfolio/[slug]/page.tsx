@@ -45,9 +45,6 @@ export default async function ProjectPage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <Header />
-
       {/* Back Button */}
       <div className="container max-w-7xl mx-auto px-4 lg:px-8 py-8">
         <Button asChild variant="ghost">

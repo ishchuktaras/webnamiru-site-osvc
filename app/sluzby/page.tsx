@@ -145,45 +145,6 @@ export default async function ServicesPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl">webnamiru.site</span>
-          </Link>
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/#sluzby"
-              className="transition-colors hover:text-accent"
-            >
-              Služby
-            </Link>
-            <Link
-              href="/#proces"
-              className="transition-colors hover:text-accent"
-            >
-              Proces
-            </Link>
-            <Link
-              href="/#portfolio"
-              className="transition-colors hover:text-accent"
-            >
-              Portfolio
-            </Link>
-            <Link
-              href="/kontakt"
-              className="transition-colors hover:text-accent"
-            >
-              Kontakt
-            </Link>
-          </nav>
-          <Button asChild className="bg-accent hover:bg-accent/90">
-            <Link href="/kontakt">Nezávazná poptávka</Link>
-          </Button>
-        </div>
-      </header>
-
       {/* Hero Section */}
       <section className="py-20 md:py-32">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
@@ -222,8 +183,8 @@ export default async function ServicesPage() {
                       <Image
                         src={
                           urlFor(service.mainImage)
-                            .width(600)
-                            .height(400)
+                            .width(1024)
+                            .height(1024)
                             .url() || "/placeholder.svg"
                         }
                         alt={service.title}
@@ -234,9 +195,6 @@ export default async function ServicesPage() {
                   )}
 
                   <CardHeader>
-                    <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center mb-4">
-                      <IconComponent className="h-6 w-6 text-accent" />
-                    </div>
                     <CardTitle className="text-2xl font-semibold">
                       {service.title}
                     </CardTitle>

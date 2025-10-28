@@ -5,8 +5,7 @@ import Link from "next/link";
 import { getProjects } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
 import Image from "next/image";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+
 
 export const metadata = {
   title: "Portfolio | webnamiru.site",
@@ -21,9 +20,6 @@ export default async function PortfolioPage() {
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <Header />
-
       {/* Hero Section */}
       <section className="py-20 md:py-32">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">

@@ -6,8 +6,6 @@ import { urlFor } from "@/lib/sanity.client";
 import Image from "next/image";
 import { PortableText } from "@portabletext/react";
 import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
 
 export async function generateStaticParams() {
   const articles = await getArticles();
@@ -45,9 +43,6 @@ export default async function ArticlePage({
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Header */}
-      <Header />
-
       {/* Back Button */}
       <div className="container max-w-4xl mx-auto px-4 lg:px-8 py-8">
         <Button asChild variant="ghost">
