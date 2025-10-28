@@ -50,17 +50,32 @@ export function ContactForm() {
     try {
       let recaptchaToken: string | undefined
 
-      if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && typeof window !== "undefined" && window.grecaptcha) {
+      const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
+      console.log("[v0] reCAPTCHA check:", {
+        hasSiteKey: !!siteKey,
+        hasGrecaptcha: typeof window !== "undefined" && !!window.grecaptcha,
+      })
+
+      if (siteKey && typeof window !== "undefined" && window.grecaptcha) {
         try {
-          recaptchaToken = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, {
+          console.log("[v0] Executing reCAPTCHA...")
+          recaptchaToken = await window.grecaptcha.execute(siteKey, {
             action: "contact_form",
           })
           console.log("[v0] reCAPTCHA token obtained successfully")
         } catch (error) {
           console.error("[v0] reCAPTCHA error:", error)
+          toast({
+            title: "Varování",
+            description: "reCAPTCHA není dostupná, ale formulář bude odeslán.",
+            variant: "default",
+          })
         }
+      } else {
+        console.log("[v0] reCAPTCHA not available, proceeding without it")
       }
 
+      console.log("[v0] Submitting form data...")
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
@@ -68,13 +83,15 @@ export function ContactForm() {
         },
         body: JSON.stringify({
           ...data,
-          recaptchaToken, // Přidán reCAPTCHA token do requestu
+          recaptchaToken,
         }),
       })
 
+      const responseData = await response.json()
+      console.log("[v0] API response:", responseData)
+
       if (!response.ok) {
-        const errorData = await response.json()
-        throw new Error(errorData.error || "Chyba při odesílání formuláře")
+        throw new Error(responseData.error || "Chyba při odesílání formuláře")
       }
 
       toast({

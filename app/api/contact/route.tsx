@@ -16,12 +16,19 @@ const resend = new Resend(process.env.RESEND_API_KEY)
 
 export async function POST(request: Request) {
   try {
+    console.log("[v0] Environment check:", {
+      hasResendKey: !!process.env.RESEND_API_KEY,
+      hasRecaptchaSecret: !!process.env.RECAPTCHA_SECRET_KEY,
+    })
+
     const body = await request.json()
+    console.log("[v0] Received form data:", { ...body, recaptchaToken: body.recaptchaToken ? "present" : "missing" })
 
     // Validace dat
     const validatedData = contactSchema.parse(body)
 
     if (validatedData.recaptchaToken && process.env.RECAPTCHA_SECRET_KEY) {
+      console.log("[v0] Verifying reCAPTCHA token...")
       const recaptchaResponse = await fetch("https://www.google.com/recaptcha/api/siteverify", {
         method: "POST",
         headers: {
@@ -31,17 +38,20 @@ export async function POST(request: Request) {
       })
 
       const recaptchaData = await recaptchaResponse.json()
+      console.log("[v0] reCAPTCHA response:", recaptchaData)
 
       if (!recaptchaData.success || recaptchaData.score < 0.5) {
         console.log("[v0] reCAPTCHA verification failed:", recaptchaData)
         return NextResponse.json({ error: "Ověření reCAPTCHA selhalo. Zkuste to prosím znovu." }, { status: 400 })
       }
+      console.log("[v0] reCAPTCHA verification successful, score:", recaptchaData.score)
+    } else {
+      console.log("[v0] Skipping reCAPTCHA verification (token or secret missing)")
     }
 
-    console.log("[v0] Contact form submission:", validatedData)
-
-    await resend.emails.send({
-      from: "webnamiru.site <onboarding@resend.dev>", // V produkci změňte na vaši ověřenou doménu
+    console.log("[v0] Sending email via Resend...")
+    const emailResult = await resend.emails.send({
+      from: "webnamiru.site <onboarding@resend.dev>",
       to: "info@webnamiru.site",
       replyTo: validatedData.email,
       subject: `Nová poptávka od ${validatedData.name}`,
@@ -87,6 +97,8 @@ export async function POST(request: Request) {
       `,
     })
 
+    console.log("[v0] Email sent successfully:", emailResult)
+
     return NextResponse.json({
       success: true,
       message: "Zpráva byla úspěšně odeslána",
@@ -96,6 +108,13 @@ export async function POST(request: Request) {
 
     if (error instanceof z.ZodError) {
       return NextResponse.json({ error: "Neplatná data formuláře", details: error.errors }, { status: 400 })
+    }
+
+    if (error && typeof error === "object" && "message" in error) {
+      return NextResponse.json(
+        { error: "Chyba při odesílání emailu", details: (error as Error).message },
+        { status: 500 },
+      )
     }
 
     return NextResponse.json({ error: "Chyba při odesílání zprávy" }, { status: 500 })
