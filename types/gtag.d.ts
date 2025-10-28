@@ -1,0 +1,13 @@
+// Type declarations for Google Analytics gtag
+declare global {
+  interface Window {
+    gtag: (
+      command: "config" | "event" | "consent" | "js" | "set",
+      targetId: string | Date,
+      config?: Record<string, any>,
+    ) => void
+    dataLayer: any[]
+  }
+}
+
+export {}
