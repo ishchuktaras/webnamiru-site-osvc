@@ -13,7 +13,7 @@ export const metadata = {
     "Ukázky našich realizovaných webových projektů pro české firmy a podnikatele.",
 };
 
-export const revalidate = 3600; // Revalidate every hour
+export const revalidate = 1800; // Revalidate every 30 minutes
 
 export default async function PortfolioPage() {
   const projects = await getProjects();
@@ -25,10 +25,10 @@ export default async function PortfolioPage() {
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
-              Naše realizované projekty
+              Moje projekty
             </h1>
             <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-              Podívejte se na weby, které jsme vytvořili pro české firmy a
+              Podívejte se na weby, které vyvíjím pro české firmy a
               podnikatele. Každý projekt je jedinečný a šitý na míru potřebám
               klienta.
             </p>

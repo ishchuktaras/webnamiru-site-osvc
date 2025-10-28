@@ -55,7 +55,7 @@ Tento návod vám ukáže, jak nastavit Sanity webhooky pro automatickou aktuali
 
 ### Test změnou obsahu:
 1. Otevřete Sanity Studio
-2. Upravte nějaký článek
+2. Upravte nějaký článek, projekt nebo službu
 3. Klikněte na **Publish**
 4. Počkejte 5-10 sekund
 5. Obnovte stránku na webu - změny by měly být viditelné
@@ -69,6 +69,16 @@ curl "https://webnamiru.site/api/revalidate?secret=VÁŠ_SECRET&path=/blog"
 curl -X POST "https://webnamiru.site/api/revalidate?secret=VÁŠ_SECRET" \
   -H "Content-Type: application/json" \
   -d '{"type": "clanek", "slug": "10-seo-chyb"}'
+
+# Revalidace portfolio projektu
+curl -X POST "https://webnamiru.site/api/revalidate?secret=VÁŠ_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"type": "projekt", "slug": "projekt-slug"}'
+
+# Revalidace služby
+curl -X POST "https://webnamiru.site/api/revalidate?secret=VÁŠ_SECRET" \
+  -H "Content-Type: application/json" \
+  -d '{"type": "sluzba", "slug": "sluzba-slug"}'
 \`\`\`
 
 ## 4. Monitoring Webhooků
@@ -113,3 +123,13 @@ Pokud nechcete používat webhooky, můžete:
 - ✅ Nastavte ISR revalidaci na 60-300 sekund jako fallback
 - ✅ Monitorujte webhook deliveries pravidelně
 - ✅ Používejte silný REVALIDATE_SECRET (min. 32 znaků)
+
+## 8. Podporované Typy Obsahu
+
+API endpoint `/api/revalidate` podporuje následující typy:
+
+- **clanek** - Blogové články (`/blog` a `/blog/[slug]`)
+- **projekt** - Portfolio projekty (`/portfolio` a `/portfolio/[slug]`)
+- **sluzba** - Služby (`/sluzby` a `/sluzby/[slug]`)
+
+Při publikaci jakéhokoliv z těchto typů v Sanity se automaticky revaliduje příslušná stránka na webu.
