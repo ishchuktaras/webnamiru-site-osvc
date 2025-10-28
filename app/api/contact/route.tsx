@@ -37,23 +37,32 @@ export async function POST(request: Request) {
     const validatedData = contactSchema.parse(body)
 
     if (validatedData.recaptchaToken && process.env.RECAPTCHA_SECRET_KEY) {
-      console.log("[v0] Verifying reCAPTCHA token...")
-      const recaptchaResponse = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-        method: "POST",
-        headers: {
-          "Content-Type": "application/x-www-form-urlencoded",
+      console.log("[v0] Verifying reCAPTCHA Enterprise token...")
+      const recaptchaResponse = await fetch(
+        "https://recaptchaenterprise.googleapis.com/v1/projects/YOUR_PROJECT_ID/assessments?key=YOUR_API_KEY",
+        {
+          method: "POST",
+          headers: {
+            "Content-Type": "application/json",
+          },
+          body: JSON.stringify({
+            event: {
+              token: validatedData.recaptchaToken,
+              siteKey: process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY,
+              expectedAction: "submit_contact_form",
+            },
+          }),
         },
-        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${validatedData.recaptchaToken}`,
-      })
+      )
 
       const recaptchaData = await recaptchaResponse.json()
-      console.log("[v0] reCAPTCHA response:", recaptchaData)
+      console.log("[v0] reCAPTCHA Enterprise response:", recaptchaData)
 
-      if (!recaptchaData.success || recaptchaData.score < 0.5) {
+      if (!recaptchaData.tokenProperties?.valid || recaptchaData.riskAnalysis?.score < 0.5) {
         console.log("[v0] reCAPTCHA verification failed:", recaptchaData)
         return NextResponse.json({ error: "Ověření reCAPTCHA selhalo. Zkuste to prosím znovu." }, { status: 400 })
       }
-      console.log("[v0] reCAPTCHA verification successful, score:", recaptchaData.score)
+      console.log("[v0] reCAPTCHA verification successful, score:", recaptchaData.riskAnalysis?.score)
     } else {
       console.log("[v0] Skipping reCAPTCHA verification (token or secret missing)")
     }

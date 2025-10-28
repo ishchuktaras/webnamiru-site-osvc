@@ -25,8 +25,10 @@ type FormData = z.infer<typeof formSchema>
 declare global {
   interface Window {
     grecaptcha: {
-      ready: (callback: () => void) => void
-      execute: (siteKey: string, options: { action: string }) => Promise<string>
+      enterprise: {
+        ready: (callback: () => void) => void
+        execute: (siteKey: string, options: { action: string }) => Promise<string>
+      }
     }
   }
 }
@@ -53,16 +55,18 @@ export function ContactForm() {
       const siteKey = process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY
       console.log("[v0] reCAPTCHA check:", {
         hasSiteKey: !!siteKey,
-        hasGrecaptcha: typeof window !== "undefined" && !!window.grecaptcha,
+        hasGrecaptcha: typeof window !== "undefined" && !!window.grecaptcha?.enterprise,
       })
 
-      if (siteKey && typeof window !== "undefined" && window.grecaptcha) {
+      if (siteKey && typeof window !== "undefined" && window.grecaptcha?.enterprise) {
         try {
-          console.log("[v0] Executing reCAPTCHA...")
-          recaptchaToken = await window.grecaptcha.execute(siteKey, {
-            action: "contact_form",
+          console.log("[v0] Executing reCAPTCHA Enterprise...")
+          await window.grecaptcha.enterprise.ready(async () => {
+            recaptchaToken = await window.grecaptcha.enterprise.execute(siteKey, {
+              action: "submit_contact_form",
+            })
+            console.log("[v0] reCAPTCHA Enterprise token obtained successfully")
           })
-          console.log("[v0] reCAPTCHA token obtained successfully")
         } catch (error) {
           console.error("[v0] reCAPTCHA error:", error)
           toast({

@@ -87,13 +87,13 @@ export default function RootLayout({
 
         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
           <Script
-            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+            src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
             strategy="lazyOnload"
           />
         )}
       </head>
       <body
-        className={`${_geist.className} ${_geistMono.className} ${_sourceSerif_4.className} font-sans antialiased`}
+        className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
