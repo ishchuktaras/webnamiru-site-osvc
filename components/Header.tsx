@@ -1,6 +1,6 @@
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import { Code2 } from "lucide-react"
+import Link from "next/link";
+import { Button } from "@/components/ui/button";
+import { Code2 } from "lucide-react";
 
 export function Header() {
   return (
@@ -17,11 +17,17 @@ export function Header() {
           <Link href="/o-mne" className="transition-colors hover:text-accent">
             O mně
           </Link>
-          <Link href="/portfolio" className="transition-colors hover:text-accent">
+          <Link
+            href="/portfolio"
+            className="transition-colors hover:text-accent"
+          >
             Portfolio
           </Link>
           <Link href="/blog" className="transition-colors hover:text-accent">
             Blog
+          </Link>
+          <Link href="/#faq" className="transition-colors hover:text-accent">
+            FAQ
           </Link>
           <Link href="/kontakt" className="transition-colors hover:text-accent">
             Kontakt
@@ -32,6 +38,6 @@ export function Header() {
         </Button>
       </div>
     </header>
-  )
+  );
 }
-export default Header
+export default Header;

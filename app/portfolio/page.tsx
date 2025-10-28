@@ -23,20 +23,21 @@ export default async function PortfolioPage() {
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
-              Naše realizované projekty
+              Ukázkové projekty
             </h1>
             <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-              Podívejte se na weby, které jsme vytvořili pro české firmy a podnikatele. Každý projekt je jedinečný a
-              šitý na míru potřebám klienta.
+              Tyto projekty jsou aktuálně ve fázi přípravy a slouží jako ukázky našich schopností. Po dokončení budou
+              doplněny kompletními informacemi, odkazy na živé weby a detailními case studies.
             </p>
+            {/* </CHANGE> */}
             <Card className="border-2 border-amber-500/20 bg-amber-50/50 dark:bg-amber-950/20">
               <CardContent className="p-6 flex items-start gap-4">
                 <AlertCircle className="h-5 w-5 text-amber-600 dark:text-amber-500 shrink-0 mt-0.5" />
                 <div className="text-left space-y-2">
-                  <h3 className="font-semibold text-amber-900 dark:text-amber-100">Ukázkové projekty</h3>
+                  <h3 className="font-semibold text-amber-900 dark:text-amber-100">Poznámka</h3>
                   <p className="text-sm text-amber-800 dark:text-amber-200 leading-relaxed">
-                    Tyto projekty jsou aktuálně ve fázi přípravy a slouží jako ukázky našich schopností. Po dokončení
-                    budou doplněny kompletními informacemi, odkazy na živé weby a detailními case studies.
+                    Projekty jsou průběžně aktualizovány. Sledujte tuto stránku pro nejnovější informace o našich
+                    realizacích.
                   </p>
                 </div>
               </CardContent>
@@ -113,7 +114,7 @@ export default async function PortfolioPage() {
                 Domluvme si nezávaznou konzultaci a probereme váš projekt
               </p>
               <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
-                <Link href="/kontakt">Kontaktovat nás</Link>
+                <Link href="/kontakt">Kontaktovat mě</Link>
               </Button>
             </CardContent>
           </Card>

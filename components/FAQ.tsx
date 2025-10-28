@@ -27,7 +27,8 @@ export function FAQ({ faqs }: FAQProps) {
   }
 
   return (
-    <section className="py-20">
+    <section id="faq" className="py-20">
+      {/* </CHANGE> */}
       <div className="container max-w-4xl mx-auto px-4 lg:px-8">
         <div className="text-center space-y-4 mb-12">
           <h2 className="text-3xl lg:text-5xl font-bold text-balance">Často kladené otázky</h2>
@@ -67,3 +68,4 @@ export function FAQ({ faqs }: FAQProps) {
     </section>
   )
 }
+export default FAQ
