@@ -1,46 +1,44 @@
-import { Button } from "@/components/ui/button";
-import { ExternalLink, Calendar, ArrowLeft } from "lucide-react";
-import Link from "next/link";
-import { getProjectBySlug, getProjects } from "@/lib/sanity.queries";
-import { urlFor } from "@/lib/sanity.client";
-import Image from "next/image";
-import { PortableText } from "@portabletext/react";
-import { notFound } from "next/navigation";
-import { Header } from "@/components/Header";
-import { Footer } from "@/components/Footer";
+import { Button } from "@/components/ui/button"
+import { ExternalLink, Calendar, ArrowLeft } from "lucide-react"
+import Link from "next/link"
+import { getProjectBySlug, getProjects } from "@/lib/sanity.queries"
+import { urlFor } from "@/lib/sanity.client"
+import Image from "next/image"
+import { PortableText } from "@portabletext/react"
+import { notFound } from "next/navigation"
 
 export async function generateStaticParams() {
-  const projects = await getProjects();
+  const projects = await getProjects()
   return projects.map((project: any) => ({
     slug: project.slug.current,
-  }));
+  }))
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const project = await getProjectBySlug(params.slug);
-  if (!project) return {};
+  const project = await getProjectBySlug(params.slug)
+  if (!project) return {}
 
   return {
     title: `${project.title} | Portfolio | webnamiru.site`,
     description: `Ukázka projektu ${project.title} pro ${project.clientName}`,
-  };
+  }
 }
 
-export const revalidate = 3600;
+export const revalidate = 60 // Revalidate every minute
 
 export default async function ProjectPage({
   params,
 }: {
-  params: { slug: string };
+  params: { slug: string }
 }) {
-  const project = await getProjectBySlug(params.slug);
+  const project = await getProjectBySlug(params.slug)
 
   if (!project) {
-    notFound();
+    notFound()
   }
 
   return (
@@ -84,15 +82,12 @@ export default async function ProjectPage({
       </section>
 
       {/* Cover Image */}
-      {project.coverImage && (
+      {project.coverImage?.asset && (
         <section className="py-8">
           <div className="container max-w-6xl mx-auto px-4 lg:px-8">
             <div className="relative h-96 md:h-[600px] w-full rounded-lg overflow-hidden">
               <Image
-                src={
-                  urlFor(project.coverImage).width(1200).height(800).url() ||
-                  "/placeholder.svg"
-                }
+                src={urlFor(project.coverImage).width(1200).height(800).url() || "/placeholder.svg"}
                 alt={project.coverImage.alt || project.title}
                 fill
                 className="object-cover"
@@ -117,26 +112,22 @@ export default async function ProjectPage({
           <div className="container max-w-6xl mx-auto px-4 lg:px-8">
             <h2 className="text-3xl font-bold mb-8">Galerie</h2>
             <div className="grid md:grid-cols-2 gap-6">
-              {project.gallery.map((image: any, index: number) => (
-                <div
-                  key={index}
-                  className="relative h-64 md:h-80 rounded-lg overflow-hidden"
-                >
-                  <Image
-                    src={
-                      urlFor(image).width(800).height(600).url() ||
-                      "/placeholder.svg"
-                    }
-                    alt={image.alt || `${project.title} - obrázek ${index + 1}`}
-                    fill
-                    className="object-cover"
-                  />
-                </div>
-              ))}
+              {project.gallery
+                .filter((image: any) => image?.asset)
+                .map((image: any, index: number) => (
+                  <div key={index} className="relative h-64 md:h-80 rounded-lg overflow-hidden">
+                    <Image
+                      src={urlFor(image).width(800).height(600).url() || "/placeholder.svg"}
+                      alt={image.alt || `${project.title} - obrázek ${index + 1}`}
+                      fill
+                      className="object-cover"
+                    />
+                  </div>
+                ))}
             </div>
           </div>
         </section>
       )}
     </div>
-  );
+  )
 }
