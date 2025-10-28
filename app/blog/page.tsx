@@ -1,10 +1,11 @@
 import { Button } from "@/components/ui/button";
 import { Card, CardContent } from "@/components/ui/card";
-import { Code2, Calendar, ArrowRight } from "lucide-react";
+import { Calendar, ArrowRight } from "lucide-react";
 import Link from "next/link";
 import { getArticles } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
 import Image from "next/image";
+import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 
 export const metadata = {
@@ -21,43 +22,8 @@ export default async function BlogPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl">webnamiru.site</span>
-          </Link>
-          <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
-            <Link
-              href="/sluzby"
-              className="transition-colors hover:text-accent"
-            >
-              Služby
-            </Link>
-            <Link
-              href="/portfolio"
-              className="transition-colors hover:text-accent"
-            >
-              Portfolio
-            </Link>
-            <Link
-              href="/blog"
-              className="transition-colors hover:text-accent text-accent"
-            >
-              Blog
-            </Link>
-            <Link
-              href="/kontakt"
-              className="transition-colors hover:text-accent"
-            >
-              Kontakt
-            </Link>
-          </nav>
-          <Button asChild className="bg-accent hover:bg-accent/90">
-            <Link href="/kontakt">Nezávazná poptávka</Link>
-          </Button>
-        </div>
-      </header>
+      <Header />
+
       {/* Hero Section */}
       <section className="py-20 md:py-32">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">

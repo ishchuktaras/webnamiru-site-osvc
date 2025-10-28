@@ -1,52 +1,52 @@
-import { Button } from "@/components/ui/button"
-import { Code2, ExternalLink, Calendar, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import { getProjectBySlug, getProjects } from "@/lib/sanity.queries"
-import { urlFor } from "@/lib/sanity.client"
-import Image from "next/image"
-import { PortableText } from "@portabletext/react"
-import { notFound } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { ExternalLink, Calendar, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { getProjectBySlug, getProjects } from "@/lib/sanity.queries";
+import { urlFor } from "@/lib/sanity.client";
+import Image from "next/image";
+import { PortableText } from "@portabletext/react";
+import { notFound } from "next/navigation";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
 
 export async function generateStaticParams() {
-  const projects = await getProjects()
+  const projects = await getProjects();
   return projects.map((project: any) => ({
     slug: project.slug.current,
-  }))
+  }));
 }
 
-export async function generateMetadata({ params }: { params: { slug: string } }) {
-  const project = await getProjectBySlug(params.slug)
-  if (!project) return {}
+export async function generateMetadata({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const project = await getProjectBySlug(params.slug);
+  if (!project) return {};
 
   return {
     title: `${project.title} | Portfolio | webnamiru.site`,
     description: `Ukázka projektu ${project.title} pro ${project.clientName}`,
-  }
+  };
 }
 
-export const revalidate = 3600
+export const revalidate = 3600;
 
-export default async function ProjectPage({ params }: { params: { slug: string } }) {
-  const project = await getProjectBySlug(params.slug)
+export default async function ProjectPage({
+  params,
+}: {
+  params: { slug: string };
+}) {
+  const project = await getProjectBySlug(params.slug);
 
   if (!project) {
-    notFound()
+    notFound();
   }
 
   return (
     <div className="flex flex-col min-h-screen">
       {/* Header */}
-      <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
-          <Link href="/" className="flex items-center space-x-2">
-            <Code2 className="h-6 w-6 text-primary" />
-            <span className="font-bold text-xl">webnamiru.site</span>
-          </Link>
-          <Button asChild className="bg-accent hover:bg-accent/90">
-            <Link href="/kontakt">Nezávazná poptávka</Link>
-          </Button>
-        </div>
-      </header>
+      <Header />
 
       {/* Back Button */}
       <div className="container max-w-7xl mx-auto px-4 lg:px-8 py-8">
@@ -92,7 +92,10 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           <div className="container max-w-6xl mx-auto px-4 lg:px-8">
             <div className="relative h-96 md:h-[600px] w-full rounded-lg overflow-hidden">
               <Image
-                src={urlFor(project.coverImage).width(1200).height(800).url() || "/placeholder.svg"}
+                src={
+                  urlFor(project.coverImage).width(1200).height(800).url() ||
+                  "/placeholder.svg"
+                }
                 alt={project.coverImage.alt || project.title}
                 fill
                 className="object-cover"
@@ -118,9 +121,15 @@ export default async function ProjectPage({ params }: { params: { slug: string }
             <h2 className="text-3xl font-bold mb-8">Galerie</h2>
             <div className="grid md:grid-cols-2 gap-6">
               {project.gallery.map((image: any, index: number) => (
-                <div key={index} className="relative h-64 md:h-80 rounded-lg overflow-hidden">
+                <div
+                  key={index}
+                  className="relative h-64 md:h-80 rounded-lg overflow-hidden"
+                >
                   <Image
-                    src={urlFor(image).width(800).height(600).url() || "/placeholder.svg"}
+                    src={
+                      urlFor(image).width(800).height(600).url() ||
+                      "/placeholder.svg"
+                    }
                     alt={image.alt || `${project.title} - obrázek ${index + 1}`}
                     fill
                     className="object-cover"
@@ -131,15 +140,6 @@ export default async function ProjectPage({ params }: { params: { slug: string }
           </div>
         </section>
       )}
-
-      {/* Footer */}
-      <footer className="border-t py-12 bg-secondary mt-20">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center text-sm text-muted-foreground">
-            <p>&copy; {new Date().getFullYear()} webnamiru.site - Taras Ishchuk, OSVČ. Všechna práva vyhrazena.</p>
-          </div>
-        </div>
-      </footer>
     </div>
-  )
+  );
 }

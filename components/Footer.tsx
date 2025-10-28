@@ -24,6 +24,11 @@ export function Footer() {
                 </Link>
               </li>
               <li>
+                <Link href="/o-mne" className="hover:text-accent transition-colors">
+                  O mně
+                </Link>
+              </li>
+              <li>
                 <Link href="/portfolio" className="hover:text-accent transition-colors">
                   Portfolio
                 </Link>
@@ -92,3 +97,4 @@ export function Footer() {
     </footer>
   )
 }
+export default Footer

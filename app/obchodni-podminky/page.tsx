@@ -1,5 +1,6 @@
 import { Card, CardContent } from "@/components/ui/card"
 import Link from "next/link"
+import { SimpleHeader } from "@/components/SimpleHeader"
 
 export const metadata = {
   title: "Obchodní podmínky | webnamiru.site",
@@ -9,13 +10,7 @@ export const metadata = {
 export default function TermsPage() {
   return (
     <div className="min-h-screen">
-      <header className="border-b">
-        <div className="container flex h-16 items-center justify-between">
-          <Link href="/" className="font-bold text-xl">
-            webnamiru.site
-          </Link>
-        </div>
-      </header>
+      <SimpleHeader />
 
       <div className="container py-20">
         <div className="max-w-4xl mx-auto space-y-8">
