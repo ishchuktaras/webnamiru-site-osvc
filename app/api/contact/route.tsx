@@ -18,8 +18,17 @@ export async function POST(request: Request) {
   try {
     console.log("[v0] Environment check:", {
       hasResendKey: !!process.env.RESEND_API_KEY,
+      resendKeyPrefix: process.env.RESEND_API_KEY?.substring(0, 7) || "missing",
       hasRecaptchaSecret: !!process.env.RECAPTCHA_SECRET_KEY,
     })
+
+    if (!process.env.RESEND_API_KEY) {
+      console.error("[v0] RESEND_API_KEY is not configured!")
+      return NextResponse.json(
+        { error: "Email služba není nakonfigurována. Kontaktujte administrátora." },
+        { status: 500 },
+      )
+    }
 
     const body = await request.json()
     console.log("[v0] Received form data:", { ...body, recaptchaToken: body.recaptchaToken ? "present" : "missing" })
@@ -50,59 +59,85 @@ export async function POST(request: Request) {
     }
 
     console.log("[v0] Sending email via Resend...")
-    const emailResult = await resend.emails.send({
-      from: "webnamiru.site <onboarding@resend.dev>",
-      to: "info@webnamiru.site",
-      replyTo: validatedData.email,
-      subject: `Nová poptávka od ${validatedData.name}`,
-      html: `
-        <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
-          <h2 style="color: #333; border-bottom: 2px solid #0070f3; padding-bottom: 10px;">
-            Nová poptávka z webu webnamiru.site
-          </h2>
-          
-          <div style="margin: 20px 0;">
-            <p style="margin: 10px 0;">
-              <strong>Jméno:</strong> ${validatedData.name}
-            </p>
-            <p style="margin: 10px 0;">
-              <strong>Email:</strong> <a href="mailto:${validatedData.email}">${validatedData.email}</a>
-            </p>
-            ${
-              validatedData.company
-                ? `<p style="margin: 10px 0;"><strong>Firma:</strong> ${validatedData.company}</p>`
-                : ""
-            }
-            ${
-              validatedData.phone
-                ? `<p style="margin: 10px 0;"><strong>Telefon:</strong> <a href="tel:${validatedData.phone}">${validatedData.phone}</a></p>`
-                : ""
-            }
-            ${
-              validatedData.budget
-                ? `<p style="margin: 10px 0;"><strong>Rozpočet:</strong> ${validatedData.budget}</p>`
-                : ""
-            }
-          </div>
-          
-          <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
-            <p style="margin: 0 0 10px 0;"><strong>Zpráva:</strong></p>
-            <p style="margin: 0; white-space: pre-wrap;">${validatedData.message}</p>
-          </div>
-          
-          <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
-            <p>Tato zpráva byla odeslána z kontaktního formuláře na webnamiru.site</p>
-          </div>
-        </div>
-      `,
-    })
 
-    console.log("[v0] Email sent successfully:", emailResult)
+    try {
+      const emailResult = await resend.emails.send({
+        from: "webnamiru.site <onboarding@resend.dev>",
+        to: "info@webnamiru.site",
+        replyTo: validatedData.email,
+        subject: `Nová poptávka od ${validatedData.name}`,
+        html: `
+          <div style="font-family: Arial, sans-serif; max-width: 600px; margin: 0 auto;">
+            <h2 style="color: #333; border-bottom: 2px solid #0070f3; padding-bottom: 10px;">
+              Nová poptávka z webu webnamiru.site
+            </h2>
+            
+            <div style="margin: 20px 0;">
+              <p style="margin: 10px 0;">
+                <strong>Jméno:</strong> ${validatedData.name}
+              </p>
+              <p style="margin: 10px 0;">
+                <strong>Email:</strong> <a href="mailto:${validatedData.email}">${validatedData.email}</a>
+              </p>
+              ${
+                validatedData.company
+                  ? `<p style="margin: 10px 0;"><strong>Firma:</strong> ${validatedData.company}</p>`
+                  : ""
+              }
+              ${
+                validatedData.phone
+                  ? `<p style="margin: 10px 0;"><strong>Telefon:</strong> <a href="tel:${validatedData.phone}">${validatedData.phone}</a></p>`
+                  : ""
+              }
+              ${
+                validatedData.budget
+                  ? `<p style="margin: 10px 0;"><strong>Rozpočet:</strong> ${validatedData.budget}</p>`
+                  : ""
+              }
+            </div>
+            
+            <div style="background: #f5f5f5; padding: 15px; border-radius: 5px; margin: 20px 0;">
+              <p style="margin: 0 0 10px 0;"><strong>Zpráva:</strong></p>
+              <p style="margin: 0; white-space: pre-wrap;">${validatedData.message}</p>
+            </div>
+            
+            <div style="margin-top: 30px; padding-top: 20px; border-top: 1px solid #ddd; color: #666; font-size: 12px;">
+              <p>Tato zpráva byla odeslána z kontaktního formuláře na webnamiru.site</p>
+            </div>
+          </div>
+        `,
+      })
 
-    return NextResponse.json({
-      success: true,
-      message: "Zpráva byla úspěšně odeslána",
-    })
+      console.log("[v0] Resend API response:", emailResult)
+
+      if (emailResult.error) {
+        console.error("[v0] Resend API error:", emailResult.error)
+        return NextResponse.json(
+          {
+            error: "Chyba při odesílání emailu",
+            details: emailResult.error.message || "Neznámá chyba Resend API",
+          },
+          { status: 500 },
+        )
+      }
+
+      console.log("[v0] Email sent successfully, ID:", emailResult.data?.id)
+
+      return NextResponse.json({
+        success: true,
+        message: "Zpráva byla úspěšně odeslána",
+        emailId: emailResult.data?.id,
+      })
+    } catch (emailError) {
+      console.error("[v0] Resend API exception:", emailError)
+      return NextResponse.json(
+        {
+          error: "Chyba při odesílání emailu",
+          details: emailError instanceof Error ? emailError.message : "Neznámá chyba",
+        },
+        { status: 500 },
+      )
+    }
   } catch (error) {
     console.error("[v0] Contact form error:", error)
 
@@ -112,7 +147,7 @@ export async function POST(request: Request) {
 
     if (error && typeof error === "object" && "message" in error) {
       return NextResponse.json(
-        { error: "Chyba při odesílání emailu", details: (error as Error).message },
+        { error: "Chyba při zpracování požadavku", details: (error as Error).message },
         { status: 500 },
       )
     }
