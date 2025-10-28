@@ -588,8 +588,6 @@ export default function CenikPage() {
           </div>
         </section>
       </main>
-
-      <Footer />
     </>
   );
 }
