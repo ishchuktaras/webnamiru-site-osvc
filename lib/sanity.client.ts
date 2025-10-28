@@ -13,7 +13,7 @@ export const client = createClient({
   projectId: projectId || "g8e5a2q4",
   dataset,
   apiVersion: "2024-01-01",
-  useCdn: true,
+  useCdn: false,
   token: process.env.SANITY_API_TOKEN,
 })
 
