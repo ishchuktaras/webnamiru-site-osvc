@@ -215,7 +215,7 @@ export default function AboutPage() {
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="font-semibold text-lg">
-                            Hlavní ekonom (státní úředník)
+                            Ekonom (státní úředník)
                           </h3>
                           <p className="text-muted-foreground">
                             Hlavní správa statistiky, Žytomyrská oblast
@@ -249,7 +249,7 @@ export default function AboutPage() {
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="font-semibold text-lg">
-                            Hlavní specialista IT projektů
+                            Specialista IT projektů
                           </h3>
                           <p className="text-muted-foreground">TMG Kyjev</p>
                         </div>
@@ -261,7 +261,7 @@ export default function AboutPage() {
                         Řídil implementaci automatizačního systému prodeje{" "}
                         <strong>"Sales Works"</strong> od{" "}
                         <strong>SoftServe</strong> v síti distributorů ve{" "}
-                        <strong>24 oblastech Ukrajiny</strong> a ARK Krym.
+                        <strong>24 oblastech Ukrajiny</strong> a AR Krym.
                         Koordinace týmů, školení uživatelů, analýza dat a
                         optimalizace procesů.
                       </p>
@@ -279,28 +279,7 @@ export default function AboutPage() {
                     </CardContent>
                   </Card>
 
-                  <Card className="border-l-4 border-l-primary">
-                    <CardContent className="p-6 space-y-2">
-                      <div className="flex items-start justify-between">
-                        <div>
-                          <h3 className="font-semibold text-lg">
-                            Multikulturní zkušenost
-                          </h3>
-                          <p className="text-muted-foreground">
-                            Ukrajina, Rusko, Izrael, Česká republika
-                          </p>
-                        </div>
-                        <span className="text-sm text-muted-foreground">
-                          2015-dosud
-                        </span>
-                      </div>
-                      <p className="text-sm leading-relaxed">
-                        Práce v různých kulturních prostředích mi dala schopnost
-                        rychle se adaptovat, komunikovat s různými typy klientů
-                        a rozumět jejich specifickým potřebám.
-                      </p>
-                    </CardContent>
-                  </Card>
+                  
                 </div>
               </div>
             </div>
