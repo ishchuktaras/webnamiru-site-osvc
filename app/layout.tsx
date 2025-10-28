@@ -86,32 +86,14 @@ export default function RootLayout({
         </Script>
 
         {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-          <>
-            <Script
-              src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-              strategy="lazyOnload"
-              onLoad={() => {
-                console.log("[v0] reCAPTCHA script loaded successfully")
-              }}
-              onError={(e) => {
-                console.error("[v0] reCAPTCHA script failed to load:", e)
-              }}
-            />
-            <Script id="recaptcha-check" strategy="lazyOnload">
-              {`
-                console.log("[v0] reCAPTCHA Site Key:", "${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}");
-                if (typeof grecaptcha !== 'undefined') {
-                  console.log("[v0] grecaptcha is available");
-                } else {
-                  console.log("[v0] grecaptcha is NOT available");
-                }
-              `}
-            </Script>
-          </>
+          <Script
+            src={`https://www.google.com/recaptcha/api.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
+            strategy="lazyOnload"
+          />
         )}
       </head>
       <body
-        className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}
+        className={`${_geist.className} ${_geistMono.className} ${_sourceSerif_4.className} font-sans antialiased`}
         suppressHydrationWarning
       >
         <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
