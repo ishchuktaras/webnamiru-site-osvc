@@ -9,6 +9,7 @@ const contactSchema = z.object({
   phone: z.string().optional(),
   budget: z.string().optional(),
   message: z.string().min(10),
+  recaptchaToken: z.string().optional(),
 })
 
 const resend = new Resend(process.env.RESEND_API_KEY)
@@ -19,6 +20,23 @@ export async function POST(request: Request) {
 
     // Validace dat
     const validatedData = contactSchema.parse(body)
+
+    if (validatedData.recaptchaToken && process.env.RECAPTCHA_SECRET_KEY) {
+      const recaptchaResponse = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+        method: "POST",
+        headers: {
+          "Content-Type": "application/x-www-form-urlencoded",
+        },
+        body: `secret=${process.env.RECAPTCHA_SECRET_KEY}&response=${validatedData.recaptchaToken}`,
+      })
+
+      const recaptchaData = await recaptchaResponse.json()
+
+      if (!recaptchaData.success || recaptchaData.score < 0.5) {
+        console.log("[v0] reCAPTCHA verification failed:", recaptchaData)
+        return NextResponse.json({ error: "Ověření reCAPTCHA selhalo. Zkuste to prosím znovu." }, { status: 400 })
+      }
+    }
 
     console.log("[v0] Contact form submission:", validatedData)
 

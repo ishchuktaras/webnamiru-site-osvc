@@ -2,9 +2,12 @@ import type React from "react"
 import type { Metadata } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
+import { ThemeProvider } from "next-themes"
+import Script from "next/script"
 import "./globals.css"
 import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
+import { CookieConsent } from "@/components/CookieConsent"
 
 import { Inter, Geist_Mono, Source_Serif_4, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -54,17 +57,46 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
-  return (
-    <html lang="cs">
+ return (
+    <html lang="cs" suppressHydrationWarning>
+      <head>
+        <Script id="google-analytics-check" strategy="afterInteractive">
+          {`
+            (function() {
+              const consent = localStorage.getItem('cookie-consent');
+              if (consent) {
+                const preferences = JSON.parse(consent);
+                if (preferences.analytics && '${process.env.NEXT_PUBLIC_GA_ID || ""}') {
+                  const script = document.createElement('script');
+                  script.src = 'https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ""}';
+                  script.async = true;
+                  document.head.appendChild(script);
+                  
+                  window.dataLayer = window.dataLayer || [];
+                  function gtag(){dataLayer.push(arguments);}
+                  gtag('js', new Date());
+                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || ""}', {
+                    anonymize_ip: true,
+                    cookie_flags: 'SameSite=None;Secure'
+                  });
+                }
+              }
+            })();
+          `}
+        </Script>
+      </head>
       <body
         className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}
         suppressHydrationWarning
       >
-        <Header />
-        {children}
-        <Footer />
-        <Toaster />
-        <Analytics />
+        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+          <Header />
+          {children}
+          <Footer />
+          <CookieConsent />
+          <Toaster />
+          <Analytics />
+        </ThemeProvider>
       </body>
     </html>
   )
