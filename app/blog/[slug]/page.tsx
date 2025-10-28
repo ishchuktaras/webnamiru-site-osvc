@@ -1,44 +1,44 @@
-import { Button } from "@/components/ui/button"
-import { Calendar, ArrowLeft } from "lucide-react"
-import Link from "next/link"
-import { getArticleBySlug, getArticles } from "@/lib/sanity.queries"
-import { urlFor } from "@/lib/sanity.client"
-import Image from "next/image"
-import { PortableText } from "@portabletext/react"
-import { notFound } from "next/navigation"
+import { Button } from "@/components/ui/button";
+import { Calendar, ArrowLeft } from "lucide-react";
+import Link from "next/link";
+import { getArticleBySlug, getArticles } from "@/lib/sanity.queries";
+import { urlFor } from "@/lib/sanity.client";
+import Image from "next/image";
+import { PortableText } from "@portabletext/react";
+import { notFound } from "next/navigation";
 
 export async function generateStaticParams() {
-  const articles = await getArticles()
+  const articles = await getArticles();
   return articles.map((article: any) => ({
     slug: article.slug.current,
-  }))
+  }));
 }
 
 export async function generateMetadata({
   params,
 }: {
-  params: { slug: string }
+  params: { slug: string };
 }) {
-  const article = await getArticleBySlug(params.slug)
-  if (!article) return {}
+  const article = await getArticleBySlug(params.slug);
+  if (!article) return {};
 
   return {
     title: `${article.title} | Blog | webnamiru.site`,
     description: article.summary,
-  }
+  };
 }
 
-export const revalidate = 60
+export const revalidate = 60;
 
 export default async function ArticlePage({
   params,
 }: {
-  params: { slug: string }
+  params: { slug: string };
 }) {
-  const article = await getArticleBySlug(params.slug)
+  const article = await getArticleBySlug(params.slug);
 
   if (!article) {
-    notFound()
+    notFound();
   }
 
   return (
@@ -68,7 +68,9 @@ export default async function ArticlePage({
                 day: "numeric",
               })}
             </div>
-            <p className="text-lg text-muted-foreground leading-relaxed">{article.summary}</p>
+            <p className="text-lg text-muted-foreground leading-relaxed">
+              {article.summary}
+            </p>
           </div>
 
           {/* Main Image */}
@@ -76,11 +78,12 @@ export default async function ArticlePage({
             <div className="relative h-96 md:h-[500px] w-full rounded-lg overflow-hidden mb-12">
               <Image
                 src={
-                  urlFor(article.mainImage).width(1200).height(800).url() || "/placeholder.svg" || "/placeholder.svg"
+                  urlFor(article.mainImage).width(1024).height(1024).url() ||
+                  "/placeholder.svg"
                 }
                 alt={article.mainImage.alt || article.title}
                 fill
-                className="object-cover"
+                className="object-contain bg-slate-800"
               />
             </div>
           )}
@@ -92,5 +95,5 @@ export default async function ArticlePage({
         </div>
       </article>
     </div>
-  )
+  );
 }
