@@ -22,6 +22,15 @@ const formSchema = z.object({
 
 type FormData = z.infer<typeof formSchema>
 
+declare global {
+  interface Window {
+    grecaptcha: {
+      ready: (callback: () => void) => void
+      execute: (siteKey: string, options: { action: string }) => Promise<string>
+    }
+  }
+}
+
 export function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
@@ -39,16 +48,33 @@ export function ContactForm() {
     setIsSubmitting(true)
 
     try {
+      let recaptchaToken: string | undefined
+
+      if (process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && typeof window !== "undefined" && window.grecaptcha) {
+        try {
+          recaptchaToken = await window.grecaptcha.execute(process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY, {
+            action: "contact_form",
+          })
+          console.log("[v0] reCAPTCHA token obtained successfully")
+        } catch (error) {
+          console.error("[v0] reCAPTCHA error:", error)
+        }
+      }
+
       const response = await fetch("/api/contact", {
         method: "POST",
         headers: {
           "Content-Type": "application/json",
         },
-        body: JSON.stringify(data),
+        body: JSON.stringify({
+          ...data,
+          recaptchaToken, // Přidán reCAPTCHA token do requestu
+        }),
       })
 
       if (!response.ok) {
-        throw new Error("Chyba při odesílání formuláře")
+        const errorData = await response.json()
+        throw new Error(errorData.error || "Chyba při odesílání formuláře")
       }
 
       toast({
@@ -58,9 +84,10 @@ export function ContactForm() {
 
       reset()
     } catch (error) {
+      console.error("[v0] Contact form error:", error)
       toast({
         title: "Chyba",
-        description: "Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.",
+        description: error instanceof Error ? error.message : "Nepodařilo se odeslat zprávu. Zkuste to prosím znovu.",
         variant: "destructive",
       })
     } finally {
