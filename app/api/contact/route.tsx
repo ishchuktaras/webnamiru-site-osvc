@@ -39,7 +39,7 @@ export async function POST(request: Request) {
     if (validatedData.recaptchaToken && process.env.RECAPTCHA_SECRET_KEY) {
       console.log("[v0] Verifying reCAPTCHA Enterprise token...")
       const recaptchaResponse = await fetch(
-        "https://recaptchaenterprise.googleapis.com/v1/projects/YOUR_PROJECT_ID/assessments?key=YOUR_API_KEY",
+        "https://recaptchaenterprise.googleapis.com/v1/projects/webnamiru-site/assessments?key=AIzaSyCVi4ueKWkg5tF4wHwdVytccyty5MMDVI4",
         {
           method: "POST",
           headers: {
