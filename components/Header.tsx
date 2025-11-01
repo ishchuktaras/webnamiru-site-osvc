@@ -19,6 +19,7 @@ export function Header() {
 
   const navLinks = [
     { href: "/sluzby", label: "Služby", icon: "💼" },
+    { href: "/zahajeni-projektu", label: "Zahájení projektu", icon: "🚀" },
     { href: "/cenik", label: "Ceník", icon: "💰" },
     { href: "/o-mne", label: "O mně", icon: "👨‍💻" },
     { href: "/portfolio", label: "Portfolio", icon: "🎨" },
