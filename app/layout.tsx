@@ -1,5 +1,6 @@
 import type React from "react"
 import type { Metadata } from "next"
+
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "next-themes"
@@ -8,6 +9,7 @@ import "./globals.css"
 import { Footer } from "@/components/Footer"
 import { Header } from "@/components/Header"
 import { CookieConsent } from "@/components/CookieConsent"
+import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 
 import { Inter, Geist_Mono, Source_Serif_4, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
 
@@ -38,16 +40,47 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
-  title: "webnamiru.site | Tvorba webů na míru s vysokou hodnotou",
+  title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
   description:
-    "Strategický partner pro tvorbu profesionálních webových stránek. Next.js, Sanity.io, měřitelné výsledky. Pomáhame českým firmám růst online.",
-  keywords: ["tvorba webů", "web na míru", "Next.js", "Sanity.io", "webový vývoj", "e-commerce", "CMS"],
+    "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky. Pomáhame českým firmám růst online.",
+  keywords: [
+    "tvorba webů Jihlava",
+    "webdesign Vysočina",
+    "tvorba e-shopu Jihlava",
+    "SEO optimalizace Vysočina",
+    "web na míru",
+    "Next.js",
+    "Sanity.io",
+    "webový vývoj",
+    "IT konzultace Jihlava",
+  ],
   authors: [{ name: "Taras Ishchuk" }],
   openGraph: {
-    title: "webnamiru.site | Tvorba webů na míru",
+    title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
     description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
     type: "website",
     locale: "cs_CZ",
+    url: "https://webnamiru.site",
+    siteName: "webnamiru.site",
+  },
+  twitter: {
+    card: "summary_large_image",
+    title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
+    description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
+  },
+  robots: {
+    index: true,
+    follow: true,
+    googleBot: {
+      index: true,
+      follow: true,
+      "max-video-preview": -1,
+      "max-image-preview": "large",
+      "max-snippet": -1,
+    },
+  },
+  alternates: {
+    canonical: "https://webnamiru.site",
   },
   generator: "v0.app",
 }
@@ -57,9 +90,35 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode
 }>) {
- return (
+  const localBusinessData = generateLocalBusinessSchema({
+    name: "webnamiru.site - Taras Ishchuk, OSVČ",
+    description:
+      "Tvorba webových stránek a e-shopů na míru. Moderní řešení na platformě Next.js a Sanity.io pro firmy a živnostníky z Vysočiny i celé ČR.",
+    email: "info@webnamiru.site",
+    address: {
+      streetAddress: "Rantířovská 123/36",
+      addressLocality: "Jihlava - Horní Kosov",
+      postalCode: "586 01",
+      addressRegion: "Vysočina",
+      addressCountry: "CZ",
+    },
+    founder: {
+      name: "Taras Ishchuk",
+      url: "https://webnamiru.site/o-mne",
+    },
+  })
+
+  return (
     <html lang="cs" suppressHydrationWarning>
       <head>
+        <Script
+          id="schema-local-business"
+          type="application/ld+json"
+          dangerouslySetInnerHTML={{
+            __html: JSON.stringify(localBusinessData),
+          }}
+        />
+
         <Script id="google-analytics-check" strategy="afterInteractive">
           {`
             (function() {

@@ -5,6 +5,7 @@ export async function getServices() {
   return client.fetch(
     `*[_type == "sluzba"] | order(_createdAt asc) {
       _id,
+      _updatedAt,
       title,
       slug,
       shortDescription,
@@ -22,6 +23,7 @@ export async function getServiceBySlug(slug: string) {
   return client.fetch(
     `*[_type == "sluzba" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       slug,
       shortDescription,
@@ -41,6 +43,7 @@ export async function getProjects() {
   return client.fetch(
     `*[_type == "projekt"] | order(publishedAt desc) {
       _id,
+      _updatedAt,
       title,
       slug,
       clientName,
@@ -58,6 +61,7 @@ export async function getProjectBySlug(slug: string) {
   return client.fetch(
     `*[_type == "projekt" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       slug,
       clientName,
@@ -76,6 +80,7 @@ export async function getArticles() {
   return client.fetch(
     `*[_type == "clanek"] | order(publishedAt desc) {
       _id,
+      _updatedAt,
       title,
       slug,
       publishedAt,
@@ -91,6 +96,7 @@ export async function getArticleBySlug(slug: string) {
   return client.fetch(
     `*[_type == "clanek" && slug.current == $slug][0] {
       _id,
+      _updatedAt,
       title,
       slug,
       publishedAt,
