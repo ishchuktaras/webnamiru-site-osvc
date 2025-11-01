@@ -5,6 +5,7 @@ import Link from "next/link"
 import Image from "next/image"
 import { FAQ } from "@/components/FAQ"
 import { getFAQs } from "@/lib/sanity.queries"
+import { ServiceAreaMap } from "@/components/ServiceAreaMap"
 
 export default async function Home() {
   const faqs = await getFAQs()
@@ -226,6 +227,9 @@ export default async function Home() {
           </div>
         </div>
       </section>
+
+      {/* Service Area Map Section */}
+      <ServiceAreaMap />
 
       {/* FAQ Section */}
       {faqs && faqs.length > 0 && <FAQ faqs={faqs} />}
