@@ -2,8 +2,8 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Code2, Menu, Moon, Sun, X, Sparkles } from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle, SheetClose } from "@/components/ui/sheet"
+import { Code2, Menu, Moon, Sun, Sparkles } from "lucide-react"
+import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
@@ -84,18 +84,10 @@ export function Header() {
             </SheetTrigger>
             <SheetContent side="right" className="w-[85vw] sm:w-[400px] p-0 flex flex-col">
               <SheetHeader className="px-6 py-4 border-b bg-gradient-to-r from-accent/10 to-primary/10">
-                <div className="flex items-center justify-between">
-                  <SheetTitle className="text-2xl font-bold flex items-center gap-2">
-                    <Sparkles className="h-5 w-5 text-accent" />
-                    Menu
-                  </SheetTitle>
-                  <SheetClose asChild>
-                    <Button variant="ghost" size="icon" className="h-8 w-8">
-                      <X className="h-5 w-5" />
-                      <span className="sr-only">Zavřít</span>
-                    </Button>
-                  </SheetClose>
-                </div>
+                <SheetTitle className="text-2xl font-bold flex items-center gap-2">
+                  <Sparkles className="h-5 w-5 text-accent" />
+                  Menu
+                </SheetTitle>
               </SheetHeader>
 
               <nav className="flex flex-col gap-1 p-4 flex-1">
