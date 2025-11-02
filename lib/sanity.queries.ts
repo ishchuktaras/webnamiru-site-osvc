@@ -84,7 +84,20 @@ export async function getArticles() {
       title,
       slug,
       publishedAt,
-      mainImage,
+      mainImage {
+        asset->{
+          _id,
+          url,
+          metadata {
+            lqip,
+            dimensions
+          }
+        },
+        alt,
+        caption,
+        "credit": asset->creditLine,
+        "source": asset->source
+      },
       summary,
       body
     }`,
@@ -100,7 +113,20 @@ export async function getArticleBySlug(slug: string) {
       title,
       slug,
       publishedAt,
-      mainImage,
+      mainImage {
+        asset->{
+          _id,
+          url,
+          metadata {
+            lqip,
+            dimensions
+          }
+        },
+        alt,
+        caption,
+        "credit": asset->creditLine,
+        "source": asset->source
+      },
       summary,
       body
     }`,
