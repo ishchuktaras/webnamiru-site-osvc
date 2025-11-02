@@ -6,6 +6,7 @@ import Link from "next/link"
 import { PortableText } from "@portabletext/react"
 import { formatReadingTime } from "@/lib/utils/reading-time"
 import { BlogImage } from "@/components/blog/BlogImage"
+import { portableTextComponents } from "@/components/blog/PortableTextComponents"
 
 interface ArticlePageClientProps {
   article: any
@@ -86,8 +87,8 @@ export default function ArticlePageClient({ article, readingMinutes }: ArticlePa
           )}
 
           {/* Article Body */}
-          <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:font-bold prose-headings:tracking-tight prose-a:text-primary prose-a:no-underline hover:prose-a:underline prose-img:rounded-lg prose-img:shadow-md">
-            <PortableText value={article.body} />
+          <div className="prose prose-lg max-w-none dark:prose-invert prose-headings:scroll-mt-20 prose-a:text-primary">
+            <PortableText value={article.body} components={portableTextComponents} />
           </div>
 
           <div className="mt-16 pt-8 border-t">

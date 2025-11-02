@@ -59,3 +59,10 @@ export function getImageMetadata(image: any) {
     source: image?.asset?.source || null,
   }
 }
+
+/**
+ * Alias pro urlFor - pro kompatibilitu s různými částmi aplikace
+ * @param source - Sanity image object
+ * @returns Image URL builder
+ */
+export const urlForImage = urlFor
