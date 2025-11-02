@@ -19,7 +19,7 @@ export default async function BlogPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 md:py-32 bg-gradient-to-b from-background to-secondary/20">
+      <section className="py-20 md:py-32 bg-linear-to-b from-background to-secondary/20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">

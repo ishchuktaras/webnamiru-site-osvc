@@ -2,11 +2,13 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Code2, Menu, Moon, Sun, Sparkles } from "lucide-react"
+import { Menu, Moon, Sun, Sparkles } from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
+import { Logo } from "@/components/Logo"
+// import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 
 export function Header() {
   const { theme, setTheme } = useTheme()
@@ -34,19 +36,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between">
-        <Link href="/" className="flex items-center space-x-2 group">
-          <Code2 className="h-6 w-6 text-primary transition-transform group-hover:scale-110" />
-          <span className="font-bold text-xl">webnamiru.site</span>
-        </Link>
+      <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between gap-4">
+        <Logo />
 
         {/* Desktop Navigation */}
-        <nav className="hidden md:flex items-center space-x-6 text-sm font-medium">
+        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="transition-all hover:text-accent hover:scale-105 relative group"
+              className="transition-all hover:text-accent hover:scale-105 relative group whitespace-nowrap"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
@@ -54,14 +53,16 @@ export function Header() {
           ))}
         </nav>
 
-        <div className="flex items-center gap-2">
+        <div className="flex items-center gap-1 sm:gap-2">
+          {/* <LanguageSwitcher /> */}
+
           {/* Theme Switcher - Desktop */}
           {mounted && (
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="hidden md:flex relative overflow-hidden group"
+              className="hidden sm:flex relative overflow-hidden group"
             >
               <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
               <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -70,20 +71,23 @@ export function Header() {
           )}
 
           {/* Desktop CTA */}
-          <Button asChild className="hidden md:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform">
+          <Button
+            asChild
+            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap"
+          >
             <Link href="/kontakt">Nezávazná poptávka</Link>
           </Button>
 
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="md:hidden">
+            <SheetTrigger asChild className="lg:hidden">
               <Button variant="ghost" size="icon" className="relative">
                 <Menu className="h-6 w-6 transition-transform hover:scale-110" />
                 <span className="sr-only">Otevřít menu</span>
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[85vw] sm:w-[400px] p-0 flex flex-col">
-              <SheetHeader className="px-6 py-4 border-b bg-gradient-to-r from-accent/10 to-primary/10">
+              <SheetHeader className="px-6 py-4 border-b bg-linear-to-r from-accent/10 to-primary/10">
                 <SheetTitle className="text-2xl font-bold flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-accent" />
                   Menu

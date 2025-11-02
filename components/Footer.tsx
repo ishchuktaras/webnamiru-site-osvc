@@ -1,5 +1,5 @@
 import Link from "next/link"
-import { Code2 } from "lucide-react"
+import { Logo } from "@/components/Logo"
 
 export function Footer() {
   return (
@@ -7,10 +7,7 @@ export function Footer() {
       <div className="container max-w-7xl mx-auto px-4 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
           <div className="space-y-4">
-            <div className="flex items-center space-x-2">
-              <Code2 className="h-6 w-6 text-accent" />
-              <span className="font-bold text-lg">webnamiru.site</span>
-            </div>
+            <Logo />
             <p className="text-sm text-muted-foreground leading-relaxed">
               Webové řešení na míru pro vaše podnikání - Taras Ishchuk, OSVČ
             </p>

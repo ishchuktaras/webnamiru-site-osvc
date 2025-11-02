@@ -11,13 +11,9 @@ import { Header } from "@/components/Header"
 import { CookieConsent } from "@/components/CookieConsent"
 import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 
-import { Inter, Geist_Mono, Source_Serif_4, Geist as V0_Font_Geist, Geist_Mono as V0_Font_Geist_Mono, Source_Serif_4 as V0_Font_Source_Serif_4 } from 'next/font/google'
+import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"
 
 // Initialize fonts
-const _geist = V0_Font_Geist({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _geistMono = V0_Font_Geist_Mono({ subsets: ['latin'], weight: ["100","200","300","400","500","600","700","800","900"] })
-const _sourceSerif_4 = V0_Font_Source_Serif_4({ subsets: ['latin'], weight: ["200","300","400","500","600","700","800","900"] })
-
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -55,6 +51,13 @@ export const metadata: Metadata = {
     "IT konzultace Jihlava",
   ],
   authors: [{ name: "Taras Ishchuk" }],
+  icons: {
+    icon: [
+      { url: "/favicon.ico", sizes: "any" },
+      { url: "/icon.svg", type: "image/svg+xml" },
+    ],
+    apple: "/apple-touch-icon.png",
+  },
   openGraph: {
     title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
     description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
@@ -62,11 +65,20 @@ export const metadata: Metadata = {
     locale: "cs_CZ",
     url: "https://webnamiru.site",
     siteName: "webnamiru.site",
+    images: [
+      {
+        url: "/og-image.png",
+        width: 1200,
+        height: 630,
+        alt: "webnamiru.site - Tvorba webů na míru",
+      },
+    ],
   },
   twitter: {
     card: "summary_large_image",
     title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
     description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
+    images: ["/og-image.png"],
   },
   robots: {
     index: true,
@@ -82,6 +94,7 @@ export const metadata: Metadata = {
   alternates: {
     canonical: "https://webnamiru.site",
   },
+  manifest: "/site.webmanifest",
   generator: "v0.app",
 }
 

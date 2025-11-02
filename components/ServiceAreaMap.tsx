@@ -62,7 +62,7 @@ export function ServiceAreaMap() {
             className={`overflow-hidden border-2 transition-all duration-700 ${isVisible ? "opacity-100 translate-y-0" : "opacity-0 translate-y-8"}`}
           >
             <CardContent className="p-0">
-              <div className="relative w-full h-[500px] bg-gradient-to-br from-accent/5 to-primary/5">
+              <div className="relative w-full h-[500px] bg-linear-to-br from-accent/5 to-primary/5">
                 <iframe
                   src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d81730.89999999999!2d15.5592!3d49.3961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470d1b6b6b6b6b6b%3A0x6b6b6b6b6b6b6b6b!2sJihlava!5e0!3m2!1scs!2scz!4v1234567890"
                   width="100%"
@@ -121,7 +121,7 @@ export function ServiceAreaMap() {
               </CardContent>
             </Card>
 
-            <Card className="border-2 bg-gradient-to-br from-accent/5 to-primary/5">
+            <Card className="border-2 bg-linear-to-br from-accent/5 to-primary/5">
               <CardContent className="p-6 space-y-4">
                 <h3 className="text-xl font-semibold">Jak spolupracujeme</h3>
                 <ul className="space-y-3">
