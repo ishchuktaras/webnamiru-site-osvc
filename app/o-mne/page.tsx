@@ -23,11 +23,7 @@ export default function AboutPage() {
                   Kombinuju ekonomické vzdělání, zkušenosti s řízením rozsáhlých IT projektů a moderní webové
                   technologie. Tato unikátní kombinace mi umožňuje vytvářet weby, které nejen skvěle vypadají, ale
                   především přinášejí měřitelné obchodní výsledky.
-                  Kombinuju ekonomické vzdělání, zkušenosti s řízením rozsáhlých IT projektů a moderní webové
-                  technologie. Tato unikátní kombinace mi umožňuje vytvářet weby, které nejen skvěle vypadají, ale
-                  především přinášejí měřitelné obchodní výsledky.
                 </p>
-                <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
                 <Button asChild size="lg" className="bg-accent hover:bg-accent/90">
                   <Link href="/kontakt">
                     Pojďme spolupracovat <ArrowRight className="ml-2 h-4 w-4" />
@@ -52,10 +48,7 @@ export default function AboutPage() {
           <div className="container max-w-7xl mx-auto px-4 lg:px-8">
             <div className="max-w-3xl mx-auto text-center space-y-6 mb-16">
               <h2 className="text-3xl lg:text-4xl font-bold text-balance">Proč je moje nabídka unikátní?</h2>
-              <h2 className="text-3xl lg:text-4xl font-bold text-balance">Proč je moje nabídka unikátní?</h2>
               <p className="text-lg text-muted-foreground leading-relaxed">
-                Nejsem jen programátor. Rozumím byznysu, strategii a tomu, jak technologie mohou skutečně pomoci vašemu
-                podnikání růst.
                 Nejsem jen programátor. Rozumím byznysu, strategii a tomu, jak technologie mohou skutečně pomoci vašemu
                 podnikání růst.
               </p>
@@ -71,8 +64,6 @@ export default function AboutPage() {
                   <p className="text-muted-foreground leading-relaxed">
                     Magistr státní služby se specializací na ekonomiku. Rozumím ROI, metrikám a tomu, jak měřit úspěch
                     vašeho webu.
-                    Magistr státní služby se specializací na ekonomiku. Rozumím ROI, metrikám a tomu, jak měřit úspěch
-                    vašeho webu.
                   </p>
                 </CardContent>
               </Card>
@@ -86,8 +77,6 @@ export default function AboutPage() {
                   <p className="text-muted-foreground leading-relaxed">
                     Řídil jsem implementaci automatizačního systému prodeje pro 24 oblastí Ukrajiny. Vím, jak
                     koordinovat složité projekty a dodávat výsledky.
-                    Řídil jsem implementaci automatizačního systému prodeje pro 24 oblastí Ukrajiny. Vím, jak
-                    koordinovat složité projekty a dodávat výsledky.
                   </p>
                 </CardContent>
               </Card>
@@ -99,8 +88,6 @@ export default function AboutPage() {
                   </div>
                   <h3 className="text-xl font-semibold">Moderní technologie</h3>
                   <p className="text-muted-foreground leading-relaxed">
-                    Absolvoval jsem IT Step Academy Praha (Web Design/Web Programming). Používám Next.js, React,
-                    TypeScript a další moderní nástroje.
                     Absolvoval jsem IT Step Academy Praha (Web Design/Web Programming). Používám Next.js, React,
                     TypeScript a další moderní nástroje.
                   </p>
@@ -129,17 +116,13 @@ export default function AboutPage() {
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="font-semibold text-lg">Management zahraničně ekonomické činnosti</h3>
-                          <h3 className="font-semibold text-lg">Management zahraničně ekonomické činnosti</h3>
                           <p className="text-muted-foreground">
-                            Evropská univerzita financí, managementu a informačních systémů
                             Evropská univerzita financí, managementu a informačních systémů
                           </p>
                         </div>
                         <span className="text-sm text-muted-foreground">2000-2008</span>
-                        <span className="text-sm text-muted-foreground">2000-2008</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Kvalifikace: Manažer-ekonom • Zaměření na mezinárodní obchod
                         Kvalifikace: Manažer-ekonom • Zaměření na mezinárodní obchod
                       </p>
                     </CardContent>
@@ -151,14 +134,10 @@ export default function AboutPage() {
                         <div>
                           <h3 className="font-semibold text-lg">Magistr státní služby</h3>
                           <p className="text-muted-foreground">Kyjevská národní ekonomická univerzita Vadyma Hetmana</p>
-                          <h3 className="font-semibold text-lg">Magistr státní služby</h3>
-                          <p className="text-muted-foreground">Kyjevská národní ekonomická univerzita Vadyma Hetmana</p>
                         </div>
-                        <span className="text-sm text-muted-foreground">2010-2012</span>
                         <span className="text-sm text-muted-foreground">2010-2012</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Specializace: Ekonomika • Zaměření na státní správu a ekonomickou politiku
                         Specializace: Ekonomika • Zaměření na státní správu a ekonomickou politiku
                       </p>
                     </CardContent>
@@ -170,14 +149,10 @@ export default function AboutPage() {
                         <div>
                           <h3 className="font-semibold text-lg">Web Design & Web Programming</h3>
                           <p className="text-muted-foreground">IT Step Academy Praha</p>
-                          <h3 className="font-semibold text-lg">Web Design & Web Programming</h3>
-                          <p className="text-muted-foreground">IT Step Academy Praha</p>
                         </div>
-                        <span className="text-sm text-muted-foreground">2021-2022</span>
                         <span className="text-sm text-muted-foreground">2021-2022</span>
                       </div>
                       <p className="text-sm text-muted-foreground">
-                        Moderní webové technologie • Next.js, React, TypeScript • UX/UI Design
                         Moderní webové technologie • Next.js, React, TypeScript • UX/UI Design
                       </p>
                     </CardContent>
@@ -192,7 +167,6 @@ export default function AboutPage() {
                     <Briefcase className="h-5 w-5 text-accent" />
                   </div>
                   <h2 className="text-2xl lg:text-3xl font-bold">Klíčové zkušenosti</h2>
-                  <h2 className="text-2xl lg:text-3xl font-bold">Klíčové zkušenosti</h2>
                 </div>
 
                 <div className="space-y-6">
@@ -202,22 +176,14 @@ export default function AboutPage() {
                         <div>
                           <h3 className="font-semibold text-lg">Ekonom (státní úředník)</h3>
                           <p className="text-muted-foreground">Hlavní správa statistiky, Žytomyrská oblast</p>
-                          <h3 className="font-semibold text-lg">Ekonom (státní úředník)</h3>
-                          <p className="text-muted-foreground">Hlavní správa statistiky, Žytomyrská oblast</p>
                         </div>
-                        <span className="text-sm text-muted-foreground">2008-2012</span>
                         <span className="text-sm text-muted-foreground">2008-2012</span>
                       </div>
                       <p className="text-sm leading-relaxed">
                         Analýza ekonomických dat, statistické výzkumy, reporting. Později specialista informační
                         bezpečnosti s přístupem ke státnímu tajemství III. stupně.
-                        Analýza ekonomických dat, statistické výzkumy, reporting. Později specialista informační
-                        bezpečnosti s přístupem ke státnímu tajemství III. stupně.
                       </p>
                       <div className="flex flex-wrap gap-2 pt-2">
-                        <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Ekonomická analýza</span>
-                        <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Státní správa</span>
-                        <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Data & Reporting</span>
                         <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Ekonomická analýza</span>
                         <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Státní správa</span>
                         <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Data & Reporting</span>
@@ -230,27 +196,20 @@ export default function AboutPage() {
                       <div className="flex items-start justify-between">
                         <div>
                           <h3 className="font-semibold text-lg">Specialista IT projektů</h3>
-                          <h3 className="font-semibold text-lg">Specialista IT projektů</h3>
                           <p className="text-muted-foreground">TMG Kyjev</p>
                         </div>
-                        <span className="text-sm text-muted-foreground">2012-2015</span>
                         <span className="text-sm text-muted-foreground">2012-2015</span>
                       </div>
                       <p className="text-sm leading-relaxed">
                         Řídil implementaci automatizačního systému prodeje <strong>"Sales Works"</strong> od{" "}
                         <strong>SoftServe</strong> v síti distributorů ve <strong>24 oblastech Ukrajiny</strong> a AR
                         Krym. Koordinace týmů, školení uživatelů, analýza dat a optimalizace procesů.
-                        Řídil implementaci automatizačního systému prodeje <strong>"Sales Works"</strong> od{" "}
-                        <strong>SoftServe</strong> v síti distributorů ve <strong>24 oblastech Ukrajiny</strong> a AR
-                        Krym. Koordinace týmů, školení uživatelů, analýza dat a optimalizace procesů.
                       </p>
                       <div className="flex flex-wrap gap-2 pt-2">
-                        <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Projektové řízení</span>
                         <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">Projektové řízení</span>
                         <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">
                           Automatizace prodeje
                         </span>
-                        <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">SoftServe</span>
                         <span className="text-xs px-2 py-1 bg-primary/10 text-primary rounded">SoftServe</span>
                       </div>
                     </CardContent>
@@ -272,7 +231,6 @@ export default function AboutPage() {
                     <Award className="h-5 w-5 text-accent" />
                   </div>
                   <h2 className="text-2xl lg:text-3xl font-bold">Technické dovednosti</h2>
-                  <h2 className="text-2xl lg:text-3xl font-bold">Technické dovednosti</h2>
                 </div>
                 <div className="grid grid-cols-2 gap-4">
                   {[
@@ -290,7 +248,6 @@ export default function AboutPage() {
                     "Web Analytics",
                   ].map((skill) => (
                     <div key={skill} className="flex items-center gap-2 p-3 bg-background rounded-lg border">
-                    <div key={skill} className="flex items-center gap-2 p-3 bg-background rounded-lg border">
                       <div className="h-2 w-2 rounded-full bg-accent" />
                       <span className="text-sm font-medium">{skill}</span>
                     </div>
@@ -305,7 +262,6 @@ export default function AboutPage() {
                     <Languages className="h-5 w-5 text-accent" />
                   </div>
                   <h2 className="text-2xl lg:text-3xl font-bold">Jazykové dovednosti</h2>
-                  <h2 className="text-2xl lg:text-3xl font-bold">Jazykové dovednosti</h2>
                 </div>
                 <div className="space-y-4">
                   <Card>
@@ -313,9 +269,7 @@ export default function AboutPage() {
                       <div>
                         <h3 className="font-semibold">Čeština</h3>
                         <p className="text-sm text-muted-foreground">Střední pokročilý</p>
-                        <p className="text-sm text-muted-foreground">Střední pokročilý</p>
                       </div>
-                      <span className="text-sm font-medium text-accent">B2</span>
                       <span className="text-sm font-medium text-accent">B2</span>
                     </CardContent>
                   </Card>
@@ -326,7 +280,6 @@ export default function AboutPage() {
                         <p className="text-sm text-muted-foreground">Střední</p>
                       </div>
                       <span className="text-sm font-medium text-accent">B1</span>
-                      <span className="text-sm font-medium text-accent">B1</span>
                     </CardContent>
                   </Card>
                   <Card>
@@ -334,9 +287,7 @@ export default function AboutPage() {
                       <div>
                         <h3 className="font-semibold">Ruština</h3>
                         <p className="text-sm text-muted-foreground">Rodilý mluvčí</p>
-                        <p className="text-sm text-muted-foreground">Rodilý mluvčí</p>
                       </div>
-                      <span className="text-sm font-medium text-accent">C2</span>
                       <span className="text-sm font-medium text-accent">C2</span>
                     </CardContent>
                   </Card>
@@ -345,9 +296,7 @@ export default function AboutPage() {
                       <div>
                         <h3 className="font-semibold">Ukrajinština</h3>
                         <p className="text-sm text-muted-foreground">Rodilý mluvčí</p>
-                        <p className="text-sm text-muted-foreground">Rodilý mluvčí</p>
                       </div>
-                      <span className="text-sm font-medium text-accent">C2</span>
                       <span className="text-sm font-medium text-accent">C2</span>
                     </CardContent>
                   </Card>
@@ -362,27 +311,19 @@ export default function AboutPage() {
           <div className="container max-w-7xl mx-auto px-4 lg:px-8">
             <div className="max-w-3xl mx-auto space-y-8">
               <h2 className="text-3xl lg:text-4xl font-bold text-center text-balance">Moje filozofie</h2>
-              <h2 className="text-3xl lg:text-4xl font-bold text-center text-balance">Moje filozofie</h2>
               <Card className="border-2 border-accent/20">
                 <CardContent className="p-8 space-y-6">
                   <p className="text-lg leading-relaxed">
                     Věřím, že nejlepší weby vznikají na průsečíku <strong>strategie</strong>, <strong>designu</strong> a{" "}
                     <strong>technologie</strong>. Není to jen o kódu – je to o pochopení vašeho byznysu, vašich
                     zákazníků a vašich cílů.
-                    Věřím, že nejlepší weby vznikají na průsečíku <strong>strategie</strong>, <strong>designu</strong> a{" "}
-                    <strong>technologie</strong>. Není to jen o kódu – je to o pochopení vašeho byznysu, vašich
-                    zákazníků a vašich cílů.
                   </p>
                   <p className="text-lg leading-relaxed">
-                    Moje zkušenosti s řízením rozsáhlých IT projektů mě naučily, že úspěch není jen o technickém řešení,
-                    ale o <strong>komunikaci</strong>, <strong>plánování</strong> a{" "}
                     Moje zkušenosti s řízením rozsáhlých IT projektů mě naučily, že úspěch není jen o technickém řešení,
                     ale o <strong>komunikaci</strong>, <strong>plánování</strong> a{" "}
                     <strong>měřitelných výsledcích</strong>.
                   </p>
                   <p className="text-lg leading-relaxed">
-                    Proto nabízím něco víc než jen programování – nabízím <strong>strategické partnerství</strong>, kde
-                    společně vytvoříme web, který skutečně pomůže vašemu podnikání růst.
                     Proto nabízím něco víc než jen programování – nabízím <strong>strategické partnerství</strong>, kde
                     společně vytvoříme web, který skutečně pomůže vašemu podnikání růst.
                   </p>
@@ -416,20 +357,15 @@ export default function AboutPage() {
             <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5">
               <CardContent className="p-12 text-center space-y-6">
                 <h2 className="text-3xl lg:text-4xl font-bold text-balance">Pojďme společně vytvořit něco skvělého</h2>
-                <h2 className="text-3xl lg:text-4xl font-bold text-balance">Pojďme společně vytvořit něco skvělého</h2>
                 <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  Máte projekt, který potřebuje strategický přístup a moderní technologie? Rád si s vámi promluvím.
                   Máte projekt, který potřebuje strategický přístup a moderní technologie? Rád si s vámi promluvím.
                 </p>
                 <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
                   <Button size="lg" asChild className="bg-accent hover:bg-accent/90">
-                  <Button size="lg" asChild className="bg-accent hover:bg-accent/90">
                     <Link href="/kontakt">
-                      Nezávazná konzultace <ArrowRight className="ml-2 h-4 w-4" />
                       Nezávazná konzultace <ArrowRight className="ml-2 h-4 w-4" />
                     </Link>
                   </Button>
-                  <Button size="lg" variant="outline" asChild className="border-2 bg-transparent">
                   <Button size="lg" variant="outline" asChild className="border-2 bg-transparent">
                     <Link href="/portfolio">Zobrazit portfolio</Link>
                   </Button>
@@ -440,6 +376,5 @@ export default function AboutPage() {
         </section>
       </main>
     </div>
-  )
   )
 }
