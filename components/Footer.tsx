@@ -1,5 +1,6 @@
 import Link from "next/link"
 import { Logo } from "@/components/Logo"
+import { FirmyCzBadge } from "@/components/widgets/FirmyCzBadge"
 
 export function Footer() {
   return (
@@ -11,6 +12,9 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               Webové řešení na míru pro vaše podnikání - Taras Ishchuk, OSVČ
             </p>
+            <div className="pt-2">
+              <FirmyCzBadge size="sm" variant="light" />
+            </div>
           </div>
           <div>
             <h4 className="font-semibold mb-4">Služby</h4>
