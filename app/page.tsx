@@ -6,6 +6,7 @@ import Image from "next/image"
 import { FAQ } from "@/components/FAQ"
 import { getFAQs } from "@/lib/sanity.queries"
 import { ServiceAreaMap } from "@/components/ServiceAreaMap"
+import { SeznamReviewsWidget } from "@/components/widgets/SeznamReviewsWidget"
 
 export default async function Home() {
   const faqs = await getFAQs()
@@ -230,6 +231,21 @@ export default async function Home() {
 
       {/* Service Area Map Section */}
       <ServiceAreaMap />
+
+      {/* Seznam Reviews Widget Section */}
+      <section className="py-20 bg-secondary">
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
+          <div className="text-center space-y-4 mb-12">
+            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Co říkají naši klienti</h2>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+              Přečtěte si ověřené recenze od spokojených zákazníků
+            </p>
+          </div>
+          <div className="max-w-4xl mx-auto">
+            <SeznamReviewsWidget maxReviews={5} showTitle={false} />
+          </div>
+        </div>
+      </section>
 
       {/* FAQ Section */}
       {faqs && faqs.length > 0 && <FAQ faqs={faqs} />}
