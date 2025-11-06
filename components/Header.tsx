@@ -8,7 +8,6 @@ import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
 import { cn } from "@/lib/utils"
 import { Logo } from "@/components/Logo"
-// import { LanguageSwitcher } from "@/components/LanguageSwitcher"
 
 export function Header() {
   const { theme, setTheme } = useTheme()
@@ -36,16 +35,16 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="container max-w-7xl mx-auto px-4 lg:px-8 flex h-16 items-center justify-between gap-4">
+      <div className="container max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
         <Logo />
 
         {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-4 xl:space-x-6 text-sm font-medium">
+        <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4 text-sm font-medium">
           {navLinks.map((link) => (
             <Link
               key={link.href}
               href={link.href}
-              className="transition-all hover:text-accent hover:scale-105 relative group whitespace-nowrap"
+              className="transition-all hover:text-accent hover:scale-105 relative group whitespace-nowrap px-2 py-1"
             >
               {link.label}
               <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
@@ -54,18 +53,16 @@ export function Header() {
         </nav>
 
         <div className="flex items-center gap-1 sm:gap-2">
-          {/* <LanguageSwitcher /> */}
-
           {/* Theme Switcher - Desktop */}
           {mounted && (
             <Button
               variant="ghost"
               size="icon"
               onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="hidden sm:flex relative overflow-hidden group"
+              className="hidden sm:flex relative overflow-hidden group h-9 w-9 sm:h-10 sm:w-10"
             >
-              <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
+              <Sun className="h-4 w-4 sm:h-5 sm:w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
+              <Moon className="absolute h-4 w-4 sm:h-5 sm:w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
               <span className="sr-only">Přepnout téma</span>
             </Button>
           )}
@@ -73,7 +70,7 @@ export function Header() {
           {/* Desktop CTA */}
           <Button
             asChild
-            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap"
+            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap text-sm px-3 xl:px-4 h-9"
           >
             <Link href="/kontakt">Nezávazná poptávka</Link>
           </Button>
@@ -81,7 +78,7 @@ export function Header() {
           {/* Mobile Menu */}
           <Sheet open={isOpen} onOpenChange={setIsOpen}>
             <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="relative">
+              <Button variant="ghost" size="icon" className="relative h-10 w-10 touch-manipulation">
                 <Menu className="h-6 w-6 transition-transform hover:scale-110" />
                 <span className="sr-only">Otevřít menu</span>
               </Button>
@@ -101,10 +98,10 @@ export function Header() {
                     href={link.href}
                     onClick={handleLinkClick}
                     className={cn(
-                      "group relative flex items-center gap-3 px-4 py-3.5 rounded-lg",
+                      "group relative flex items-center gap-3 px-4 py-4",
                       "text-base font-medium transition-all duration-300",
                       "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
-                      "active:scale-95",
+                      "active:scale-95 touch-manipulation min-h-12",
                       "animate-in slide-in-from-right fade-in",
                     )}
                     style={{
@@ -123,7 +120,7 @@ export function Header() {
               </nav>
 
               <div className="p-4 border-t bg-muted/30 space-y-3">
-                <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-background/50 border">
+                <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-background/50 border min-h-12">
                   <span className="text-sm font-medium flex items-center gap-2">
                     {theme === "dark" ? "🌙" : "☀️"}
                     {theme === "dark" ? "Tmavý režim" : "Světlý režim"}
@@ -133,7 +130,7 @@ export function Header() {
                       variant="ghost"
                       size="icon"
                       onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                      className="h-9 w-9 relative overflow-hidden"
+                      className="h-10 w-10 relative overflow-hidden touch-manipulation"
                     >
                       <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
                       <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
@@ -143,7 +140,7 @@ export function Header() {
 
                 <Button
                   asChild
-                  className="w-full bg-accent hover:bg-accent/90 hover:scale-[1.02] transition-transform shadow-lg"
+                  className="w-full bg-accent hover:bg-accent/90 hover:scale-[1.02] transition-transform shadow-lg min-h-12 touch-manipulation"
                   onClick={handleLinkClick}
                 >
                   <Link href="/kontakt" className="flex items-center justify-center gap-2">

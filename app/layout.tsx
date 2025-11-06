@@ -36,6 +36,13 @@ const sourceSerif = Source_Serif_4({
 })
 
 export const metadata: Metadata = {
+  metadataBase: new URL("https://webnamiru.site"),
+  viewport: {
+    width: "device-width",
+    initialScale: 1,
+    maximumScale: 5,
+    userScalable: true,
+  },
   title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
   description:
     "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky. Pomáhame českým firmám růst online.",
