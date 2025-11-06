@@ -269,7 +269,7 @@ export default function ZahajeniProjektuPage() {
               Fáze životního cyklu projektu
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
-              Každý projekt prochází čtyřmi hlavními fázemi s konkrétními kroky a výstupy
+              Každý projekt prochází čtyři hlavními fázemi s konkrétními kroky a výstupy
             </p>
           </div>
 
@@ -329,31 +329,6 @@ export default function ZahajeniProjektuPage() {
         </div>
       </section>
 
-      {/* Methodologies Section */}
-      <section className="border-y bg-muted/30 py-16 md:py-24">
-        <div className="container mx-auto px-4">
-          <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">Metodologie a nástroje</h2>
-            <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
-              Používáme osvědčené metodologie pro efektivní řízení projektů
-            </p>
-          </div>
-
-          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-            {projectMethodologies.map((methodology) => (
-              <Card key={methodology.name}>
-                <CardHeader>
-                  <CardTitle className="text-xl">{methodology.name}</CardTitle>
-                </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">{methodology.description}</p>
-                </CardContent>
-              </Card>
-            ))}
-          </div>
-        </div>
-      </section>
-
       {/* Timeline Section */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
@@ -369,9 +344,9 @@ export default function ZahajeniProjektuPage() {
           <div className="mx-auto max-w-4xl">
             <div className="relative">
               {/* Timeline line */}
-              <div className="absolute left-8 top-0 bottom-0 w-0.5 bg-border md:left-1/2" />
+              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border md:left-1/2" />
 
-              <div className="space-y-12">
+              <div className="space-y-8 md:space-y-12">
                 {[
                   {
                     phase: "Iniciace",
@@ -399,23 +374,23 @@ export default function ZahajeniProjektuPage() {
                     description: "Podpora a kontinuální zlepšování",
                   },
                 ].map((item, index) => (
-                  <div key={item.phase} className="relative flex items-center gap-8 md:gap-0">
+                  <div key={item.phase} className="relative flex items-center gap-4 md:gap-0">
                     {/* Timeline dot */}
-                    <div className="absolute left-8 h-4 w-4 rounded-full border-4 border-background bg-accent md:left-1/2 md:-translate-x-1/2" />
+                    <div className="absolute left-4 h-3 w-3 md:h-4 md:w-4 rounded-full border-4 border-background bg-accent md:left-1/2 md:-translate-x-1/2 z-10" />
 
                     {/* Content */}
                     <div
-                      className={`ml-20 md:ml-0 md:w-1/2 ${
+                      className={`ml-10 w-full md:ml-0 md:w-1/2 ${
                         index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12 md:ml-auto"
                       }`}
                     >
-                      <Card>
-                        <CardHeader>
-                          <div className="flex items-center gap-2 md:justify-end">
-                            <Badge>{item.duration}</Badge>
+                      <Card className="shadow-sm">
+                        <CardHeader className="p-4 md:p-6">
+                          <div className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
+                            <Badge className="text-xs">{item.duration}</Badge>
                           </div>
-                          <CardTitle className="text-xl">{item.phase}</CardTitle>
-                          <CardDescription>{item.description}</CardDescription>
+                          <CardTitle className="text-lg md:text-xl">{item.phase}</CardTitle>
+                          <CardDescription className="text-sm md:text-base">{item.description}</CardDescription>
                         </CardHeader>
                       </Card>
                     </div>
@@ -423,6 +398,31 @@ export default function ZahajeniProjektuPage() {
                 ))}
               </div>
             </div>
+          </div>
+        </div>
+      </section>
+
+      {/* Methodologies Section */}
+      <section className="border-y bg-muted/30 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">Metodologie a nástroje</h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
+              Používáme osvědčené metodologie pro efektivní řízení projektů
+            </p>
+          </div>
+
+          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
+            {projectMethodologies.map((methodology) => (
+              <Card key={methodology.name}>
+                <CardHeader>
+                  <CardTitle className="text-xl">{methodology.name}</CardTitle>
+                </CardHeader>
+                <CardContent>
+                  <p className="text-muted-foreground leading-relaxed">{methodology.description}</p>
+                </CardContent>
+              </Card>
+            ))}
           </div>
         </div>
       </section>
