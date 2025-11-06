@@ -29,11 +29,11 @@ Tento návod vám ukáže, jak nastavit Sanity webhooky pro automatickou aktuali
      - ✅ Update
      - ✅ Delete
    - **Filter:** (volitelné, pro specifické typy dokumentů)
-     ```groq
+     \`\`\`groq
      _type in ["clanek", "projekt", "sluzba"]
      \`\`\`
    - **Projection:** (volitelné, pro posílání pouze potřebných dat)
-     ```groq
+     \`\`\`groq
      {
        "type": _type,
        "slug": slug.current
