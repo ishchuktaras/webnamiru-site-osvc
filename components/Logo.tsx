@@ -8,7 +8,7 @@ interface LogoProps {
 
 export function Logo({ className = "", showText = true }: LogoProps) {
   return (
-    <Link href="/" className={`flex items-center gap-1.5 sm:gap-2 group min-h-[44px] ${className}`}>
+    <Link href="/" className={`flex items-center gap-1.5 sm:gap-2 group min-h-12 ${className}`}>
       <div className="relative">
         <div className="absolute inset-0 bg-linear-to-br from-accent/20 to-primary/20 rounded-lg blur-sm group-hover:blur-md transition-all" />
         <div className="relative bg-linear-to-br from-accent to-primary p-1.5 sm:p-2 rounded-lg transition-transform group-hover:scale-110">

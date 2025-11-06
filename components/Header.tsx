@@ -38,19 +38,23 @@ export function Header() {
       <div className="container max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
         <Logo />
 
-        {/* Desktop Navigation */}
-        <nav className="hidden lg:flex items-center space-x-2 xl:space-x-4 text-sm font-medium">
-          {navLinks.map((link) => (
-            <Link
-              key={link.href}
-              href={link.href}
-              className="transition-all hover:text-accent hover:scale-105 relative group whitespace-nowrap px-2 py-1"
-            >
-              {link.label}
-              <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
-            </Link>
-          ))}
-        </nav>
+        {/* Desktop Navigation - Added horizontal scrolling with gradient fade indicators */}
+        <div className="hidden lg:flex flex-1 max-w-3xl relative">
+          <div className="absolute left-0 top-0 bottom-0 w-8 bg-linear-to-r from-background/95 to-transparent pointer-events-none z-10" />
+          <nav className="flex items-center gap-1 xl:gap-2 text-sm font-medium overflow-x-auto scrollbar-hide scroll-smooth px-8 -mx-8">
+            {navLinks.map((link) => (
+              <Link
+                key={link.href}
+                href={link.href}
+                className="transition-all hover:text-accent hover:scale-105 relative group whitespace-nowrap px-3 py-2 shrink-0"
+              >
+                {link.label}
+                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
+              </Link>
+            ))}
+          </nav>
+          <div className="absolute right-0 top-0 bottom-0 w-8 bg-linear-to-l from-background/95 to-transparent pointer-events-none z-10" />
+        </div>
 
         <div className="flex items-center gap-1 sm:gap-2">
           {/* Theme Switcher - Desktop */}
@@ -70,7 +74,7 @@ export function Header() {
           {/* Desktop CTA */}
           <Button
             asChild
-            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap text-sm px-3 xl:px-4 h-9"
+            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap text-sm px-3 xl:px-4 h-9 shrink-0"
           >
             <Link href="/kontakt">Nezávazná poptávka</Link>
           </Button>
@@ -91,7 +95,7 @@ export function Header() {
                 </SheetTitle>
               </SheetHeader>
 
-              <nav className="flex flex-col gap-1 p-4 flex-1">
+              <nav className="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
                 {navLinks.map((link, index) => (
                   <Link
                     key={link.href}
