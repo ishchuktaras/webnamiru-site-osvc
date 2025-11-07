@@ -5,8 +5,11 @@ import Link from "next/link"
 import { getServices } from "@/lib/sanity.queries"
 import Image from "next/image"
 import { urlFor } from "@/lib/sanity.client"
+import { AnimatedSection } from "@/components/animations/AnimatedSection"
+import { StaggerContainer } from "@/components/animations/StaggerContainer"
+import type { Metadata } from "next"
 
-export const metadata = {
+export const metadata: Metadata = {
   title: "Služby | webnamiru.site",
   description: "Komplexní služby pro tvorbu webů na míru - od strategického plánování přes vývoj až po podporu.",
 }
@@ -129,30 +132,32 @@ export default async function ServicesPage() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="py-20 md:py-32">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="max-w-3xl mx-auto text-center space-y-8">
-            <div className="inline-block">
-              <span className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
-                <Sparkles className="mr-2 h-4 w-4" />
-                Komplexní služby pro váš úspěch
-              </span>
+      <AnimatedSection direction="up">
+        <section className="py-20 md:py-32">
+          <div className="container max-w-7xl mx-auto px-4 lg:px-8">
+            <div className="max-w-3xl mx-auto text-center space-y-8">
+              <div className="inline-block">
+                <span className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
+                  <Sparkles className="mr-2 h-4 w-4" />
+                  Komplexní služby pro váš úspěch
+                </span>
+              </div>
+              <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
+                Služby šité na míru vašemu podnikání
+              </h1>
+              <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
+                Od strategického plánování přes technickou realizaci až po dlouhodobou podporu. Poskytuju komplexní
+                služby, které zajistí úspěch vašeho webového projektu.
+              </p>
             </div>
-            <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
-              Služby šité na míru vašemu podnikání
-            </h1>
-            <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-              Od strategického plánování přes technickou realizaci až po dlouhodobou podporu. Poskytuju komplexní
-              služby, které zajistí úspěch vašeho webového projektu.
-            </p>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* Services Grid */}
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-8">
             {services.map((service: any, index: number) => {
               const IconComponent = service.icon || Target
               return (
@@ -219,84 +224,88 @@ export default async function ServicesPage() {
                 </Card>
               )
             })}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* Process Overview */}
-      <section className="py-20">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
-            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Jak spolupráce probíhá</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Transparentní proces od první konzultace po úspěšné spuštění
-            </p>
-          </div>
+      <AnimatedSection direction="right">
+        <section className="py-20">
+          <div className="container max-w-7xl mx-auto px-4 lg:px-8">
+            <div className="text-center space-y-4 mb-16">
+              <h2 className="text-3xl lg:text-5xl font-bold text-balance">Jak spolupráce probíhá</h2>
+              <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+                Transparentní proces od první konzultace po úspěšné spuštění
+              </p>
+            </div>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
-            {[
-              {
-                step: "01",
-                title: "Zjišťování potřeb",
-                description: "Hloubková analýza vašeho podnikání, cílů a cílového publika.",
-              },
-              {
-                step: "02",
-                title: "Strategie & Design",
-                description: "Vytvoříme wireframy, uživatelské persony a vizuální design.",
-              },
-              {
-                step: "03",
-                title: "Vývoj & Testování",
-                description: "Implementace pomocí Next.js a Sanity.io s průběžným testováním.",
-              },
-              {
-                step: "04",
-                title: "Spuštění & Podpora",
-                description: "Nasazení na Vercel a následná podpora a optimalizace.",
-              },
-            ].map((phase, index) => (
-              <div key={index} className="relative">
-                <div className="space-y-4">
-                  <div className="text-5xl font-bold text-accent/20">{phase.step}</div>
-                  <h3 className="text-xl font-semibold">{phase.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{phase.description}</p>
+            <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+              {[
+                {
+                  step: "01",
+                  title: "Zjišťování potřeb",
+                  description: "Hloubková analýza vašeho podnikání, cílů a cílového publika.",
+                },
+                {
+                  step: "02",
+                  title: "Strategie & Design",
+                  description: "Vytvoříme wireframy, uživatelské persony a vizuální design.",
+                },
+                {
+                  step: "03",
+                  title: "Vývoj & Testování",
+                  description: "Implementace pomocí Next.js a Sanity.io s průběžným testováním.",
+                },
+                {
+                  step: "04",
+                  title: "Spuštění & Podpora",
+                  description: "Nasazení na Vercel a následná podpora a optimalizace.",
+                },
+              ].map((phase, index) => (
+                <div key={index} className="relative">
+                  <div className="space-y-4">
+                    <div className="text-5xl font-bold text-accent/20">{phase.step}</div>
+                    <h3 className="text-xl font-semibold">{phase.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm">{phase.description}</p>
+                  </div>
+                  {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />}
                 </div>
-                {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />}
-              </div>
-            ))}
+              ))}
+            </div>
           </div>
-        </div>
-      </section>
+        </section>
+      </AnimatedSection>
 
       {/* CTA Section */}
-      <section className="py-20 bg-secondary">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
-            <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
-              <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-                Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
-                  <Link href="/kontakt">
-                    Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
-                >
-                  <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
-        </div>
-      </section>
+      <AnimatedSection direction="up">
+        <section className="py-20 bg-secondary">
+          <div className="container max-w-7xl mx-auto px-4 lg:px-8">
+            <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
+              <CardContent className="p-12 text-center space-y-6">
+                <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
+                <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+                  Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                  <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
+                    <Link href="/kontakt">
+                      Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    asChild
+                    className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
+                  >
+                    <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </section>
+      </AnimatedSection>
     </div>
   )
 }

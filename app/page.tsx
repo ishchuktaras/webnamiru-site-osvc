@@ -2,76 +2,40 @@ import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield } from "lucide-react"
 import Link from "next/link"
-import Image from "next/image"
 import { FAQ } from "@/components/FAQ"
 import { getFAQs } from "@/lib/sanity.queries"
 import { ServiceAreaMap } from "@/components/ServiceAreaMap"
 import { SeznamReviewsWidget } from "@/components/widgets/SeznamReviewsWidget"
+import { HeroParallax } from "@/components/animations/HeroParallax"
+import { AnimatedSection } from "@/components/animations/AnimatedSection"
+import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer"
+import { FloatingElement } from "@/components/animations/FloatingElements"
 
 export default async function Home() {
   const faqs = await getFAQs()
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Section */}
-      <section className="relative py-20 md:py-32 overflow-hidden">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="grid lg:grid-cols-2 gap-12 items-center">
-            <div className="space-y-8">
-              <div className="inline-block">
-                <span className="inline-flex items-center rounded-full border border-accent/20 bg-accent/10 px-4 py-1.5 text-sm font-medium text-accent">
-                  <Rocket className="mr-2 h-4 w-4" />
-                  Strategický přístup k webovému vývoji
-                </span>
-              </div>
-              <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
-                Weby, které <span className="text-accent">přinášejí výsledky</span>
-              </h1>
-              <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-                Vytvářím webové stránky na míru, které nejen skvěle vypadají, ale především pomáhají vašemu podnikání
-                růst. Od strategie přes design až po měřitelné výsledky.
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4">
-                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
-                  <Link href="/kontakt">
-                    Začít projekt <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
-                >
-                  <Link href="#sluzby">Zjistit více</Link>
-                </Button>
-              </div>
-            </div>
-            <div className="relative h-[400px] lg:h-[600px]">
-              <div className="absolute inset-0 bg-linear-to-br from-accent/20 to-primary/10 rounded-3xl" />
-              <Image
-                src="/modern-web-development-workspace-with-laptop-showi.jpg"
-                alt="Moderní webový vývoj"
-                fill
-                className="object-cover rounded-3xl"
-                priority
-              />
-            </div>
-          </div>
-        </div>
-      </section>
+      <HeroParallax />
 
       {/* Services Section */}
-      <section id="sluzby" className="py-20 bg-secondary">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
+      <section id="sluzby" className="py-20 bg-secondary relative overflow-hidden">
+        <FloatingElement className="absolute top-10 right-10 text-accent/10" delay={0}>
+          <Code2 className="h-32 w-32" />
+        </FloatingElement>
+        <FloatingElement className="absolute bottom-20 left-10 text-accent/10" delay={1}>
+          <Rocket className="h-24 w-24" />
+        </FloatingElement>
+
+        <div className="container max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
+          <AnimatedSection className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-5xl font-bold text-balance">Komplexní služby pro váš úspěch</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Od strategického plánování až po technickou realizaci a následnou podporu
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-3 gap-6">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
             {[
               {
                 icon: Target,
@@ -111,46 +75,49 @@ export default async function Home() {
                 features: ["Monitoring", "Aktualizace", "Technická podpora"],
               },
             ].map((service, index) => (
-              <Card key={index} className="border-2 hover:border-accent transition-colors duration-200 shadow-sm">
-                <CardContent className="p-6 space-y-4">
-                  <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center">
-                    <service.icon className="h-6 w-6 text-accent" />
-                  </div>
-                  <h3 className="text-xl font-semibold">{service.title}</h3>
-                  <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
-                  <ul className="space-y-2">
-                    {service.features.map((feature, i) => (
-                      <li key={i} className="flex items-center text-sm">
-                        <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0" />
-                        {feature}
-                      </li>
-                    ))}
-                  </ul>
-                </CardContent>
-              </Card>
+              <StaggerItem key={index}>
+                <Card className="border-2 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-[1.02] h-full magnetic-hover">
+                  <CardContent className="p-6 space-y-4">
+                    <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center group-hover:glow-accent transition-all">
+                      <service.icon className="h-6 w-6 text-accent" />
+                    </div>
+                    <h3 className="text-xl font-semibold">{service.title}</h3>
+                    <p className="text-muted-foreground leading-relaxed text-sm">{service.description}</p>
+                    <ul className="space-y-2">
+                      {service.features.map((feature, i) => (
+                        <li key={i} className="flex items-center text-sm">
+                          <CheckCircle2 className="h-4 w-4 mr-2 text-accent shrink-0" />
+                          {feature}
+                        </li>
+                      ))}
+                    </ul>
+                  </CardContent>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
-          <div className="text-center mt-12">
-            <Button size="lg" asChild variant="outline" className="border-2 bg-transparent">
+          </StaggerContainer>
+
+          <AnimatedSection className="text-center mt-12" delay={0.6}>
+            <Button size="lg" asChild variant="outline" className="border-2 bg-transparent hover:glow-accent">
               <Link href="/sluzby">
                 Zobrazit všechny služby <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Process Section */}
       <section id="proces" className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
+          <AnimatedSection className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-5xl font-bold text-balance">Jak spolupráce probíhá</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Transparentní proces od první konzultace po úspěšné spuštění
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-8">
+          <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-4 gap-8" staggerDelay={0.15}>
             {[
               {
                 step: "01",
@@ -177,37 +144,38 @@ export default async function Home() {
                   "Nasazení na Vercel, propojení domény a školení. Následná podpora a optimalizace na základě dat.",
               },
             ].map((phase, index) => (
-              <div key={index} className="relative">
+              <StaggerItem key={index} className="relative">
                 <div className="space-y-4">
-                  <div className="text-5xl font-bold text-accent/20">{phase.step}</div>
+                  <div className="text-5xl font-bold text-accent/20 gradient-text">{phase.step}</div>
                   <h3 className="text-xl font-semibold">{phase.title}</h3>
                   <p className="text-muted-foreground leading-relaxed text-sm">{phase.description}</p>
                 </div>
-                {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border" />}
-              </div>
+                {index < 3 && <div className="hidden lg:block absolute top-8 -right-4 w-8 h-0.5 bg-border shimmer" />}
+              </StaggerItem>
             ))}
-          </div>
-          <div className="text-center mt-12">
+          </StaggerContainer>
+
+          <AnimatedSection className="text-center mt-12" delay={0.8}>
             <Button size="lg" asChild variant="outline" className="border-2 bg-transparent">
               <Link href="/zahajeni-projektu">
                 Detailní proces projektu <ArrowRight className="ml-2 h-4 w-4" />
               </Link>
             </Button>
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* Technology Stack */}
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center space-y-4 mb-16">
+          <AnimatedSection className="text-center space-y-4 mb-16">
             <h2 className="text-3xl lg:text-5xl font-bold text-balance">Moderní technologie</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Používáme osvědčené nástroje pro maximální výkon a spolehlivost
             </p>
-          </div>
+          </AnimatedSection>
 
-          <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+          <StaggerContainer className="grid grid-cols-2 md:grid-cols-4 gap-8" staggerDelay={0.08}>
             {[
               { name: "Next.js 16", desc: "React framework" },
               { name: "Sanity.io", desc: "Headless CMS" },
@@ -218,64 +186,74 @@ export default async function Home() {
               { name: "Stripe", desc: "Payments" },
               { name: "Resend", desc: "Email API" },
             ].map((tech, index) => (
-              <Card key={index} className="text-center p-6 hover:border-accent transition-colors duration-200">
-                <CardContent className="p-0 space-y-2">
-                  <div className="text-lg font-semibold text-primary">{tech.name}</div>
-                  <div className="text-sm text-muted-foreground">{tech.desc}</div>
-                </CardContent>
-              </Card>
+              <StaggerItem key={index}>
+                <Card className="text-center p-6 hover:border-accent transition-all duration-300 hover:scale-105 magnetic-hover">
+                  <CardContent className="p-0 space-y-2">
+                    <div className="text-lg font-semibold text-primary">{tech.name}</div>
+                    <div className="text-sm text-muted-foreground">{tech.desc}</div>
+                  </CardContent>
+                </Card>
+              </StaggerItem>
             ))}
-          </div>
+          </StaggerContainer>
         </div>
       </section>
 
       {/* Service Area Map Section */}
-      <ServiceAreaMap />
+      <AnimatedSection>
+        <ServiceAreaMap />
+      </AnimatedSection>
 
       {/* Seznam Reviews Widget Section */}
       <section className="py-20 bg-secondary">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <div className="text-center space-y-4 mb-12">
+          <AnimatedSection className="text-center space-y-4 mb-12">
             <h2 className="text-3xl lg:text-5xl font-bold text-balance">Co říkají naši klienti</h2>
             <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
               Přečtěte si ověřené recenze od spokojených zákazníků
             </p>
-          </div>
-          <div className="max-w-4xl mx-auto">
+          </AnimatedSection>
+          <AnimatedSection className="max-w-4xl mx-auto" delay={0.3}>
             <SeznamReviewsWidget maxReviews={5} showTitle={false} />
-          </div>
+          </AnimatedSection>
         </div>
       </section>
 
       {/* FAQ Section */}
-      {faqs && faqs.length > 0 && <FAQ faqs={faqs} />}
+      {faqs && faqs.length > 0 && (
+        <AnimatedSection>
+          <FAQ faqs={faqs} />
+        </AnimatedSection>
+      )}
 
       {/* CTA Section */}
       <section id="kontakt" className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
-            <CardContent className="p-12 text-center space-y-6">
-              <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
-              <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-                Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
-              </p>
-              <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
-                  <Link href="/kontakt">
-                    Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
-                  </Link>
-                </Button>
-                <Button
-                  size="lg"
-                  variant="outline"
-                  asChild
-                  className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
-                >
-                  <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
-                </Button>
-              </div>
-            </CardContent>
-          </Card>
+          <AnimatedSection delay={0.2}>
+            <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg hover:shadow-2xl transition-shadow duration-500">
+              <CardContent className="p-12 text-center space-y-6">
+                <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni začít váš projekt?</h2>
+                <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
+                  Domluvme si nezávaznou konzultaci a probereme, jak můžeme pomoci vašemu podnikání růst
+                </p>
+                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
+                  <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md hover:glow-accent">
+                    <Link href="/kontakt">
+                      Kontaktovat nás <ArrowRight className="ml-2 h-4 w-4" />
+                    </Link>
+                  </Button>
+                  <Button
+                    size="lg"
+                    variant="outline"
+                    asChild
+                    className="border-2 border-primary text-primary hover:bg-primary/5 bg-transparent"
+                  >
+                    <Link href="mailto:info@webnamiru.site">info@webnamiru.site</Link>
+                  </Button>
+                </div>
+              </CardContent>
+            </Card>
+          </AnimatedSection>
         </div>
       </section>
     </div>
