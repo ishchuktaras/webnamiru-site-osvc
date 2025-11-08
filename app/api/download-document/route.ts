@@ -15,6 +15,10 @@ export async function GET(request: NextRequest) {
       filename: "sla-template.md",
       contentType: "text/markdown",
     },
+    nda: {
+      filename: "nda-template.md",
+      contentType: "text/markdown",
+    },
   }
 
   if (!doc || !documents[doc]) {

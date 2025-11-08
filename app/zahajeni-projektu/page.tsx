@@ -15,6 +15,7 @@ import {
   AlertCircle,
   Clock,
   XCircle,
+  Lock,
 } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
@@ -694,6 +695,25 @@ export default function ZahajeniProjektuPage() {
       {/* CTA Section */}
       <section className="border-t bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4">
+          <Card className="mb-8 mx-auto max-w-4xl border-2 border-accent/20 bg-accent/5">
+            <CardContent className="p-6">
+              <div className="flex items-start gap-4">
+                <Lock className="h-6 w-6 text-accent shrink-0 mt-1" />
+                <div>
+                  <h3 className="font-semibold mb-2 text-lg">Ochrana důvěrných informací</h3>
+                  <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                    Pro projekty s citlivými obchodními informacemi nebo inovativními řešeními doporučujeme před
+                    konzultací podepsat NDA (Dohodu o mlčenlivosti). Vaše informace budou chráněny po celou dobu
+                    spolupráce i po jejím ukončení.
+                  </p>
+                  <Button variant="outline" size="sm" asChild>
+                    <Link href="/nda">Více o NDA</Link>
+                  </Button>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
           <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5 shadow-lg">
             <CardContent className="p-12 text-center space-y-6">
               <h2 className="text-3xl lg:text-5xl font-bold text-balance">Připraveni zahájit váš projekt?</h2>

@@ -385,7 +385,7 @@ export default function ProKlientyPage() {
                 </CardHeader>
                 <CardContent>
                   <Button variant="outline" className="w-full bg-transparent" asChild>
-                    <Link href="/kontakt">Vyžádat NDA</Link>
+                    <Link href="/nda">Více o NDA</Link>
                   </Button>
                 </CardContent>
               </Card>

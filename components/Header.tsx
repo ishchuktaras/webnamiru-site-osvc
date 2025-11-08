@@ -27,6 +27,7 @@ export function Header() {
     { href: "/blog", label: "Blog", icon: "📝" },
     { href: "/pro-klienty", label: "Pro klienty", icon: "🛡️" },
     { href: "/jak-pracuji", label: "Jak pracuji", icon: "⚙️" },
+    { href: "/nda", label: "NDA", icon: "🔒" },
     { href: "/#faq", label: "FAQ", icon: "❓" },
     { href: "/kontakt", label: "Kontakt", icon: "📧" },
   ]
