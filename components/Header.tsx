@@ -57,11 +57,15 @@ export function Header() {
 
   return (
     <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="container max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
-        <Logo />
+      <div className="container max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex h-14 sm:h-16 items-center gap-2 sm:gap-4">
+        {/* Logo - Left side */}
+        <div className="flex-shrink-0">
+          <Logo size="lg" />
+        </div>
 
-        <div className="hidden lg:flex flex-1 max-w-3xl relative">
-          <nav className="flex items-center gap-1 xl:gap-2 text-sm font-medium w-full justify-center">
+        {/* Navigation - Center */}
+        <div className="hidden lg:flex flex-1 justify-center">
+          <nav className="flex items-center gap-1 xl:gap-2 text-sm font-medium">
             {navLinks.map((link) => {
               const IconComponent = link.icon
               return (
@@ -79,7 +83,8 @@ export function Header() {
           </nav>
         </div>
 
-        <div className="flex items-center gap-1 sm:gap-2">
+        {/* Actions - Right side */}
+        <div className="flex items-center gap-1 sm:gap-2 ml-auto lg:ml-0">
           {/* Theme Switcher - Desktop */}
           {mounted && (
             <Button

@@ -10,7 +10,7 @@ export function Footer() {
         <div className="grid md:grid-cols-4 gap-8">
           {/* Brand & Trust */}
           <div className="space-y-4">
-            <Logo />
+            <Logo size="md" />
             <p className="text-sm text-muted-foreground leading-relaxed">
               Webové řešení na míru pro vaše podnikání - Taras Ishchuk, OSVČ
             </p>
