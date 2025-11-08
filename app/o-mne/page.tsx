@@ -4,8 +4,6 @@ import { Card, CardContent } from "@/components/ui/card"
 import { GraduationCap, Briefcase, TrendingUp, Users, Award, Languages, ArrowRight, Code2 } from "lucide-react"
 import Link from "next/link"
 import Image from "next/image"
-import { SeznamReviewsWidget } from "@/components/widgets/SeznamReviewsWidget"
-import { FirmyCzRateUsWidget } from "@/components/widgets/FirmyCzRateUsWidget"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 import { StaggerContainer } from "@/components/animations/StaggerContainer"
 
@@ -357,31 +355,11 @@ export default function AboutPage() {
           </section>
         </AnimatedSection>
 
-        {/* Reviews */}
-        <AnimatedSection direction="up">
-          <section className="py-20 bg-secondary">
-            <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-              <div className="text-center space-y-4 mb-12">
-                <h2 className="text-3xl lg:text-4xl font-bold text-balance">Reference od klientů</h2>
-                <p className="text-lg text-muted-foreground max-w-2xl mx-auto leading-relaxed">
-                  Důvěřují mi firmy i jednotlivci po celé České republice
-                </p>
-              </div>
-              <div className="max-w-4xl mx-auto space-y-8">
-                <SeznamReviewsWidget maxReviews={5} />
-                <div className="flex justify-center">
-                  <FirmyCzRateUsWidget variant="dark" />
-                </div>
-              </div>
-            </div>
-          </section>
-        </AnimatedSection>
-
         {/* CTA */}
         <AnimatedSection>
           <section className="py-20 bg-secondary">
             <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-              <Card className="border-2 border-accent/20 bg-linear-to-br from-accent/5 to-primary/5">
+              <Card className="border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-primary/5">
                 <CardContent className="p-12 text-center space-y-6">
                   <h2 className="text-3xl lg:text-4xl font-bold text-balance">
                     Pojďme společně vytvořit něco skvělého

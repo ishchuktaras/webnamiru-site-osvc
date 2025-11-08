@@ -5,7 +5,6 @@ import Link from "next/link"
 import { FAQ } from "@/components/FAQ"
 import { getFAQs } from "@/lib/sanity.queries"
 import { ServiceAreaMap } from "@/components/ServiceAreaMap"
-import { SeznamReviewsWidget } from "@/components/widgets/SeznamReviewsWidget"
 import { HeroParallax } from "@/components/animations/HeroParallax"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer"
@@ -203,21 +202,6 @@ export default async function Home() {
       <AnimatedSection>
         <ServiceAreaMap />
       </AnimatedSection>
-
-      {/* Seznam Reviews Widget Section */}
-      <section className="py-20 bg-secondary">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center space-y-4 mb-12">
-            <h2 className="text-3xl lg:text-5xl font-bold text-balance">Co říkají naši klienti</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Přečtěte si ověřené recenze od spokojených zákazníků
-            </p>
-          </AnimatedSection>
-          <AnimatedSection className="max-w-4xl mx-auto" delay={0.3}>
-            <SeznamReviewsWidget maxReviews={5} showTitle={false} />
-          </AnimatedSection>
-        </div>
-      </section>
 
       {/* FAQ Section */}
       {faqs && faqs.length > 0 && (

@@ -2,7 +2,24 @@
 
 import Link from "next/link"
 import { Button } from "@/components/ui/button"
-import { Menu, Moon, Sun, Sparkles } from "lucide-react"
+import {
+  Menu,
+  Moon,
+  Sun,
+  Sparkles,
+  Briefcase,
+  Rocket,
+  DollarSign,
+  User,
+  FolderKanban,
+  FileText,
+  Shield,
+  Settings,
+  Lock,
+  MessageSquare,
+  HelpCircle,
+  Star,
+} from "lucide-react"
 import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
 import { useTheme } from "next-themes"
 import { useEffect, useState } from "react"
@@ -19,17 +36,19 @@ export function Header() {
   }, [])
 
   const navLinks = [
-    { href: "/sluzby", label: "Služby", icon: "💼" },
-    { href: "/zahajeni-projektu", label: "Zahájení projektu", icon: "🚀" },
-    { href: "/cenik", label: "Ceník", icon: "💰" },
-    { href: "/o-mne", label: "O mně", icon: "👨‍💻" },
-    { href: "/portfolio", label: "Portfolio", icon: "🎨" },
-    { href: "/blog", label: "Blog", icon: "📝" },
-    { href: "/pro-klienty", label: "Pro klienty", icon: "🛡️" },
-    { href: "/jak-pracuji", label: "Jak pracuji", icon: "⚙️" },
-    { href: "/nda", label: "NDA", icon: "🔒" },
-    { href: "/#faq", label: "FAQ", icon: "❓" },
-    { href: "/kontakt", label: "Kontakt", icon: "📧" },
+    { href: "/sluzby", label: "Služby", icon: Briefcase },
+    { href: "/cenik", label: "Ceník", icon: DollarSign },
+    { href: "/portfolio", label: "Portfolio", icon: FolderKanban },
+    { href: "/blog", label: "Blog", icon: FileText },
+    { href: "/o-mne", label: "O mně", icon: User },
+    { href: "/recenze", label: "Recenze", icon: Star },
+  ]
+
+  const secondaryLinks = [
+    { href: "/zahajeni-projektu", label: "Zahájení projektu", icon: Rocket, group: "Jak pracuji" },
+    { href: "/jak-pracuji", label: "Jak pracuji", icon: Settings, group: "Jak pracuji" },
+    { href: "/pro-klienty", label: "Pro klienty", icon: Shield, group: "Jak pracuji" },
+    { href: "/nda", label: "NDA", icon: Lock, group: "Jak pracuji" },
   ]
 
   const handleLinkClick = () => {
@@ -41,22 +60,23 @@ export function Header() {
       <div className="container max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex h-14 sm:h-16 items-center justify-between gap-2 sm:gap-4">
         <Logo />
 
-        {/* Desktop Navigation - Added horizontal scrolling with gradient fade indicators */}
         <div className="hidden lg:flex flex-1 max-w-3xl relative">
-          <div className="absolute left-0 top-0 bottom-0 w-8 bg-linear-to-r from-background/95 to-transparent pointer-events-none z-10" />
-          <nav className="flex items-center gap-1 xl:gap-2 text-sm font-medium overflow-x-auto scrollbar-hide scroll-smooth px-8 -mx-8">
-            {navLinks.map((link) => (
-              <Link
-                key={link.href}
-                href={link.href}
-                className="transition-all hover:text-accent hover:scale-105 relative group whitespace-nowrap px-3 py-2 shrink-0"
-              >
-                {link.label}
-                <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full" />
-              </Link>
-            ))}
+          <nav className="flex items-center gap-1 xl:gap-2 text-sm font-medium w-full justify-center">
+            {navLinks.map((link) => {
+              const IconComponent = link.icon
+              return (
+                <Link
+                  key={link.href}
+                  href={link.href}
+                  className="group flex items-center gap-1.5 transition-all hover:text-accent relative whitespace-nowrap px-2.5 xl:px-3 py-2 text-xs xl:text-sm hover:bg-accent/5 rounded-md"
+                >
+                  <IconComponent className="h-3.5 w-3.5 xl:h-4 xl:w-4 transition-transform group-hover:scale-110" />
+                  <span>{link.label}</span>
+                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full rounded-full" />
+                </Link>
+              )
+            })}
           </nav>
-          <div className="absolute right-0 top-0 bottom-0 w-8 bg-linear-to-l from-background/95 to-transparent pointer-events-none z-10" />
         </div>
 
         <div className="flex items-center gap-1 sm:gap-2">
@@ -77,9 +97,12 @@ export function Header() {
           {/* Desktop CTA */}
           <Button
             asChild
-            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap text-sm px-3 xl:px-4 h-9 shrink-0"
+            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap text-xs xl:text-sm px-3 xl:px-4 h-8 xl:h-9 shrink-0 gap-1.5"
           >
-            <Link href="/kontakt">Nezávazná poptávka</Link>
+            <Link href="/kontakt">
+              <MessageSquare className="h-3.5 w-3.5" />
+              Nezávazná poptávka
+            </Link>
           </Button>
 
           {/* Mobile Menu */}
@@ -91,7 +114,7 @@ export function Header() {
               </Button>
             </SheetTrigger>
             <SheetContent side="right" className="w-[85vw] sm:w-[400px] p-0 flex flex-col">
-              <SheetHeader className="px-6 py-4 border-b bg-linear-to-r from-accent/10 to-primary/10">
+              <SheetHeader className="px-6 py-4 border-b bg-gradient-to-r from-accent/10 to-primary/10">
                 <SheetTitle className="text-2xl font-bold flex items-center gap-2">
                   <Sparkles className="h-5 w-5 text-accent" />
                   Menu
@@ -99,31 +122,99 @@ export function Header() {
               </SheetHeader>
 
               <nav className="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
-                {navLinks.map((link, index) => (
-                  <Link
-                    key={link.href}
-                    href={link.href}
-                    onClick={handleLinkClick}
-                    className={cn(
-                      "group relative flex items-center gap-3 px-4 py-4",
-                      "text-base font-medium transition-all duration-300",
-                      "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
-                      "active:scale-95 touch-manipulation min-h-12",
-                      "animate-in slide-in-from-right fade-in",
-                    )}
-                    style={{
-                      animationDelay: `${index * 50}ms`,
-                      animationDuration: "400ms",
-                      animationFillMode: "backwards",
-                    }}
-                  >
-                    <span className="text-2xl transition-transform group-hover:scale-125 group-hover:rotate-12">
-                      {link.icon}
-                    </span>
-                    <span className="flex-1">{link.label}</span>
-                    <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                  </Link>
-                ))}
+                {/* Primary Navigation */}
+                <div className="space-y-1">
+                  {navLinks.map((link, index) => {
+                    const IconComponent = link.icon
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={handleLinkClick}
+                        className={cn(
+                          "group relative flex items-center gap-3 px-4 py-3.5",
+                          "text-base font-medium transition-all duration-300",
+                          "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
+                          "active:scale-95 touch-manipulation rounded-lg",
+                          "animate-in slide-in-from-right fade-in",
+                        )}
+                        style={{
+                          animationDelay: `${index * 50}ms`,
+                          animationDuration: "400ms",
+                          animationFillMode: "backwards",
+                        }}
+                      >
+                        <IconComponent className="h-5 w-5 transition-transform group-hover:scale-110 text-accent" />
+                        <span className="flex-1">{link.label}</span>
+                        <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+
+                {/* Secondary Navigation */}
+                <div className="pt-3 mt-3 border-t space-y-1">
+                  <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
+                    Jak pracuji
+                  </div>
+                  {secondaryLinks.map((link, index) => {
+                    const IconComponent = link.icon
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={handleLinkClick}
+                        className={cn(
+                          "group relative flex items-center gap-3 px-4 py-3",
+                          "text-sm font-medium transition-all duration-300",
+                          "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
+                          "active:scale-95 touch-manipulation rounded-lg",
+                          "animate-in slide-in-from-right fade-in",
+                        )}
+                        style={{
+                          animationDelay: `${(navLinks.length + index) * 50}ms`,
+                          animationDuration: "400ms",
+                          animationFillMode: "backwards",
+                        }}
+                      >
+                        <IconComponent className="h-4 w-4 transition-transform group-hover:scale-110 text-muted-foreground group-hover:text-accent" />
+                        <span className="flex-1">{link.label}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
+
+                {/* Additional Links */}
+                <div className="pt-3 mt-3 border-t space-y-1">
+                  {[
+                    { href: "/#faq", label: "FAQ", icon: HelpCircle },
+                    { href: "/kontakt", label: "Kontakt", icon: MessageSquare },
+                  ].map((link, index) => {
+                    const IconComponent = link.icon
+                    return (
+                      <Link
+                        key={link.href}
+                        href={link.href}
+                        onClick={handleLinkClick}
+                        className={cn(
+                          "group relative flex items-center gap-3 px-4 py-3",
+                          "text-sm font-medium transition-all duration-300",
+                          "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
+                          "active:scale-95 touch-manipulation rounded-lg",
+                          "animate-in slide-in-from-right fade-in",
+                        )}
+                        style={{
+                          animationDelay: `${(navLinks.length + secondaryLinks.length + index) * 50}ms`,
+                          animationDuration: "400ms",
+                          animationFillMode: "backwards",
+                        }}
+                      >
+                        <IconComponent className="h-4 w-4 transition-transform group-hover:scale-110 text-muted-foreground group-hover:text-accent" />
+                        <span className="flex-1">{link.label}</span>
+                      </Link>
+                    )
+                  })}
+                </div>
               </nav>
 
               <div className="p-4 border-t bg-muted/30 space-y-3">

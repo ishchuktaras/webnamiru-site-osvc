@@ -8,6 +8,7 @@ export function Footer() {
     <footer className="border-t py-12 bg-secondary">
       <div className="container max-w-7xl mx-auto px-4 lg:px-8">
         <div className="grid md:grid-cols-4 gap-8">
+          {/* Brand & Trust */}
           <div className="space-y-4">
             <Logo />
             <p className="text-sm text-muted-foreground leading-relaxed">
@@ -18,6 +19,8 @@ export function Footer() {
               <FirmyCzRateUsWidget variant="light" className="max-w-[249px]" />
             </div>
           </div>
+
+          {/* Main Services */}
           <div>
             <h4 className="font-semibold mb-4">Služby</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
@@ -32,11 +35,6 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/o-mne" className="hover:text-accent transition-colors">
-                  O mně
-                </Link>
-              </li>
-              <li>
                 <Link href="/portfolio" className="hover:text-accent transition-colors">
                   Portfolio
                 </Link>
@@ -47,20 +45,71 @@ export function Footer() {
                 </Link>
               </li>
               <li>
-                <Link href="/#faq" className="hover:text-accent transition-colors">
-                  FAQ
-                </Link>
-              </li>
-              <li>
-                <Link href="/kontakt" className="hover:text-accent transition-colors">
-                  Kontakt
+                <Link href="/recenze" className="hover:text-accent transition-colors">
+                  Recenze
                 </Link>
               </li>
             </ul>
           </div>
+
+          {/* About & Process */}
           <div>
-            <h4 className="font-semibold mb-4">Společnost</h4>
+            <h4 className="font-semibold mb-4">Jak pracuji</h4>
             <ul className="space-y-2 text-sm text-muted-foreground">
+              <li>
+                <Link href="/o-mne" className="hover:text-accent transition-colors">
+                  O mně
+                </Link>
+              </li>
+              <li>
+                <Link href="/zahajeni-projektu" className="hover:text-accent transition-colors">
+                  Zahájení projektu
+                </Link>
+              </li>
+              <li>
+                <Link href="/jak-pracuji" className="hover:text-accent transition-colors">
+                  Jak pracuji
+                </Link>
+              </li>
+              <li>
+                <Link href="/pro-klienty" className="hover:text-accent transition-colors">
+                  Pro klienty
+                </Link>
+              </li>
+              <li>
+                <Link href="/nda" className="hover:text-accent transition-colors">
+                  NDA
+                </Link>
+              </li>
+              <li>
+                <Link href="/#faq" className="hover:text-accent transition-colors">
+                  FAQ
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Contact & Legal */}
+          <div>
+            <h4 className="font-semibold mb-4">Kontakt</h4>
+            <ul className="space-y-2 text-sm text-muted-foreground mb-6">
+              <li>
+                <a href="mailto:info@webnamiru.site" className="hover:text-accent transition-colors">
+                  info@webnamiru.site
+                </a>
+              </li>
+              <li>
+                <a href="tel:+420777596216" className="hover:text-accent transition-colors">
+                  +420 777 596 216
+                </a>
+              </li>
+              <li>IČO: 23874694</li>
+              <li>Taras Ishchuk, OSVČ</li>
+              <li>Rantířovská 123/36</li>
+              <li>586 01 Jihlava - Horní Kosov</li>
+            </ul>
+            <h4 className="font-semibold mb-4 text-xs">Právní informace</h4>
+            <ul className="space-y-2 text-xs text-muted-foreground">
               <li>
                 <Link href="/pravni-informace" className="hover:text-accent transition-colors">
                   Právní informace
@@ -81,25 +130,6 @@ export function Footer() {
                   Cookies
                 </Link>
               </li>
-            </ul>
-          </div>
-          <div>
-            <h4 className="font-semibold mb-4">Kontakt</h4>
-            <ul className="space-y-2 text-sm text-muted-foreground">
-              <li>
-                <a href="mailto:info@webnamiru.site" className="hover:text-accent transition-colors">
-                  info@webnamiru.site
-                </a>
-              </li>
-              <li>
-                <a href="tel:+420777596216" className="hover:text-accent transition-colors">
-                  +420 777 596 216
-                </a>
-              </li>
-              <li>IČO: 23874694</li>
-              <li>Taras Ishchuk, OSVČ</li>
-              <li>Rantířovská 123/36</li>
-              <li>586 01 Jihlava - Horní Kosov</li>
             </ul>
           </div>
         </div>

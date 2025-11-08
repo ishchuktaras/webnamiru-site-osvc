@@ -1,9 +1,8 @@
+import Link from "next/link"
 import type { Metadata } from "next"
 import { ContactForm } from "@/components/contact-form"
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from "@/components/ui/card"
 import { Mail, MapPin, Phone } from "lucide-react"
-import { FirmyCzBadge } from "@/components/widgets/FirmyCzBadge"
-import { FirmyCzRateUsWidget } from "@/components/widgets/FirmyCzRateUsWidget"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 
 export const metadata: Metadata = {
@@ -85,14 +84,6 @@ export default function ContactPage() {
                   </CardContent>
                 </Card>
 
-                <FirmyCzRateUsWidget variant="dark" />
-
-                <Card>
-                  <CardContent className="p-6 flex justify-center">
-                    <FirmyCzBadge size="md" variant="light" showRating={true} />
-                  </CardContent>
-                </Card>
-
                 <Card>
                   <CardContent className="p-6 space-y-2">
                     <div className="font-semibold text-sm">Identifikační údaje</div>
@@ -102,6 +93,21 @@ export default function ContactPage() {
                       <p>Fyzická osoba zapsaná v Živnostenském rejstříku</p>
                       <p>Nejsem plátce DPH</p>
                     </div>
+                  </CardContent>
+                </Card>
+
+                <Card className="bg-accent/5 border-accent/20">
+                  <CardContent className="p-6 space-y-2">
+                    <div className="font-semibold flex items-center gap-2">⭐ Reference od klientů</div>
+                    <p className="text-sm text-muted-foreground leading-relaxed">
+                      Podívejte se na hodnocení a recenze od našich spokojených klientů.
+                    </p>
+                    <Link
+                      href="/recenze"
+                      className="text-sm text-accent hover:underline inline-flex items-center gap-1"
+                    >
+                      Zobrazit recenze →
+                    </Link>
                   </CardContent>
                 </Card>
               </div>
