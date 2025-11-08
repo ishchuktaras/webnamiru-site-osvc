@@ -25,6 +25,8 @@ export function Header() {
     { href: "/o-mne", label: "O mně", icon: "👨‍💻" },
     { href: "/portfolio", label: "Portfolio", icon: "🎨" },
     { href: "/blog", label: "Blog", icon: "📝" },
+    { href: "/pro-klienty", label: "Pro klienty", icon: "🛡️" },
+    { href: "/jak-pracuji", label: "Jak pracuji", icon: "⚙️" },
     { href: "/#faq", label: "FAQ", icon: "❓" },
     { href: "/kontakt", label: "Kontakt", icon: "📧" },
   ]

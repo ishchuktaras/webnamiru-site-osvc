@@ -12,6 +12,9 @@ import {
   Rocket,
   TrendingUp,
   ClipboardCheck,
+  AlertCircle,
+  Clock,
+  XCircle,
 } from "lucide-react"
 import Link from "next/link"
 import type { Metadata } from "next"
@@ -329,100 +332,361 @@ export default function ZahajeniProjektuPage() {
         </div>
       </section>
 
-      {/* Timeline Section */}
-      <section className="py-16 md:py-24">
+      {/* Acceptance Criteria Section */}
+      <section className="border-y bg-muted/30 py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
             <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">
-              Typický časový harmonogram
+              Akceptační kritéria projektu
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
-              Orientační délka trvání jednotlivých fází projektu
+              Jasně definovaná kritéria pro předání a akceptaci dokončeného díla
             </p>
           </div>
 
-          <div className="mx-auto max-w-4xl">
-            <div className="relative">
-              {/* Timeline line */}
-              <div className="absolute left-4 top-0 bottom-0 w-0.5 bg-border md:left-1/2" />
+          <div className="mx-auto max-w-5xl space-y-6">
+            <Card className="border-2">
+              <CardHeader className="bg-accent/5">
+                <CardTitle className="flex items-center gap-3">
+                  <CheckCircle2 className="h-6 w-6 text-accent" />
+                  Funkční požadavky
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Všechny dohodnuté stránky jsou vytvořeny a plně funkční</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Kontaktní formulář správně odesílá zprávy a obsahuje spam ochranu</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Responsivní design funguje na všech zařízeních (desktop, tablet, mobil)</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>CMS je plně funkční, konfigurovatelný a intuitivní</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-              <div className="space-y-8 md:space-y-12">
-                {[
-                  {
-                    phase: "Iniciace",
-                    duration: "1-2 týdny",
-                    description: "Definování cílů a základních parametrů",
-                  },
-                  {
-                    phase: "Plánování",
-                    duration: "2-4 týdny",
-                    description: "Analýzy, design a dokumentace",
-                  },
-                  {
-                    phase: "Realizace",
-                    duration: "4-12 týdnů",
-                    description: "Vývoj, testování a implementace",
-                  },
-                  {
-                    phase: "Spuštění",
-                    duration: "1 týden",
-                    description: "Nasazení a předání projektu",
-                  },
-                  {
-                    phase: "Údržba",
-                    duration: "Průběžně",
-                    description: "Podpora a kontinuální zlepšování",
-                  },
-                ].map((item, index) => (
-                  <div key={item.phase} className="relative flex items-center gap-4 md:gap-0">
-                    {/* Timeline dot */}
-                    <div className="absolute left-4 h-3 w-3 md:h-4 md:w-4 rounded-full border-4 border-background bg-accent md:left-1/2 md:-translate-x-1/2 z-10" />
+            <Card className="border-2">
+              <CardHeader className="bg-accent/5">
+                <CardTitle className="flex items-center gap-3">
+                  <TrendingUp className="h-6 w-6 text-accent" />
+                  Výkonnostní požadavky
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Google PageSpeed Insights skóre minimálně 85/100</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Doba načtení hlavní stránky maximálně 3 sekundy</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Web optimalizován pro SEO (meta tagy, strukturovaná data, sitemap)</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
 
-                    {/* Content */}
-                    <div
-                      className={`ml-10 w-full md:ml-0 md:w-1/2 ${
-                        index % 2 === 0 ? "md:pr-12 md:text-right" : "md:pl-12 md:ml-auto"
-                      }`}
-                    >
-                      <Card className="shadow-sm">
-                        <CardHeader className="p-4 md:p-6">
-                          <div className={`flex items-center gap-2 mb-2 ${index % 2 === 0 ? "md:justify-end" : ""}`}>
-                            <Badge className="text-xs">{item.duration}</Badge>
-                          </div>
-                          <CardTitle className="text-lg md:text-xl">{item.phase}</CardTitle>
-                          <CardDescription className="text-sm md:text-base">{item.description}</CardDescription>
-                        </CardHeader>
-                      </Card>
-                    </div>
-                  </div>
-                ))}
-              </div>
-            </div>
+            <Card className="border-2">
+              <CardHeader className="bg-accent/5">
+                <CardTitle className="flex items-center gap-3">
+                  <FileText className="h-6 w-6 text-accent" />
+                  Kvalita a dokumentace
+                </CardTitle>
+              </CardHeader>
+              <CardContent className="p-6">
+                <ul className="space-y-3">
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Web je bez kritických chyb a testován ve všech moderních prohlížečích</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Design odpovídá schváleným mockupům a wireframům</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Uživatelská dokumentace pro správu CMS</span>
+                  </li>
+                  <li className="flex items-start gap-3">
+                    <CheckCircle2 className="h-5 w-5 mt-0.5 shrink-0 text-accent" />
+                    <span>Technická dokumentace pro budoucí údržbu</span>
+                  </li>
+                </ul>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
 
-      {/* Methodologies Section */}
-      <section className="border-y bg-muted/30 py-16 md:py-24">
+      {/* Total Cost of Ownership Section */}
+      <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
-            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">Metodologie a nástroje</h2>
+            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">
+              Celkové náklady vlastnictví (TCO)
+            </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
-              Používáme osvědčené metodologie pro efektivní řízení projektů
+              Transparentní přehled všech nákladů spojených s vlastnictvím webového řešení
             </p>
           </div>
 
-          <div className="mx-auto grid max-w-5xl gap-6 md:grid-cols-2">
-            {projectMethodologies.map((methodology) => (
-              <Card key={methodology.name}>
-                <CardHeader>
-                  <CardTitle className="text-xl">{methodology.name}</CardTitle>
+          <div className="mx-auto max-w-5xl">
+            <Card className="border-2 mb-8">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <TrendingUp className="h-6 w-6 text-accent shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-2 text-lg">Co je TCO?</h3>
+                    <p className="text-muted-foreground leading-relaxed">
+                      Total Cost of Ownership (TCO) zahrnuje všechny náklady spojené s vlastnictvím řešení po celou jeho
+                      životnost, nejen počáteční pořizovací cenu. Pro profesionální plánování je klíčové znát všechny
+                      náklady dopředu.
+                    </p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="grid gap-6 md:grid-cols-2">
+              <Card className="border-2">
+                <CardHeader className="bg-accent/5">
+                  <CardTitle className="text-xl">Počáteční investice</CardTitle>
+                  <CardDescription>Jednorázové náklady na vytvoření</CardDescription>
                 </CardHeader>
-                <CardContent>
-                  <p className="text-muted-foreground leading-relaxed">{methodology.description}</p>
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <span className="text-sm">Analýza a plánování</span>
+                    <span className="font-semibold">10-15%</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <span className="text-sm">Design a UX</span>
+                    <span className="font-semibold">20-25%</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <span className="text-sm">Vývoj a implementace</span>
+                    <span className="font-semibold">50-60%</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Testování a spuštění</span>
+                    <span className="font-semibold">5-10%</span>
+                  </div>
                 </CardContent>
               </Card>
-            ))}
+
+              <Card className="border-2">
+                <CardHeader className="bg-accent/5">
+                  <CardTitle className="text-xl">Provozní náklady (roční)</CardTitle>
+                  <CardDescription>Opakující se náklady na provoz</CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <span className="text-sm">Hosting a doména</span>
+                    <span className="font-semibold">3-10 tis. Kč</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <span className="text-sm">CMS licence (Sanity.io)</span>
+                    <span className="font-semibold">0-20 tis. Kč</span>
+                  </div>
+                  <div className="flex justify-between items-center pb-2 border-b">
+                    <span className="text-sm">Technická podpora</span>
+                    <span className="font-semibold">Volitelně</span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-sm">Aktualizace a rozvoj</span>
+                    <span className="font-semibold">Podle potřeby</span>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="mt-6 border-2 border-accent/20 bg-accent/5">
+              <CardContent className="p-6">
+                <div className="flex items-start gap-4">
+                  <AlertCircle className="h-6 w-6 text-accent shrink-0 mt-1" />
+                  <div>
+                    <h3 className="font-semibold mb-2">Důležité upozornění</h3>
+                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
+                      Údržba a rozvoj může po několika letech přesáhnout původní pořizovací náklady. Proto je důležité
+                      plánovat dlouhodobě a vybírat řešení, která jsou snadno udržovatelná a škálovatelná.
+                    </p>
+                    <Button variant="outline" size="sm" asChild>
+                      <Link href="/pro-klienty#dokumenty">Vyžádat TCO kalkulačku</Link>
+                    </Button>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+          </div>
+        </div>
+      </section>
+
+      {/* Detailed Change Management Section */}
+      <section className="border-y bg-muted/30 py-16 md:py-24">
+        <div className="container mx-auto px-4">
+          <div className="mb-12 text-center">
+            <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">
+              Řízení změn (Change Management)
+            </h2>
+            <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
+              Proces pro transparentní řešení změn rozsahu projektu během realizace
+            </p>
+          </div>
+
+          <div className="mx-auto max-w-5xl space-y-8">
+            <Card className="border-2">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4">Proč je Change Management důležitý?</h3>
+                <p className="text-muted-foreground leading-relaxed mb-4">
+                  Změny v rozsahu projektu jsou normální součástí vývoje. Mohou vzniknout z nových požadavků, změn na
+                  trhu nebo zpřesnění původních představ. Change Management zajišťuje, že obě strany rozumí dopadu změn
+                  na čas, náklady a kvalitu.
+                </p>
+                <div className="grid md:grid-cols-3 gap-4 mt-6">
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <Clock className="h-6 w-6 text-accent mb-2" />
+                    <h4 className="font-semibold text-sm mb-1">Dopad na čas</h4>
+                    <p className="text-xs text-muted-foreground">
+                      Prodloužení termínu o počet dní nutných pro implementaci
+                    </p>
+                  </div>
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <BarChart3 className="h-6 w-6 text-accent mb-2" />
+                    <h4 className="font-semibold text-sm mb-1">Dopad na náklady</h4>
+                    <p className="text-xs text-muted-foreground">Dodatečné náklady dle hodinové sazby nebo paušálu</p>
+                  </div>
+                  <div className="p-4 bg-muted/50 rounded-lg">
+                    <Target className="h-6 w-6 text-accent mb-2" />
+                    <h4 className="font-semibold text-sm mb-1">Dopad na rozsah</h4>
+                    <p className="text-xs text-muted-foreground">Možné odložení jiných funkcionalit</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
+
+            <div className="grid md:grid-cols-3 gap-6">
+              <Card className="border-2 hover:shadow-lg transition-all">
+                <CardHeader className="bg-green-50 dark:bg-green-950">
+                  <div className="h-12 w-12 rounded-lg bg-green-100 dark:bg-green-900 flex items-center justify-center mb-4">
+                    <CheckCircle2 className="h-6 w-6 text-green-600 dark:text-green-400" />
+                  </div>
+                  <CardTitle className="text-lg">Drobné změny</CardTitle>
+                  <CardDescription>Do 10% rozsahu</CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <p className="text-sm text-muted-foreground">
+                    Zahrnuty v původní ceně projektu bez dalších poplatků.
+                  </p>
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2">Příklady:</h4>
+                    <ul className="space-y-1 text-sm">
+                      <li>• Změna barev nebo typografie</li>
+                      <li>• Úprava textů a copywritingu</li>
+                      <li>• Drobné layoutové úpravy</li>
+                    </ul>
+                  </div>
+                  <Badge variant="outline" className="font-mono text-green-600 border-green-600">
+                    Bez příplatku
+                  </Badge>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:shadow-lg transition-all">
+                <CardHeader className="bg-orange-50 dark:bg-orange-950">
+                  <div className="h-12 w-12 rounded-lg bg-orange-100 dark:bg-orange-900 flex items-center justify-center mb-4">
+                    <AlertCircle className="h-6 w-6 text-orange-600 dark:text-orange-400" />
+                  </div>
+                  <CardTitle className="text-lg">Střední změny</CardTitle>
+                  <CardDescription>10-30% rozsahu</CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <p className="text-sm text-muted-foreground">Vyžadují formální Change Request a posouzení dopadu.</p>
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2">Příklady:</h4>
+                    <ul className="space-y-1 text-sm">
+                      <li>• Přidání nové podstránky</li>
+                      <li>• Změna funkcionalit</li>
+                      <li>• Redesign části webu</li>
+                    </ul>
+                  </div>
+                  <Badge variant="outline" className="font-mono text-orange-600 border-orange-600">
+                    Hodinová sazba
+                  </Badge>
+                </CardContent>
+              </Card>
+
+              <Card className="border-2 hover:shadow-lg transition-all">
+                <CardHeader className="bg-red-50 dark:bg-red-950">
+                  <div className="h-12 w-12 rounded-lg bg-red-100 dark:bg-red-900 flex items-center justify-center mb-4">
+                    <XCircle className="h-6 w-6 text-red-600 dark:text-red-400" />
+                  </div>
+                  <CardTitle className="text-lg">Rozsáhlé změny</CardTitle>
+                  <CardDescription>Nad 30% rozsahu</CardDescription>
+                </CardHeader>
+                <CardContent className="p-6 space-y-4">
+                  <p className="text-sm text-muted-foreground">Vyžadují novou smlouvu nebo dodatek ke smlouvě.</p>
+                  <div>
+                    <h4 className="font-semibold text-sm mb-2">Příklady:</h4>
+                    <ul className="space-y-1 text-sm">
+                      <li>• Změna technologie</li>
+                      <li>• Přidání e-shopu</li>
+                      <li>• Kompletní redesign</li>
+                    </ul>
+                  </div>
+                  <Badge variant="outline" className="font-mono text-red-600 border-red-600">
+                    Nová kalkulace
+                  </Badge>
+                </CardContent>
+              </Card>
+            </div>
+
+            <Card className="border-2 border-accent/20 bg-accent/5">
+              <CardContent className="p-6">
+                <h3 className="font-semibold text-lg mb-4">Proces Change Request</h3>
+                <div className="grid md:grid-cols-4 gap-4">
+                  <div>
+                    <div className="h-8 w-8 rounded-full bg-accent text-white flex items-center justify-center font-bold text-sm mb-2">
+                      1
+                    </div>
+                    <h4 className="font-semibold text-sm mb-1">Požadavek</h4>
+                    <p className="text-xs text-muted-foreground">Klient podává písemný požadavek na změnu</p>
+                  </div>
+                  <div>
+                    <div className="h-8 w-8 rounded-full bg-accent text-white flex items-center justify-center font-bold text-sm mb-2">
+                      2
+                    </div>
+                    <h4 className="font-semibold text-sm mb-1">Analýza</h4>
+                    <p className="text-xs text-muted-foreground">Posouzení dopadu na čas, náklady a rozsah</p>
+                  </div>
+                  <div>
+                    <div className="h-8 w-8 rounded-full bg-accent text-white flex items-center justify-center font-bold text-sm mb-2">
+                      3
+                    </div>
+                    <h4 className="font-semibold text-sm mb-1">Schválení</h4>
+                    <p className="text-xs text-muted-foreground">Klient schvaluje nebo zamítá dopad změny</p>
+                  </div>
+                  <div>
+                    <div className="h-8 w-8 rounded-full bg-accent text-white flex items-center justify-center font-bold text-sm mb-2">
+                      4
+                    </div>
+                    <h4 className="font-semibold text-sm mb-1">Implementace</h4>
+                    <p className="text-xs text-muted-foreground">Realizace schválené změny</p>
+                  </div>
+                </div>
+              </CardContent>
+            </Card>
           </div>
         </div>
       </section>
