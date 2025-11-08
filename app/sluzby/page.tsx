@@ -34,6 +34,7 @@ export default async function ServicesPage() {
       ],
       benefits:
         "Získáte jasný strategický plán, který zajistí, že váš web bude nástrojem pro dosažení obchodních cílů, ne jen digitální vizitkou.",
+      image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
     },
     {
       slug: { current: "vyvoj-webu-na-miru" },
@@ -48,6 +49,7 @@ export default async function ServicesPage() {
       ],
       benefits:
         "Váš web bude bleskurychlý, bezpečný a postavený na nejmodernějších technologiích, které zajistí dlouhodobou udržitelnost.",
+      image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
     },
     {
       slug: { current: "ux-ui-design" },
@@ -62,6 +64,7 @@ export default async function ServicesPage() {
       ],
       benefits:
         "Design, který nejen skvěle vypadá, ale především vede uživatele k požadované akci a maximalizuje konverze.",
+      image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=600&fit=crop",
     },
     {
       slug: { current: "cms-integrace" },
@@ -75,6 +78,7 @@ export default async function ServicesPage() {
         "Školení týmu pro správu obsahu",
       ],
       benefits: "Budete moci snadno aktualizovat obsah webu bez programátora, ušetříte čas a náklady na údržbu.",
+      image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
     },
     {
       slug: { current: "e-commerce" },
@@ -89,6 +93,7 @@ export default async function ServicesPage() {
       ],
       benefits:
         "Profesionální e-shop, který zvýší vaše online prodeje a poskytne zákazníkům bezproblémový nákupní zážitek.",
+      image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
     },
     {
       slug: { current: "podpora-udrzba" },
@@ -103,6 +108,7 @@ export default async function ServicesPage() {
       ],
       benefits:
         "Váš web bude vždy aktuální, bezpečný a výkonný. Můžete se soustředit na své podnikání, o technologii se postaráme my.",
+      image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
     },
   ]
 
@@ -113,9 +119,9 @@ export default async function ServicesPage() {
           title: service.title,
           shortDesc: service.shortDescription,
           mainImage: service.mainImage,
-          priceFrom: service.priceFrom, // Added priceFrom field
-          icon: Target, // Default icon, can be customized based on service type
-          features: [], // Will be loaded from Sanity content
+          priceFrom: service.priceFrom,
+          icon: Target,
+          features: [],
           benefits: "",
         }))
       : fallbackServices.map((s) => ({
@@ -123,10 +129,11 @@ export default async function ServicesPage() {
           title: s.title,
           shortDesc: s.shortDescription,
           mainImage: null,
-          priceFrom: null, // Added priceFrom field
+          priceFrom: null,
           icon: s.icon,
           features: s.features,
           benefits: s.benefits,
+          image: s.image,
         }))
 
   return (
@@ -163,16 +170,21 @@ export default async function ServicesPage() {
               return (
                 <Card
                   key={index}
-                  className="border-2 hover:border-accent transition-all duration-200 shadow-sm hover:shadow-md flex flex-col overflow-hidden"
+                  className="border-2 hover:border-accent transition-all duration-200 shadow-sm hover:shadow-md flex flex-col overflow-hidden group"
                 >
-                  {service.mainImage && (
-                    <div className="relative w-full h-48">
+                  {(service.mainImage || service.image) && (
+                    <div className="relative w-full h-48 overflow-hidden">
                       <Image
-                        src={urlFor(service.mainImage).width(1024).height(1024).url() || "/placeholder.svg"}
+                        src={
+                          service.mainImage
+                            ? urlFor(service.mainImage).width(800).height(600).url()
+                            : service.image || "/placeholder.svg?height=600&width=800"
+                        }
                         alt={service.title}
                         fill
-                        className="object-cover"
+                        className="object-cover transition-transform duration-500 group-hover:scale-110"
                       />
+                      <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
                     </div>
                   )}
 

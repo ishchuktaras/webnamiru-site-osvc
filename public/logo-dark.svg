@@ -1,0 +1,19 @@
+<svg width="280" height="80" viewBox="0 0 280 80" fill="none" xmlns="http://www.w3.org/2000/svg">
+  <!-- Icon background - lighter for dark mode -->
+  <rect width="64" height="64" x="8" y="8" rx="12" fill="#3B82F6" fill-opacity="0.2"/>
+  
+  <!-- Code brackets - white for dark mode -->
+  <path d="M24 32L32 40L24 48" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M56 32L48 40L56 48" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"/>
+  <path d="M44 28L36 52" stroke="#60A5FA" stroke-width="2.5" stroke-linecap="round"/>
+  
+  <!-- Text "webnamiru" - white -->
+  <text x="88" y="42" font-family="Inter, system-ui, sans-serif" font-size="24" font-weight="700" fill="#FFFFFF">
+    webnamiru
+  </text>
+  
+  <!-- Text ".site" - light gray -->
+  <text x="88" y="58" font-family="Inter, system-ui, sans-serif" font-size="14" font-weight="400" fill="#9CA3AF">
+    .site
+  </text>
+</svg>

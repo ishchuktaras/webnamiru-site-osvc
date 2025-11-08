@@ -9,6 +9,7 @@ import { HeroParallax } from "@/components/animations/HeroParallax"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer"
 import { FloatingElement } from "@/components/animations/FloatingElements"
+import Image from "next/image"
 
 export default async function Home() {
   const faqs = await getFAQs()
@@ -42,40 +43,55 @@ export default async function Home() {
                 description:
                   "Definujeme cíle, analyzujeme konkurenci a vytváříme plán pro dosažení měřitelných výsledků.",
                 features: ["Analýza cílového publika", "Konkurenční výzkum", "SMART cíle"],
+                image: "https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=800&h=600&fit=crop",
               },
               {
                 icon: Code2,
                 title: "Vývoj na míru",
                 description: "Vytváříme weby pomocí Next.js, Tailwind CSS a moderních technologií pro maximální výkon.",
                 features: ["Next.js 16", "Responzivní design", "SEO optimalizace"],
+                image: "https://images.unsplash.com/photo-1461749280684-dccba630e2f6?w=800&h=600&fit=crop",
               },
               {
                 icon: Users,
                 title: "UX/UI Design",
                 description: "Navrhujeme intuitivní rozhraní zaměřená na uživatele a konverze.",
                 features: ["Uživatelské persony", "Wireframing", "Prototypování"],
+                image: "https://images.unsplash.com/photo-1581291518633-83b4ebd1d83e?w=800&h=600&fit=crop",
               },
               {
                 icon: Rocket,
                 title: "CMS integrace",
                 description: "Propojení se Sanity.io pro snadnou správu obsahu bez technických znalostí.",
                 features: ["Sanity Studio", "Flexibilní schémata", "Real-time preview"],
+                image: "https://images.unsplash.com/photo-1488590528505-98d2b5aba04b?w=800&h=600&fit=crop",
               },
               {
                 icon: Zap,
                 title: "E-commerce řešení",
                 description: "Kompletní online obchody s platebními branami a správou produktů.",
                 features: ["Stripe integrace", "Správa objednávek", "Analytika prodejů"],
+                image: "https://images.unsplash.com/photo-1556742049-0cfed4f6a45d?w=800&h=600&fit=crop",
               },
               {
                 icon: Shield,
                 title: "Podpora & údržba",
                 description: "Kontinuální péče o váš web, aktualizace a technická podpora.",
                 features: ["Monitoring", "Aktualizace", "Technická podpora"],
+                image: "https://images.unsplash.com/photo-1563986768609-322da13575f3?w=800&h=600&fit=crop",
               },
             ].map((service, index) => (
               <StaggerItem key={index}>
-                <Card className="border-2 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-[1.02] h-full magnetic-hover">
+                <Card className="border-2 hover:border-accent transition-all duration-300 shadow-sm hover:shadow-lg hover:scale-[1.02] h-full magnetic-hover overflow-hidden group">
+                  <div className="relative w-full h-48 overflow-hidden">
+                    <Image
+                      src={service.image || "/placeholder.svg"}
+                      alt={service.title}
+                      fill
+                      className="object-cover transition-transform duration-500 group-hover:scale-110"
+                    />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/80 to-transparent" />
+                  </div>
                   <CardContent className="p-6 space-y-4">
                     <div className="h-12 w-12 rounded-lg bg-accent/10 flex items-center justify-center group-hover:glow-accent transition-all">
                       <service.icon className="h-6 w-6 text-accent" />
