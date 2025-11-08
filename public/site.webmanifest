@@ -1,11 +1,12 @@
 {
-  "name": "webnamiru.site",
+  "name": "webnamiru.site - Tvorba webů na míru",
   "short_name": "webnamiru",
-  "description": "Tvorba webů na míru pro firmy v Jihlavě a na Vysočině",
+  "description": "Tvorba profesionálních webových stránek pro Jihlavu a Vysočinu. Moderní technologie, transparentní proces.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#ffffff",
   "theme_color": "#3b82f6",
+  "orientation": "portrait-primary",
   "icons": [
     {
       "src": "/icon.svg",
@@ -23,5 +24,9 @@
       "sizes": "512x512",
       "type": "image/png"
     }
-  ]
+  ],
+  "categories": ["business", "productivity"],
+  "lang": "cs-CZ",
+  "dir": "ltr",
+  "scope": "/"
 }

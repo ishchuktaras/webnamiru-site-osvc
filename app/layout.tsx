@@ -44,7 +44,10 @@ export const viewport: Viewport = {
 
 export const metadata: Metadata = {
   metadataBase: new URL("https://webnamiru.site"),
-  title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
+  title: {
+    default: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
+    template: "%s | webnamiru.site",
+  },
   description:
     "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky. Pomáhame českým firmám růst online.",
   keywords: [
@@ -57,36 +60,46 @@ export const metadata: Metadata = {
     "Sanity.io",
     "webový vývoj",
     "IT konzultace Jihlava",
+    "UX/UI design",
+    "responzivní weby",
+    "moderní webové stránky",
   ],
-  authors: [{ name: "Taras Ishchuk" }],
+  authors: [{ name: "Taras Ishchuk", url: "https://webnamiru.site/o-mne" }],
+  creator: "Taras Ishchuk, OSVČ",
+  publisher: "webnamiru.site",
   icons: {
     icon: [
       { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon.svg", type: "image/svg+xml" },
+      { url: "/icon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      { url: "/icon-dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
     ],
     apple: "/apple-touch-icon.png",
   },
   openGraph: {
     title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
-    description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
+    description:
+      "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky. Moderní technologie, transparentní proces, férové ceny.",
     type: "website",
     locale: "cs_CZ",
     url: "https://webnamiru.site",
     siteName: "webnamiru.site",
     images: [
       {
-        url: "/og-image.png",
+        url: "/og-image-home.jpg",
         width: 1200,
         height: 630,
-        alt: "webnamiru.site - Tvorba webů na míru",
+        alt: "webnamiru.site - Tvorba webů na míru pro Jihlavu a Vysočinu",
+        type: "image/jpeg",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
     title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
-    description: "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky",
-    images: ["/og-image.png"],
+    description:
+      "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky. Moderní technologie, transparentní proces.",
+    images: ["/og-image-home.jpg"],
+    creator: "@webnamiru",
   },
   robots: {
     index: true,
@@ -101,9 +114,21 @@ export const metadata: Metadata = {
   },
   alternates: {
     canonical: "https://webnamiru.site",
+    languages: {
+      "cs-CZ": "https://webnamiru.site",
+    },
   },
+  verification: {
+    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
+  },
+  category: "technology",
+  classification: "Business",
   manifest: "/site.webmanifest",
-  generator: "v0.app",
+  other: {
+    "theme-color": "#3b82f6",
+    "color-scheme": "light dark",
+    "format-detection": "telephone=no",
+  },
 }
 
 export default function RootLayout({

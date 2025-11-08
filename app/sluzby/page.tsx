@@ -10,8 +10,36 @@ import { StaggerContainer } from "@/components/animations/StaggerContainer"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Služby | webnamiru.site",
-  description: "Komplexní služby pro tvorbu webů na míru - od strategického plánování přes vývoj až po podporu.",
+  title: "Služby - Komplexní tvorba webů od strategie po realizaci",
+  description:
+    "Strategické plánování, vývoj na míru s Next.js, UX/UI design, CMS integrace, e-commerce řešení a podpora. Transparentní proces, férové ceny, měřitelné výsledky.",
+  keywords: [
+    "webové služby",
+    "vývoj webu",
+    "UX/UI design",
+    "e-commerce",
+    "CMS integrace",
+    "Sanity.io",
+    "Next.js vývoj",
+    "webová podpora",
+  ],
+  openGraph: {
+    title: "Služby | webnamiru.site - Od strategie po realizaci",
+    description: "Kompletní služby pro tvorbu webů na míru - strategické plánování, design, vývoj, podpora.",
+    url: "https://webnamiru.site/sluzby",
+    type: "website",
+    images: [
+      {
+        url: "/og-image-services.jpg",
+        width: 1200,
+        height: 630,
+        alt: "Webové služby - strategické plánování, design, vývoj",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://webnamiru.site/sluzby",
+  },
 }
 
 export const revalidate = 60 // Revalidate every minute

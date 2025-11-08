@@ -10,6 +10,40 @@ import { AnimatedSection } from "@/components/animations/AnimatedSection"
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer"
 import { FloatingElement } from "@/components/animations/FloatingElements"
 import Image from "next/image"
+import type { Metadata } from "next"
+
+export const metadata: Metadata = {
+  title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
+  description:
+    "Vytvářím webové stránky na míru, které nejen skvěle vypadají, ale především pomáhají vašemu podnikání růst. Moderní technologie Next.js, Sanity CMS, SEO optimalizace. Konzultace zdarma.",
+  keywords: [
+    "tvorba webů Jihlava",
+    "webové stránky Vysočina",
+    "e-shop Jihlava",
+    "webdesign",
+    "Next.js web",
+    "SEO optimalizace",
+    "UX/UI design",
+    "CMS Sanity",
+  ],
+  openGraph: {
+    title: "webnamiru.site | Weby, které přinášejí výsledky",
+    description: "Strategický přístup k tvorbě webů. Od analýzy přes design až po měřitelné výsledky.",
+    url: "https://webnamiru.site",
+    type: "website",
+    images: [
+      {
+        url: "/og-image-home.jpg",
+        width: 1200,
+        height: 630,
+        alt: "webnamiru.site - Tvorba webů na míru",
+      },
+    ],
+  },
+  alternates: {
+    canonical: "https://webnamiru.site",
+  },
+}
 
 export default async function Home() {
   const faqs = await getFAQs()
