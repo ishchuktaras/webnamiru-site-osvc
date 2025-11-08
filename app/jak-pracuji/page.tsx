@@ -232,69 +232,78 @@ export default function JakPracujiPage() {
 
       {/* Workflow Steps */}
       <AnimatedSection direction="right">
-        <section id="proces" className="border-y bg-muted/30 py-16 md:py-24">
+        <section id="proces" className="border-y bg-muted/30 py-12 md:py-16 lg:py-24">
           <div className="container mx-auto px-4">
-            <div className="mb-12 text-center">
-              <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl text-balance">
+            <div className="mb-8 md:mb-12 text-center">
+              <h2 className="mb-3 md:mb-4 text-2xl md:text-3xl lg:text-4xl font-bold tracking-tight text-balance">
                 Workflow: Od myšlenky k živému webu
               </h2>
-              <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
+              <p className="mx-auto max-w-2xl text-sm md:text-base text-muted-foreground text-pretty leading-relaxed">
                 Pěti-krokový proces pro efektivní a transparentní realizaci projektu
               </p>
             </div>
 
-            <div className="mx-auto max-w-6xl">
+            <div className="mx-auto max-w-4xl lg:max-w-6xl">
               <div className="relative">
-                {/* Connecting line */}
-                <div className="absolute left-8 md:left-1/2 top-0 bottom-0 w-0.5 bg-border hidden sm:block" />
+                {/* Connecting line - only visible on desktop */}
+                <div className="absolute left-1/2 top-0 bottom-0 w-0.5 bg-border -translate-x-1/2 hidden lg:block" />
 
-                <div className="space-y-12">
+                <div className="space-y-6 md:space-y-8 lg:space-y-12">
                   {workflowSteps.map((step, index) => (
                     <div
                       key={step.number}
-                      className={`relative flex flex-col md:flex-row gap-8 items-start ${
-                        index % 2 === 0 ? "md:flex-row" : "md:flex-row-reverse"
+                      className={`relative flex flex-col lg:flex-row gap-6 lg:gap-8 items-start ${
+                        index % 2 === 0 ? "lg:flex-row" : "lg:flex-row-reverse"
                       }`}
                     >
-                      {/* Timeline dot */}
-                      <div className="absolute left-8 md:left-1/2 md:-translate-x-1/2 hidden sm:block">
-                        <div className={`h-16 w-16 rounded-full ${step.color} flex items-center justify-center z-10`}>
-                          <step.icon className="h-8 w-8 text-white" />
+                      {/* Timeline dot - desktop only */}
+                      <div className="absolute left-1/2 -translate-x-1/2 hidden lg:block">
+                        <div
+                          className={`h-14 w-14 xl:h-16 xl:w-16 rounded-full ${step.color} flex items-center justify-center z-10`}
+                        >
+                          <step.icon className="h-7 w-7 xl:h-8 xl:w-8 text-white" />
                         </div>
                       </div>
 
                       {/* Content card */}
-                      <div className="flex-1 md:w-1/2">
+                      <div className="flex-1 lg:w-1/2 w-full">
                         <Card
                           className={`border-2 hover:shadow-lg transition-all ${
-                            index % 2 === 0 ? "md:mr-8" : "md:ml-8"
+                            index % 2 === 0 ? "lg:mr-8" : "lg:ml-8"
                           }`}
                         >
-                          <CardHeader>
-                            <div className="flex items-center gap-3 mb-2">
+                          <CardHeader className="pb-3 md:pb-4">
+                            <div className="flex items-start gap-3 mb-2">
+                              {/* Mobile icon */}
                               <div
-                                className={`sm:hidden h-12 w-12 rounded-full ${step.color} flex items-center justify-center`}
+                                className={`lg:hidden h-10 w-10 md:h-12 md:w-12 rounded-full ${step.color} flex items-center justify-center shrink-0`}
                               >
-                                <step.icon className="h-6 w-6 text-white" />
+                                <step.icon className="h-5 w-5 md:h-6 md:w-6 text-white" />
                               </div>
-                              <div>
-                                <Badge variant="outline">Krok {step.number}</Badge>
-                                <Badge variant="secondary" className="ml-2">
-                                  {step.duration}
-                                </Badge>
+                              <div className="flex-1 min-w-0">
+                                <div className="flex flex-wrap items-center gap-2 mb-1">
+                                  <Badge variant="outline" className="text-xs">
+                                    Krok {step.number}
+                                  </Badge>
+                                  <Badge variant="secondary" className="text-xs">
+                                    {step.duration}
+                                  </Badge>
+                                </div>
+                                <CardTitle className="text-lg md:text-xl leading-tight">{step.title}</CardTitle>
                               </div>
                             </div>
-                            <CardTitle className="text-xl">{step.title}</CardTitle>
-                            <CardDescription className="text-base">{step.description}</CardDescription>
+                            <CardDescription className="text-sm md:text-base leading-relaxed">
+                              {step.description}
+                            </CardDescription>
                           </CardHeader>
-                          <CardContent>
+                          <CardContent className="pt-0">
                             <div>
-                              <h4 className="font-semibold text-sm mb-3">Výstupy:</h4>
-                              <ul className="space-y-2">
+                              <h4 className="font-semibold text-xs md:text-sm mb-2 md:mb-3">Výstupy:</h4>
+                              <ul className="space-y-1.5 md:space-y-2">
                                 {step.deliverables.map((deliverable) => (
-                                  <li key={deliverable} className="flex items-center gap-2">
-                                    <CheckCircle2 className="h-4 w-4 text-accent shrink-0" />
-                                    <span className="text-sm">{deliverable}</span>
+                                  <li key={deliverable} className="flex items-start gap-2">
+                                    <CheckCircle2 className="h-3.5 w-3.5 md:h-4 md:w-4 text-accent shrink-0 mt-0.5" />
+                                    <span className="text-xs md:text-sm leading-relaxed">{deliverable}</span>
                                   </li>
                                 ))}
                               </ul>
@@ -303,8 +312,8 @@ export default function JakPracujiPage() {
                         </Card>
                       </div>
 
-                      {/* Spacer for other side */}
-                      <div className="hidden md:block flex-1 md:w-1/2" />
+                      {/* Spacer for other side - desktop only */}
+                      <div className="hidden lg:block flex-1 lg:w-1/2" />
                     </div>
                   ))}
                 </div>
