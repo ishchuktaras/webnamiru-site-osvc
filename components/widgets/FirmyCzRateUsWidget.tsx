@@ -1,3 +1,5 @@
+// widgets/FirmyCzRateUsWidget.tsx
+
 "use client"
 
 import { Star } from "lucide-react"

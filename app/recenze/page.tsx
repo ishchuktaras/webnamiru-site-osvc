@@ -1,25 +1,28 @@
+// app/recenze/page.tsx
+
 import type { Metadata } from "next"
-import { Star, Award, ThumbsUp, TrendingUp } from "lucide-react"
-import { Card, CardContent } from "@/components/ui/card"
-import { Button } from "@/components/ui/button"
-import Link from "next/link"
-import { SeznamReviewsWidget } from "@/components/widgets/SeznamReviewsWidget"
-import { FirmyCzBadge } from "@/components/widgets/FirmyCzBadge"
-import { FirmyCzRateUsWidget } from "@/components/widgets/FirmyCzRateUsWidget"
+import { Star, Award, ThumbsUp, TrendingUp, Quote, User, MessageSquare } from "lucide-react"
+import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer"
+import { ReviewForm } from "@/components/ReviewForm"
+import { sanityFetch } from "@/lib/sanity.client"
+import { reviewsQuery } from "@/lib/sanity.queries"
+import { Badge } from "@/components/ui/badge"
 
 export const metadata: Metadata = {
   title: "Recenze a hodnocení | webnamiru.site",
   description:
-    "Přečtěte si ověřené recenze od spokojených klientů. Hodnocení a reference webových projektů z Jihlavy a Vysočiny. Důvěra potvrzená na Firmy.cz a Seznam.cz.",
-  openGraph: {
-    title: "Recenze a hodnocení | webnamiru.site",
-    description: "Ověřené recenze od spokojených klientů. Transparentní hodnocení webových projektů.",
-  },
+    "Přečtěte si ověřené recenze od spokojených klientů. Hodnocení a reference webových projektů z Jihlavy a Vysočiny.",
 }
 
-export default function RecenzePage() {
+// Revalidace každých 60 sekund (ISR)
+export const revalidate = 60
+
+export default async function RecenzePage() {
+  // Načtení schválených recenzí ze Sanity
+  const reviews = await sanityFetch<any[]>({ query: reviewsQuery }) || []
+
   const stats = [
     { icon: Star, value: "5.0", label: "Průměrné hodnocení", color: "text-yellow-500" },
     { icon: Award, value: "100%", label: "Spokojených klientů", color: "text-green-500" },
@@ -38,7 +41,7 @@ export default function RecenzePage() {
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-balance">Co říkají moji klienti</h1>
             <p className="text-base lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-              Transparentní hodnocení od skutečných klientů. Jsem hrdý na důvěru, kterou nám dávají firmy a podnikatelé.
+              Skutečné hodnocení spolupráce. Žádné externí widgety, ale přímá zpětná vazba od lidí, se kterými jsem pracoval.
             </p>
           </AnimatedSection>
 
@@ -62,124 +65,85 @@ export default function RecenzePage() {
         </div>
       </section>
 
-      {/* Firmy.cz Verification Section */}
-      <section className="py-16 bg-secondary">
+      {/* Form Section */}
+      <section className="py-16 bg-secondary/30" id="napsat-recenzi">
         <div className="container max-w-4xl mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center space-y-6 mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-balance">Ověřeno na Firmy.cz</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Jsme oficiálně ověřeni na portálu Firmy.cz. Naše hodnocení a recenze jsou transparentní a důvěryhodné.
-            </p>
+          <AnimatedSection className="text-center mb-10">
+            <h2 className="text-3xl font-bold mb-4">Máte se mnou zkušenost?</h2>
+            <p className="text-muted-foreground">Budu rád, když napíšete pár slov o naší spolupráci.</p>
           </AnimatedSection>
-
-          <AnimatedSection delay={0.2} className="space-y-8">
-            <div className="flex flex-col sm:flex-row items-center justify-center gap-6 pb-8">
-              <FirmyCzBadge size="lg" variant="light" showRating={true} />
-              <div className="max-w-xs">
-                <FirmyCzRateUsWidget variant="light" />
-              </div>
-            </div>
-
-            <Card className="border-2 border-accent/20">
-              <CardContent className="p-8 text-center space-y-4">
-                <h3 className="text-xl font-semibold">Ohodnoťte naši spolupráci</h3>
-                <p className="text-muted-foreground">
-                  Spolupracovali jste s námi? Budeme rádi za vaši upřímnou zpětnou vazbu, která pomůže dalším klientům s
-                  rozhodnutím.
-                </p>
-                <Button asChild variant="outline" className="border-2 bg-transparent">
-                  <a
-                    href="https://www.firmy.cz/detail/13911712-taras-ishchuk-jihlava.html#pridat-hodnoceni"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                  >
-                    <Star className="mr-2 h-4 w-4" />
-                    Přidat hodnocení
-                  </a>
-                </Button>
-              </CardContent>
-            </Card>
-          </AnimatedSection>
-        </div>
-      </section>
-
-      {/* Seznam.cz Reviews Section */}
-      <section className="py-16">
-        <div className="container max-w-4xl mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center space-y-6 mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-balance">Recenze na Seznam.cz</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-              Přečtěte si, co o nás píší naši klienti na největším českém portálu Seznam.cz.
-            </p>
-          </AnimatedSection>
-
           <AnimatedSection delay={0.2}>
-            <SeznamReviewsWidget maxReviews={10} showTitle={false} />
+            <ReviewForm />
           </AnimatedSection>
         </div>
       </section>
 
-      {/* Trust Indicators Section */}
-      <section className="py-16 bg-secondary">
-        <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <AnimatedSection className="text-center space-y-6 mb-12">
-            <h2 className="text-3xl lg:text-4xl font-bold text-balance">Proč nám klienti důvěřují</h2>
-          </AnimatedSection>
-
-          <StaggerContainer className="grid md:grid-cols-3 gap-8" staggerDelay={0.15}>
-            {[
-              {
-                title: "Transparentnost",
-                description: "Jasná komunikace, férové ceny a žádná skrytá poplatky. Co slíbíme, to dodáme.",
-                icon: "🤝",
-              },
-              {
-                title: "Kvalita na prvním místě",
-                description: "Používáme moderní technologie a best practices pro maximální výkon a spolehlivost.",
-                icon: "⚡",
-              },
-              {
-                title: "Dlouhodobá podpora",
-                description: "Nezmizíme po spuštění webu. Poskytujeme průběžnou podporu a pomoc s rozvojem.",
-                icon: "🛡️",
-              },
-            ].map((item, index) => (
-              <StaggerItem key={index}>
-                <Card className="h-full hover:border-accent/50 transition-all duration-300">
-                  <CardContent className="p-8 space-y-4">
-                    <div className="text-5xl">{item.icon}</div>
-                    <h3 className="text-xl font-semibold">{item.title}</h3>
-                    <p className="text-muted-foreground leading-relaxed">{item.description}</p>
-                  </CardContent>
-                </Card>
-              </StaggerItem>
-            ))}
-          </StaggerContainer>
-        </div>
-      </section>
-
-      {/* CTA Section */}
+      {/* Reviews List Section */}
       <section className="py-20">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
-          <AnimatedSection delay={0.2}>
-            <Card className="border-2 border-accent/20 bg-gradient-to-br from-accent/5 to-primary/5 shadow-lg">
-              <CardContent className="p-12 text-center space-y-6">
-                <h2 className="text-3xl lg:text-5xl font-bold text-balance">Staňte se dalším spokojeným klientem</h2>
-                <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto text-pretty leading-relaxed">
-                  Připojte se k firmám, které nám důvěřují. Začneme nezávaznou konzultací a společně vytvoříme web,
-                  který splní vaše očekávání.
-                </p>
-                <div className="flex flex-col sm:flex-row gap-4 justify-center pt-4">
-                  <Button size="lg" asChild className="bg-accent hover:bg-accent/90 shadow-md">
-                    <Link href="/kontakt">Nezávazná poptávka</Link>
-                  </Button>
-                  <Button size="lg" variant="outline" asChild className="border-2 bg-transparent">
-                    <Link href="/portfolio">Zobrazit portfolio</Link>
-                  </Button>
-                </div>
-              </CardContent>
-            </Card>
+          <AnimatedSection className="text-center space-y-6 mb-12">
+            <h2 className="text-3xl lg:text-4xl font-bold text-balance">Všechny recenze</h2>
+            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
+              Seznam ověřených recenzí.
+            </p>
           </AnimatedSection>
+
+          {reviews.length > 0 ? (
+            <StaggerContainer className="grid md:grid-cols-2 lg:grid-cols-3 gap-6" staggerDelay={0.1}>
+              {reviews.map((review: any) => (
+                <StaggerItem key={review._id}>
+                  <Card className="h-full flex flex-col hover:shadow-md transition-shadow duration-300 bg-card/50 backdrop-blur-sm border-accent/10">
+                    <CardHeader>
+                      <div className="flex justify-between items-start mb-2">
+                        <div className="flex items-center gap-3">
+                          <div className="h-10 w-10 rounded-full bg-primary/10 flex items-center justify-center text-primary">
+                            <User className="h-5 w-5" />
+                          </div>
+                          <div>
+                            <CardTitle className="text-base font-semibold">{review.name}</CardTitle>
+                            {review.company && (
+                              <p className="text-sm text-muted-foreground">{review.company}</p>
+                            )}
+                          </div>
+                        </div>
+                      </div>
+                      <div className="flex">
+                        {[...Array(5)].map((_, i) => (
+                          <Star 
+                            key={i} 
+                            className={`h-4 w-4 ${i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-200 dark:text-gray-700"}`} 
+                          />
+                        ))}
+                      </div>
+                    </CardHeader>
+                    <CardContent className="flex-grow pt-0">
+                      <div className="relative mt-2">
+                        <Quote className="absolute -top-1 -left-1 h-4 w-4 text-accent/20 rotate-180" />
+                        <p className="text-muted-foreground text-sm leading-relaxed pl-4">
+                          {review.text}
+                        </p>
+                      </div>
+                      <div className="mt-4 pt-4 border-t flex justify-end">
+                        <span className="text-xs text-muted-foreground">
+                          {new Date(review.date).toLocaleDateString('cs-CZ')}
+                        </span>
+                      </div>
+                    </CardContent>
+                  </Card>
+                </StaggerItem>
+              ))}
+            </StaggerContainer>
+          ) : (
+            <AnimatedSection>
+              <div className="flex flex-col items-center justify-center py-16 text-center border-2 border-dashed rounded-lg border-muted">
+                <MessageSquare className="h-12 w-12 text-muted-foreground mb-4" />
+                <h3 className="text-xl font-semibold mb-2">Zatím žádné recenze</h3>
+                <p className="text-muted-foreground max-w-md">
+                  Buďte první, kdo napíše recenzi! Využijte formulář výše.
+                </p>
+              </div>
+            </AnimatedSection>
+          )}
         </div>
       </section>
     </div>

@@ -1,26 +1,30 @@
-import { createClient } from "@sanity/client"
-import imageUrlBuilder from "@sanity/image-url"
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { createClient } from 'next-sanity'
 
-const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
-const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
-
-if (!projectId) {
-  console.warn("[Sanity] NEXT_PUBLIC_SANITY_PROJECT_ID is not set. Sanity features will be disabled.")
-}
+export const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
+export const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET
+export const apiVersion = '2024-01-01'
 
 export const client = createClient({
-  projectId: projectId || "g8e5a2q4",
+  projectId,
   dataset,
-  apiVersion: "2024-01-01",
-  useCdn: false,
-  token: process.env.SANITY_API_TOKEN,
+  apiVersion,
+  useCdn: false, // Pro produkci můžete dát true, pokud chcete rychlejší čtení z edge
 })
 
-export const isSanityConfigured = () => !!projectId
-
-const builder = imageUrlBuilder(client)
-
-export function urlFor(source: SanityImageSource) {
-  return builder.image(source)
+// --- PŘIDEJTE TUTO FUNKCI ---
+export async function sanityFetch<QueryResponse>({
+  query,
+  params = {},
+  tags = [],
+}: {
+  query: string
+  params?: Record<string, any>
+  tags?: string[]
+}): Promise<QueryResponse> {
+  return client.fetch<QueryResponse>(query, params, {
+    next: {
+      revalidate: 60, // Defaultní čas pro obnovu dat (60 sekund)
+      tags,
+    },
+  })
 }

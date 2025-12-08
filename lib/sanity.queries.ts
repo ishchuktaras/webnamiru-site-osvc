@@ -1,3 +1,6 @@
+// lib/sanity.queries.ts
+
+import { groq } from "next-sanity"
 import { client } from "./sanity.client"
 
 // Fetch all services
@@ -145,4 +148,23 @@ export async function getFAQs() {
       order
     }`,
   )
+}
+
+// --- Fetch Reviews (Recenze) ---
+
+// 1. Exportujeme samotný dotaz (Query string) - toto používá vaše stránka recenze/page.tsx
+export const reviewsQuery = groq`
+  *[_type == "review" && isApproved == true] | order(date desc) {
+    _id,
+    name,
+    company,
+    rating,
+    text,
+    date
+  }
+`
+
+// 2. Helper funkce pro přímé volání (pro konzistenci s ostatními funkcemi)
+export async function getReviews() {
+  return client.fetch(reviewsQuery)
 }
