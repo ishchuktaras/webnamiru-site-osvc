@@ -405,6 +405,34 @@ const supportPackages = [
   },
 ]
 
+const faqItems = [
+  {
+    question: "Jsou uvedené ceny konečné?",
+    answer:
+      "Ceny uvedené v ceníku jsou orientační (označené jako 'od'). Finální cena závisí na konkrétním rozsahu funkcí, počtu podstránek a složitosti designu. Přesnou nezávaznou kalkulaci vám připravíme zdarma po úvodní konzultaci.",
+  },
+  {
+    question: "Musím platit nějaké měsíční poplatky?",
+    answer:
+      "Za samotný vývoj webu neplatíte žádné povinné měsíční poplatky nám. Budete platit pouze třetím stranám za doménu a hosting (pokud není zdarma). Nabízíme však volitelné balíčky správy a údržby pro váš klid, viz ceník výše.",
+  },
+  {
+    question: "Jak probíhá platba za web?",
+    answer:
+      "Standardně pracujeme s rozdělením platby: 50 % záloha před zahájením prací a 50 % doplatek po dokončení, otestování a předání webu. U větších projektů lze domluvit individuální splátkový kalendář.",
+  },
+  {
+    question: "Jak dlouho trvá vytvoření webu?",
+    answer:
+      "Jednoduchý prezentační web nebo landing page stihneme obvykle do 1-2 týdnů. Rozsáhlejší firemní weby trvají 3-6 týdnů a e-shopy 4-8 týdnů, vždy v závislosti na rychlosti dodání podkladů a zpětné vazby.",
+  },
+  {
+    question: "Co když budu chtít web v budoucnu rozšířit?",
+    answer:
+      "Všechny naše weby stavíme na moderních technologiích (Next.js), které jsou snadno škálovatelné. Web lze kdykoliv rozšířit o nové stránky, funkce nebo třeba e-shop bez nutnosti stavět ho celý znovu.",
+  },
+]
+
 export default function CenikPage() {
   return (
     <>
@@ -667,52 +695,23 @@ export default function CenikPage() {
               <h2 className="mb-4 text-3xl font-bold tracking-tight md:text-4xl">Časté otázky o cenách</h2>
             </div>
 
-            <div className="mx-auto max-w-3xl space-y-6">
-              {supportPackages.map((pkg, index) => {
-                const Icon = pkg.icon
+            <div className="mx-auto max-w-3xl space-y-4">
+              {faqItems.map((item, index) => {
                 return (
                   <Card
-                    key={pkg.name}
-                    className="group relative overflow-hidden transition-all duration-300 hover:scale-105 hover:shadow-xl animate-in fade-in slide-in-from-bottom-4"
-                    style={{ animationDelay: `${index * 150}ms` }}
+                    key={index}
+                    className="group overflow-hidden transition-all duration-300 hover:shadow-md animate-in fade-in slide-in-from-bottom-4"
+                    style={{ animationDelay: `${index * 100}ms` }}
                   >
-                    <div
-                      className={`absolute inset-0 opacity-0 bg-gradient-to-br ${pkg.gradient} transition-opacity duration-300 group-hover:opacity-5`}
-                    />
-
-                    <CardHeader className="relative">
-                      <div
-                        className={`mb-4 inline-flex h-12 w-12 items-center justify-center rounded-lg bg-gradient-to-br ${pkg.gradient} text-white`}
-                      >
-                        <Icon className="h-6 w-6" />
-                      </div>
-
-                      <CardTitle>{pkg.name}</CardTitle>
-                      <CardDescription>{pkg.description}</CardDescription>
-                      <div className="mt-4">
-                        <span className="bg-gradient-to-r from-primary to-primary/70 bg-clip-text text-2xl font-bold text-transparent">
-                          {pkg.price}
-                        </span>
-                      </div>
+                    <CardHeader className="pb-2">
+                      <CardTitle className="text-lg flex items-start gap-3">
+                        <Info className="h-5 w-5 mt-1 shrink-0 text-primary" />
+                        {item.question}
+                      </CardTitle>
                     </CardHeader>
-                    <CardContent className="relative">
-                      <ul className="space-y-2">
-                        {pkg.features.map((feature) => (
-                          <li key={feature} className="flex items-start gap-2">
-                            <Check className="mt-0.5 h-4 w-4 shrink-0 text-primary" />
-                            <span className="text-sm">{feature}</span>
-                          </li>
-                        ))}
-                      </ul>
+                    <CardContent>
+                      <p className="text-muted-foreground pl-8">{item.answer}</p>
                     </CardContent>
-                    <CardFooter className="relative">
-                      <Button className="w-full bg-transparent group/btn" variant="outline" asChild>
-                        <Link href="/kontakt">
-                          Vybrat balíček
-                          <ArrowRight className="ml-2 h-4 w-4 transition-transform group-hover/btn:translate-x-1" />
-                        </Link>
-                      </Button>
-                    </CardFooter>
                   </Card>
                 )
               })}
