@@ -20,6 +20,7 @@ import {
 import Link from "next/link"
 import type { Metadata } from "next"
 import { Accordion, AccordionContent, AccordionItem, AccordionTrigger } from "@/components/ui/accordion"
+import { TCOCalculator } from "@/components/TCOCalculator"
 
 export const metadata: Metadata = {
   title: "Zahájení projektu | Životní cyklus webového projektu | webnamiru.site",
@@ -183,27 +184,6 @@ const projectBenefits = [
     icon: TrendingUp,
     title: "Kontinuální zlepšování",
     description: "Neustálé vylepšování produktu na základě dat a zpětné vazby od uživatelů.",
-  },
-]
-
-const projectMethodologies = [
-  {
-    name: "SMART cíle",
-    description:
-      "Specific, Measurable, Achievable, Relevant, Time-bound - Definujeme cíle, které jsou konkrétní, měřitelné, dosažitelné, relevantní a časově ohraničené.",
-  },
-  {
-    name: "MoSCoW prioritizace",
-    description:
-      "Must have, Should have, Could have, Won't have - Prioritizujeme funkce podle důležitosti pro úspěch projektu.",
-  },
-  {
-    name: "Agile přístup",
-    description: "Iterativní vývoj s pravidelnými sprinty, denními stand-upy a průběžným testováním.",
-  },
-  {
-    name: "EVM (Earned Value Management)",
-    description: "Sledování pokroku projektu pomocí plánované hodnoty, skutečné hodnoty a získané hodnoty.",
   },
 ]
 
@@ -432,7 +412,7 @@ export default function ZahajeniProjektuPage() {
         </div>
       </section>
 
-      {/* Total Cost of Ownership Section */}
+      {/* Total Cost of Ownership Section - UPDATED */}
       <section className="py-16 md:py-24">
         <div className="container mx-auto px-4">
           <div className="mb-12 text-center">
@@ -440,12 +420,18 @@ export default function ZahajeniProjektuPage() {
               Celkové náklady vlastnictví (TCO)
             </h2>
             <p className="mx-auto max-w-2xl text-muted-foreground text-pretty leading-relaxed">
-              Transparentní přehled všech nákladů spojených s vlastnictvím webového řešení
+              Transparentní přehled všech nákladů spojených s vlastnictvím webového řešení.
+              Mnoho klientů se dívá pouze na počáteční cenu. Podívejte se, co se stane s náklady v průběhu 3-5 let.
             </p>
           </div>
 
           <div className="mx-auto max-w-5xl">
-            <Card className="border-2 mb-8">
+            {/* TCO Calculator Component */}
+            <div className="mb-12">
+              <TCOCalculator />
+            </div>
+
+            <Card className="border-2">
               <CardContent className="p-6">
                 <div className="flex items-start gap-4">
                   <TrendingUp className="h-6 w-6 text-accent shrink-0 mt-1" />
@@ -461,7 +447,7 @@ export default function ZahajeniProjektuPage() {
               </CardContent>
             </Card>
 
-            <div className="grid gap-6 md:grid-cols-2">
+            <div className="grid gap-6 md:grid-cols-2 mt-8">
               <Card className="border-2">
                 <CardHeader className="bg-accent/5">
                   <CardTitle className="text-xl">Počáteční investice</CardTitle>
@@ -512,24 +498,6 @@ export default function ZahajeniProjektuPage() {
                 </CardContent>
               </Card>
             </div>
-
-            <Card className="mt-6 border-2 border-accent/20 bg-accent/5">
-              <CardContent className="p-6">
-                <div className="flex items-start gap-4">
-                  <AlertCircle className="h-6 w-6 text-accent shrink-0 mt-1" />
-                  <div>
-                    <h3 className="font-semibold mb-2">Důležité upozornění</h3>
-                    <p className="text-sm text-muted-foreground leading-relaxed mb-3">
-                      Údržba a rozvoj může po několika letech přesáhnout původní pořizovací náklady. Proto je důležité
-                      plánovat dlouhodobě a vybírat řešení, která jsou snadno udržovatelná a škálovatelná.
-                    </p>
-                    <Button variant="outline" size="sm" asChild>
-                      <Link href="/pro-klienty#dokumenty">Vyžádat TCO kalkulačku</Link>
-                    </Button>
-                  </div>
-                </div>
-              </CardContent>
-            </Card>
           </div>
         </div>
       </section>
