@@ -1,7 +1,8 @@
+// components/Footer.tsx
+
 import Link from "next/link"
 import { Logo } from "@/components/Logo"
 import { FirmyCzBadge } from "@/components/widgets/FirmyCzBadge"
-import { FirmyCzRateUsWidget } from "@/components/widgets/FirmyCzRateUsWidget"
 
 export function Footer() {
   return (
@@ -14,9 +15,9 @@ export function Footer() {
             <p className="text-sm text-muted-foreground leading-relaxed">
               Webové řešení na míru pro vaše podnikání - Taras Ishchuk, OSVČ
             </p>
-            <div className="pt-2 space-y-3">
+            <div className="pt-2">
+              {/* Ponecháno pouze ověření (badge), widget s výzvou k recenzi byl odstraněn */}
               <FirmyCzBadge size="sm" variant="light" />
-              <FirmyCzRateUsWidget variant="light" className="max-w-[249px]" />
             </div>
           </div>
 
