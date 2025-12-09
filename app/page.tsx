@@ -1,3 +1,5 @@
+// app/page.tsx
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield } from "lucide-react"
