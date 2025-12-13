@@ -1,3 +1,5 @@
+// app/portfolio/[slug]/page.tsx
+
 import { Button } from "@/components/ui/button"
 import { ExternalLink, Calendar, ArrowLeft } from "lucide-react"
 import Link from "next/link"
