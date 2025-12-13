@@ -1,3 +1,5 @@
+// lib/seo/structured-data.ts
+
 // Utility funkce pro generování strukturovaných dat (Schema.org JSON-LD)
 
 export interface LocalBusinessData {

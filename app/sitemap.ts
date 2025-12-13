@@ -1,17 +1,14 @@
+// app/sitemap.ts
+
 import type { MetadataRoute } from "next"
 import { getServices, getProjects, getArticles } from "@/lib/sanity.queries"
 import { isSanityConfigured } from "@/lib/sanity.client"
 
 const BASE_URL = "https://webnamiru.site"
 
-type SanityDoc = {
-  slug: { current: string }
-  _updatedAt?: string
-}
-
 export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
-  // Statické stránky s prioritami a frekvencemi změn
-  const staticUrls: MetadataRoute.Sitemap = [
+  // 1. Definice statických stránek (hlavní struktura webu)
+  const staticRoutes: MetadataRoute.Sitemap = [
     {
       url: BASE_URL,
       lastModified: new Date(),
@@ -19,34 +16,16 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       priority: 1.0,
     },
     {
-      url: `${BASE_URL}/sluzby`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.9,
-    },
-    {
-      url: `${BASE_URL}/zahajeni-projektu`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/cenik`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.8,
-    },
-    {
-      url: `${BASE_URL}/o-mne`,
-      lastModified: new Date(),
-      changeFrequency: "monthly",
-      priority: 0.7,
-    },
-    {
       url: `${BASE_URL}/portfolio`,
       lastModified: new Date(),
       changeFrequency: "weekly",
       priority: 0.8,
+    },
+    {
+      url: `${BASE_URL}/sluzby`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.9,
     },
     {
       url: `${BASE_URL}/blog`,
@@ -60,45 +39,67 @@ export default async function sitemap(): Promise<MetadataRoute.Sitemap> {
       changeFrequency: "yearly",
       priority: 0.6,
     },
+    {
+      url: `${BASE_URL}/o-mne`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.7,
+    },
+    {
+      url: `${BASE_URL}/zahajeni-projektu`,
+      lastModified: new Date(),
+      changeFrequency: "monthly",
+      priority: 0.8,
+    },
   ]
 
+  // Pokud není Sanity nastaveno, vrátíme jen statické stránky
   if (!isSanityConfigured()) {
-    console.warn("[Sitemap] Sanity is not configured. Returning static URLs only.")
-    return staticUrls
+    return staticRoutes
   }
 
   try {
-    // Načtení dat ze Sanity paralelně
-    const [sluzby, projekty, clanky] = await Promise.all([getServices(), getProjects(), getArticles()])
+    // 2. Paralelní načtení dat ze Sanity (Projects, Services, Articles)
+    const [services, projects, articles] = await Promise.all([
+      getServices(),
+      getProjects(),
+      getArticles()
+    ])
 
-    // Generování URL pro služby
-    const sluzbyUrls: MetadataRoute.Sitemap = sluzby.map((sluzba: SanityDoc) => ({
-      url: `${BASE_URL}/sluzby/${sluzba.slug.current}`,
-      lastModified: sluzba._updatedAt ? new Date(sluzba._updatedAt) : new Date(),
+    // 3. Mapování Služeb (Services)
+    const servicesUrls: MetadataRoute.Sitemap = services.map((service: any) => ({
+      url: `${BASE_URL}/sluzby/${service.slug.current}`,
+      lastModified: service._updatedAt ? new Date(service._updatedAt) : new Date(),
       changeFrequency: "monthly" as const,
       priority: 0.8,
     }))
 
-    // Generování URL pro portfolio projekty
-    const projektyUrls: MetadataRoute.Sitemap = projekty.map((projekt: SanityDoc) => ({
-      url: `${BASE_URL}/portfolio/${projekt.slug.current}`,
-      lastModified: projekt._updatedAt ? new Date(projekt._updatedAt) : new Date(),
+    // 4. Mapování Projektů (Portfolio)
+    const projectsUrls: MetadataRoute.Sitemap = projects.map((project: any) => ({
+      url: `${BASE_URL}/portfolio/${project.slug.current}`,
+      lastModified: project._updatedAt 
+        ? new Date(project._updatedAt) 
+        : (project.publishedAt ? new Date(project.publishedAt) : new Date()),
       changeFrequency: "monthly" as const,
       priority: 0.7,
     }))
 
-    // Generování URL pro blog články
-    const clankyUrls: MetadataRoute.Sitemap = clanky.map((clanek: SanityDoc) => ({
-      url: `${BASE_URL}/blog/${clanek.slug.current}`,
-      lastModified: clanek._updatedAt ? new Date(clanek._updatedAt) : new Date(),
-      changeFrequency: "monthly" as const,
-      priority: 0.6,
+    // 5. Mapování Článků (Blog)
+    const articlesUrls: MetadataRoute.Sitemap = articles.map((article: any) => ({
+      url: `${BASE_URL}/blog/${article.slug.current}`,
+      lastModified: article._updatedAt 
+        ? new Date(article._updatedAt) 
+        : (article.publishedAt ? new Date(article.publishedAt) : new Date()),
+      changeFrequency: "weekly" as const,
+      priority: 0.7,
     }))
 
-    // Kombinace všech URL
-    return [...staticUrls, ...sluzbyUrls, ...projektyUrls, ...clankyUrls]
+    // 6. Spojení všeho dohromady
+    return [...staticRoutes, ...servicesUrls, ...projectsUrls, ...articlesUrls]
+
   } catch (error) {
     console.error("[Sitemap] Error fetching Sanity data:", error)
-    return staticUrls
+    // V případě chyby vrátíme alespoň statické stránky, aby web nespadl
+    return staticRoutes
   }
 }

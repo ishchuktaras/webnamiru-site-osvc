@@ -1,3 +1,5 @@
+// app/robots.ts
+
 import type { MetadataRoute } from "next"
 
 export default function robots(): MetadataRoute.Robots {
@@ -6,12 +8,7 @@ export default function robots(): MetadataRoute.Robots {
       {
         userAgent: "*",
         allow: "/",
-        disallow: ["/api/", "/admin/", "/_next/"],
-      },
-      {
-        userAgent: "Googlebot",
-        allow: "/",
-        disallow: ["/api/", "/admin/"],
+        disallow: ["/api/", "/studio/", "/_next/"],
       },
     ],
     sitemap: "https://webnamiru.site/sitemap.xml",

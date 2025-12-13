@@ -1,3 +1,5 @@
+// lib/seo/generate-metadata.ts
+
 import type { Metadata } from "next"
 
 interface GenerateMetadataProps {
