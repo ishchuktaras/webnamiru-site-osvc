@@ -1,3 +1,5 @@
+// app/blog/[slug]/page.tsx
+
 import { getArticleBySlug, getArticles } from "@/lib/sanity.queries"
 import { notFound } from "next/navigation"
 import { calculateReadingTime, extractTextFromPortableText } from "@/lib/utils/reading-time"
