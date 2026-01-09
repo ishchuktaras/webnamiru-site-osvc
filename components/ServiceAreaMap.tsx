@@ -39,7 +39,9 @@ export function ServiceAreaMap() {
   const features = [
     "Osobní konzultace v Jihlavě",
     "Online spolupráce po celé ČR",
-    "Mezinárodní projekty",
+    "Flexibilní pracovní doba",
+    "Rychlé reakční časy",
+    "Přizpůsobení potřebám klienta",
     "Flexibilní komunikace",
   ]
 
