@@ -66,7 +66,7 @@ export function ServiceAreaMap() {
             <CardContent className="p-0">
               <div className="relative w-full h-[500px] bg-linear-to-br from-accent/5 to-primary/5">
                 <iframe
-                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d81730.89999999999!2d15.5592!3d49.3961!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470d1b6b6b6b6b6b%3A0x6b6b6b6b6b6b6b6b!2sJihlava!5e0!3m2!1scs!2scz!4v1234567890"
+                  src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d2596.5374249130036!2d15.553838376780629!3d49.39874166252841!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x470d1a4a859bd2a9%3A0x984fbb3fbfc5be78!2zUmFudMOtxZlvdnNrw6EgMTIzLzM2LCA1ODYgMDEgSmlobGF2YSAxLUhvcm7DrSBLb3Nvdg!5e0!3m2!1scs!2scz!4v1767986075548!5m2!1scs!2scz"
                   width="100%"
                   height="500"
                   style={{ border: 0 }}
