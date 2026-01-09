@@ -1,3 +1,5 @@
+// components/ServiceAreaMap.tsx
+
 "use client"
 
 import { Card, CardContent } from "@/components/ui/card"
@@ -138,18 +140,7 @@ export function ServiceAreaMap() {
                 </ul>
               </CardContent>
             </Card>
-
-            <Card className="border-2 border-accent/20">
-              <CardContent className="p-6">
-                <div className="space-y-3">
-                  <h3 className="text-lg font-semibold">Mezinárodní projekty</h3>
-                  <p className="text-sm text-muted-foreground leading-relaxed">
-                    Díky moderním technologiím a online komunikaci realizujeme projekty i pro klienty mimo Českou
-                    republiku. Nabízíme flexibilní formy spolupráce přizpůsobené vašim potřebám.
-                  </p>
-                </div>
-              </CardContent>
-            </Card>
+            
           </div>
         </div>
 
@@ -164,7 +155,8 @@ export function ServiceAreaMap() {
               image: "https://www.webnamiru.site/og-image.jpg",
               "@id": "https://www.webnamiru.site",
               url: "https://www.webnamiru.site",
-              telephone: "+420-XXX-XXX-XXX",
+              telephone: "+420 777 596 216", 
+              priceRange: "$$",
               address: {
                 "@type": "PostalAddress",
                 streetAddress: "Rantířovská 123/36",
@@ -184,7 +176,7 @@ export function ServiceAreaMap() {
                 opens: "09:00",
                 closes: "17:00",
               },
-              sameAs: ["https://www.webnamiru.site"],
+              sameAs: ["https://www.webnamiru.site"], // Zde by měly být i odkazy na soc. sítě (LinkedIn, FB)
               areaServed: [
                 {
                   "@type": "State",
