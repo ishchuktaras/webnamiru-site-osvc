@@ -1,3 +1,5 @@
+// app/(web)/o-mne/page.tsx
+
 import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
