@@ -30,6 +30,15 @@ export default function Footer() {
                   Portfolio
                 </Link>
               </li>
+
+              <li>
+                <Link
+                  href="/o-mne"
+                  className="text-sm leading-6 text-gray-300 hover:text-white"
+                >
+                  O mně
+                </Link>
+              </li>
               <li>
                 <Link href="/faq" className="hover:text-[#3B82F6]">
                   Časté dotazy
