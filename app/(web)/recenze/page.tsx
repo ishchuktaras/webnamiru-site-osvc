@@ -56,12 +56,12 @@ export default async function RecenzePage() {
       label: "Počet hodnocení", 
       color: "text-blue-500" 
     },
-    { 
-      icon: TrendingUp, 
-      value: "5+", 
-      label: "Let zkušeností", 
-      color: "text-purple-500" 
-    },
+    // { 
+    //   icon: TrendingUp, 
+    //   value: "5+", 
+    //   label: "Let zkušeností", 
+    //   color: "text-purple-500" 
+    // },
   ]
 
   return (
