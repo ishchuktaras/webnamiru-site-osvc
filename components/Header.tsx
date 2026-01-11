@@ -13,6 +13,8 @@ export default function Header() {
     { name: 'O mně', href: '/o-mne' },
     { name: 'FAQ', href: '/faq' },
     { name: 'Recenze', href: '/recenze' },
+    { name: 'Kontakt', href: '/kontakt' },
+    { name: 'Blog', href: '/blog' },
   ];
 
   return (
