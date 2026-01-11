@@ -1,21 +1,14 @@
 import type React from "react"
 import type { Metadata, Viewport } from "next"
-
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "next-themes"
 import Script from "next/script"
 import "./globals.css"
-
-// OPRAVENO: Importy bez složených závorek pro export default
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
-
-// U CookieConsent předpokládám také default export. Pokud ne, vraťte závorky {}.
 import { CookieConsent } from "@/components/CookieConsent" 
-
 import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
-
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"
 
 // Initialize fonts
@@ -54,20 +47,12 @@ export const metadata: Metadata = {
     template: "%s | webnamiru.site",
   },
   description:
-    "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky. Pomáhame českým firmám růst online.",
+    "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky.",
   keywords: [
     "tvorba webů Jihlava",
     "webdesign Vysočina",
-    "tvorba e-shopu Jihlava",
-    "SEO optimalizace Vysočina",
-    "web na míru",
     "Next.js",
     "Sanity.io",
-    "webový vývoj",
-    "IT konzultace Jihlava",
-    "UX/UI design",
-    "responzivní weby",
-    "moderní webové stránky",
   ],
   authors: [{ name: "Taras Ishchuk", url: "https://webnamiru.site/o-mne" }],
   creator: "Taras Ishchuk, OSVČ",
@@ -80,59 +65,12 @@ export const metadata: Metadata = {
     ],
     apple: "/apple-touch-icon.png",
   },
-  openGraph: {
-    title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
-    description:
-      "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky. Moderní technologie, transparentní proces, férové ceny.",
-    type: "website",
-    locale: "cs_CZ",
-    url: "https://webnamiru.site",
-    siteName: "webnamiru.site",
-    images: [
-      {
-        url: "/og-image-home.jpg",
-        width: 1200,
-        height: 630,
-        alt: "webnamiru.site - Tvorba webů na míru pro Jihlavu a Vysočinu",
-        type: "image/jpeg",
-      },
-    ],
-  },
-  twitter: {
-    card: "summary_large_image",
-    title: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
-    description:
-      "Strategický partner pro tvorbu profesionálních webových stránek s měřitelnými výsledky. Moderní technologie, transparentní proces.",
-    images: ["/og-image-home.jpg"],
-    creator: "@webnamiru",
-  },
   robots: {
     index: true,
     follow: true,
-    googleBot: {
-      index: true,
-      follow: true,
-      "max-video-preview": -1,
-      "max-image-preview": "large",
-      "max-snippet": -1,
-    },
-  },
-  alternates: {
-    canonical: "https://webnamiru.site",
-    languages: {
-      "cs-CZ": "https://webnamiru.site",
-    },
   },
   verification: {
     google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-  },
-  category: "technology",
-  classification: "Business",
-  manifest: "/site.webmanifest",
-  other: {
-    "theme-color": "#3b82f6",
-    "color-scheme": "light dark",
-    "format-detection": "telephone=no",
   },
 }
 
@@ -143,8 +81,7 @@ export default function RootLayout({
 }>) {
   const localBusinessData = generateLocalBusinessSchema({
     name: "webnamiru.site - Taras Ishchuk, OSVČ",
-    description:
-      "Tvorba webových stránek a e-shopů na míru. Moderní řešení na platformě Next.js a Sanity.io pro firmy a živnostníky z Vysočiny i celé ČR.",
+    description: "Tvorba webových stránek a e-shopů na míru.",
     email: "info@webnamiru.site",
     address: {
       streetAddress: "Rantířovská 123/36",
@@ -160,7 +97,8 @@ export default function RootLayout({
   })
 
   return (
-    <html lang="cs" suppressHydrationWarning>
+   
+    <html lang="cs" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <Script
           id="schema-local-business"
@@ -169,38 +107,7 @@ export default function RootLayout({
             __html: JSON.stringify(localBusinessData),
           }}
         />
-
-        <Script id="google-analytics-check" strategy="afterInteractive">
-          {`
-            (function() {
-              const consent = localStorage.getItem('cookie-consent');
-              if (consent) {
-                const preferences = JSON.parse(consent);
-                if (preferences.analytics && '${process.env.NEXT_PUBLIC_GA_ID || ""}') {
-                  const script = document.createElement('script');
-                  script.src = 'https://www.googletagmanager.com/gtag/js?id=${process.env.NEXT_PUBLIC_GA_ID || ""}';
-                  script.async = true;
-                  document.head.appendChild(script);
-                  
-                  window.dataLayer = window.dataLayer || [];
-                  function gtag(){dataLayer.push(arguments);}
-                  gtag('js', new Date());
-                  gtag('config', '${process.env.NEXT_PUBLIC_GA_ID || ""}', {
-                    anonymize_ip: true,
-                    cookie_flags: 'SameSite=None;Secure'
-                  });
-                }
-              }
-            })();
-          `}
-        </Script>
-
-        {process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY && (
-          <Script
-            src={`https://www.google.com/recaptcha/enterprise.js?render=${process.env.NEXT_PUBLIC_RECAPTCHA_SITE_KEY}`}
-            strategy="lazyOnload"
-          />
-        )}
+        
       </head>
       <body
         className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}

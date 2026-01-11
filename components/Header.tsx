@@ -34,13 +34,13 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            {/* CTA Button */}
-            <Link 
+            {/* CTA Button - Používáme <a> pro spolehlivý scroll */}
+            <a 
               href="#kontakt" 
               className="bg-[#3B82F6] hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-colors shadow-sm"
             >
               Nezávazná konzultace
-            </Link>
+            </a>
           </nav>
 
           {/* Mobile Menu Button */}
@@ -50,7 +50,6 @@ export default function Header() {
               className="text-[#0D1B3E] p-2"
             >
               <span className="sr-only">Otevřít menu</span>
-              {/* Hamburger Icon */}
               <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
               </svg>
@@ -73,13 +72,13 @@ export default function Header() {
                 {item.name}
               </Link>
             ))}
-            <Link
+            <a
               href="#kontakt"
               className="block w-full text-center mt-4 bg-[#3B82F6] text-white px-3 py-3 rounded-lg font-bold"
               onClick={() => setIsMenuOpen(false)}
             >
               Chci konzultaci
-            </Link>
+            </a>
           </div>
         </div>
       )}
