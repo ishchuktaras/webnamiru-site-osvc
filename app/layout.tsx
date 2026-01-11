@@ -1,5 +1,3 @@
-// app/layout.tsx
-
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 
@@ -8,9 +6,14 @@ import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "next-themes"
 import Script from "next/script"
 import "./globals.css"
-import { Footer } from "@/components/Footer"
-import { Header } from "@/components/Header"
-import { CookieConsent } from "@/components/CookieConsent"
+
+// OPRAVENO: Importy bez složených závorek pro export default
+import Footer from "@/components/Footer"
+import Header from "@/components/Header"
+
+// U CookieConsent předpokládám také default export. Pokud ne, vraťte závorky {}.
+import { CookieConsent } from "@/components/CookieConsent" 
+
 import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"

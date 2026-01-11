@@ -1,263 +1,88 @@
-"use client"
+'use client'
 
-import Link from "next/link"
-import { Button } from "@/components/ui/button"
-import {
-  Menu,
-  Moon,
-  Sun,
-  Sparkles,
-  Briefcase,
-  Rocket,
-  DollarSign,
-  User,
-  FolderKanban,
-  FileText,
-  Shield,
-  Settings,
-  Lock,
-  MessageSquare,
-  HelpCircle,
-  Star,
-} from "lucide-react"
-import { Sheet, SheetContent, SheetTrigger, SheetHeader, SheetTitle } from "@/components/ui/sheet"
-import { useTheme } from "next-themes"
-import { useEffect, useState } from "react"
-import { cn } from "@/lib/utils"
-import { Logo } from "@/components/Logo"
+import Link from 'next/link';
+import { useState } from 'react';
 
-export function Header() {
-  const { theme, setTheme } = useTheme()
-  const [mounted, setMounted] = useState(false)
-  const [isOpen, setIsOpen] = useState(false)
+export default function Header() {
+  const [isMenuOpen, setIsMenuOpen] = useState(false);
 
-  useEffect(() => {
-    setMounted(true)
-  }, [])
-
-  const navLinks = [
-    { href: "/sluzby", label: "Služby", icon: Briefcase },
-    { href: "/cenik", label: "Ceník", icon: DollarSign },
-    { href: "/portfolio", label: "Portfolio", icon: FolderKanban },
-    { href: "/blog", label: "Blog", icon: FileText },
-    { href: "/o-mne", label: "O mně", icon: User },
-    { href: "/recenze", label: "Recenze", icon: Star },
-  ]
-
-  const secondaryLinks = [
-    { href: "/zahajeni-projektu", label: "Zahájení projektu", icon: Rocket, group: "Jak pracuji" },
-    { href: "/jak-pracuji", label: "Jak pracuji", icon: Settings, group: "Jak pracuji" },
-    { href: "/pro-klienty", label: "Pro klienty", icon: Shield, group: "Jak pracuji" },
-    { href: "/nda", label: "NDA", icon: Lock, group: "Jak pracuji" },
-  ]
-
-  const handleLinkClick = () => {
-    setIsOpen(false)
-  }
+  const navigation = [
+    { name: 'Domů', href: '/' },
+    { name: 'Služby', href: '/sluzby' },
+    { name: 'Portfolio', href: '/portfolio' },
+  ];
 
   return (
-    <header className="sticky top-0 z-50 w-full border-b bg-background/95 backdrop-blur supports-backdrop-filter:bg-background/60">
-      <div className="container max-w-7xl mx-auto px-3 sm:px-4 lg:px-8 flex h-14 sm:h-16 items-center gap-2 sm:gap-4">
-        {/* Logo - Left side */}
-        <div className="flex-shrink-0">
-          <Logo size="lg" />
-        </div>
-
-        {/* Navigation - Center */}
-        <div className="hidden lg:flex flex-1 justify-center">
-          <nav className="flex items-center gap-1 xl:gap-2 text-sm font-medium">
-            {navLinks.map((link) => {
-              const IconComponent = link.icon
-              return (
-                <Link
-                  key={link.href}
-                  href={link.href}
-                  className="group flex items-center gap-1.5 transition-all hover:text-accent relative whitespace-nowrap px-2.5 xl:px-3 py-2 text-xs xl:text-sm hover:bg-accent/5 rounded-md"
-                >
-                  <IconComponent className="h-3.5 w-3.5 xl:h-4 xl:w-4 transition-transform group-hover:scale-110" />
-                  <span>{link.label}</span>
-                  <span className="absolute -bottom-1 left-0 w-0 h-0.5 bg-accent transition-all group-hover:w-full rounded-full" />
-                </Link>
-              )
-            })}
-          </nav>
-        </div>
-
-        {/* Actions - Right side */}
-        <div className="flex items-center gap-1 sm:gap-2 ml-auto lg:ml-0">
-          {/* Theme Switcher - Desktop */}
-          {mounted && (
-            <Button
-              variant="ghost"
-              size="icon"
-              onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-              className="hidden sm:flex relative overflow-hidden group h-9 w-9 sm:h-10 sm:w-10"
-            >
-              <Sun className="h-4 w-4 sm:h-5 sm:w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-              <Moon className="absolute h-4 w-4 sm:h-5 sm:w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-              <span className="sr-only">Přepnout téma</span>
-            </Button>
-          )}
-
-          {/* Desktop CTA */}
-          <Button
-            asChild
-            className="hidden lg:flex bg-accent hover:bg-accent/90 hover:scale-105 transition-transform whitespace-nowrap text-xs xl:text-sm px-3 xl:px-4 h-8 xl:h-9 shrink-0 gap-1.5"
-          >
-            <Link href="/kontakt">
-              <MessageSquare className="h-3.5 w-3.5" />
-              Nezávazná poptávka
+    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-gray-100">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
+        <div className="flex justify-between items-center h-16">
+          {/* Logo */}
+          <div className="flex-shrink-0">
+            <Link href="/" className="font-extrabold text-2xl text-[#0D1B3E]">
+              webnamiru<span className="text-[#3B82F6]">.site</span>
             </Link>
-          </Button>
+          </div>
 
-          {/* Mobile Menu */}
-          <Sheet open={isOpen} onOpenChange={setIsOpen}>
-            <SheetTrigger asChild className="lg:hidden">
-              <Button variant="ghost" size="icon" className="relative h-10 w-10 touch-manipulation">
-                <Menu className="h-6 w-6 transition-transform hover:scale-110" />
-                <span className="sr-only">Otevřít menu</span>
-              </Button>
-            </SheetTrigger>
-            <SheetContent side="right" className="w-[85vw] sm:w-[400px] p-0 flex flex-col">
-              <SheetHeader className="px-6 py-4 border-b bg-gradient-to-r from-accent/10 to-primary/10">
-                <SheetTitle className="text-2xl font-bold flex items-center gap-2">
-                  <Sparkles className="h-5 w-5 text-accent" />
-                  Menu
-                </SheetTitle>
-              </SheetHeader>
+          {/* Desktop Menu */}
+          <nav className="hidden md:flex space-x-8 items-center">
+            {navigation.map((item) => (
+              <Link 
+                key={item.name} 
+                href={item.href}
+                className="text-[#1F2937] hover:text-[#3B82F6] font-medium transition-colors"
+              >
+                {item.name}
+              </Link>
+            ))}
+            {/* CTA Button */}
+            <Link 
+              href="#kontakt" 
+              className="bg-[#3B82F6] hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-colors shadow-sm"
+            >
+              Nezávazná konzultace
+            </Link>
+          </nav>
 
-              <nav className="flex flex-col gap-1 p-4 flex-1 overflow-y-auto">
-                {/* Primary Navigation */}
-                <div className="space-y-1">
-                  {navLinks.map((link, index) => {
-                    const IconComponent = link.icon
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={handleLinkClick}
-                        className={cn(
-                          "group relative flex items-center gap-3 px-4 py-3.5",
-                          "text-base font-medium transition-all duration-300",
-                          "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
-                          "active:scale-95 touch-manipulation rounded-lg",
-                          "animate-in slide-in-from-right fade-in",
-                        )}
-                        style={{
-                          animationDelay: `${index * 50}ms`,
-                          animationDuration: "400ms",
-                          animationFillMode: "backwards",
-                        }}
-                      >
-                        <IconComponent className="h-5 w-5 transition-transform group-hover:scale-110 text-accent" />
-                        <span className="flex-1">{link.label}</span>
-                        <span className="opacity-0 group-hover:opacity-100 transition-opacity">→</span>
-                      </Link>
-                    )
-                  })}
-                </div>
-
-                {/* Secondary Navigation */}
-                <div className="pt-3 mt-3 border-t space-y-1">
-                  <div className="px-4 py-2 text-xs font-semibold text-muted-foreground uppercase tracking-wider">
-                    Jak pracuji
-                  </div>
-                  {secondaryLinks.map((link, index) => {
-                    const IconComponent = link.icon
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={handleLinkClick}
-                        className={cn(
-                          "group relative flex items-center gap-3 px-4 py-3",
-                          "text-sm font-medium transition-all duration-300",
-                          "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
-                          "active:scale-95 touch-manipulation rounded-lg",
-                          "animate-in slide-in-from-right fade-in",
-                        )}
-                        style={{
-                          animationDelay: `${(navLinks.length + index) * 50}ms`,
-                          animationDuration: "400ms",
-                          animationFillMode: "backwards",
-                        }}
-                      >
-                        <IconComponent className="h-4 w-4 transition-transform group-hover:scale-110 text-muted-foreground group-hover:text-accent" />
-                        <span className="flex-1">{link.label}</span>
-                      </Link>
-                    )
-                  })}
-                </div>
-
-                {/* Additional Links */}
-                <div className="pt-3 mt-3 border-t space-y-1">
-                  {[
-                    { href: "/#faq", label: "FAQ", icon: HelpCircle },
-                    { href: "/kontakt", label: "Kontakt", icon: MessageSquare },
-                  ].map((link, index) => {
-                    const IconComponent = link.icon
-                    return (
-                      <Link
-                        key={link.href}
-                        href={link.href}
-                        onClick={handleLinkClick}
-                        className={cn(
-                          "group relative flex items-center gap-3 px-4 py-3",
-                          "text-sm font-medium transition-all duration-300",
-                          "hover:bg-accent/10 hover:text-accent hover:translate-x-1",
-                          "active:scale-95 touch-manipulation rounded-lg",
-                          "animate-in slide-in-from-right fade-in",
-                        )}
-                        style={{
-                          animationDelay: `${(navLinks.length + secondaryLinks.length + index) * 50}ms`,
-                          animationDuration: "400ms",
-                          animationFillMode: "backwards",
-                        }}
-                      >
-                        <IconComponent className="h-4 w-4 transition-transform group-hover:scale-110 text-muted-foreground group-hover:text-accent" />
-                        <span className="flex-1">{link.label}</span>
-                      </Link>
-                    )
-                  })}
-                </div>
-              </nav>
-
-              <div className="p-4 border-t bg-muted/30 space-y-3">
-                <div className="flex items-center justify-between px-4 py-3 rounded-lg bg-background/50 border min-h-12">
-                  <span className="text-sm font-medium flex items-center gap-2">
-                    {theme === "dark" ? "🌙" : "☀️"}
-                    {theme === "dark" ? "Tmavý režim" : "Světlý režim"}
-                  </span>
-                  {mounted && (
-                    <Button
-                      variant="ghost"
-                      size="icon"
-                      onClick={() => setTheme(theme === "dark" ? "light" : "dark")}
-                      className="h-10 w-10 relative overflow-hidden touch-manipulation"
-                    >
-                      <Sun className="h-5 w-5 rotate-0 scale-100 transition-all dark:-rotate-90 dark:scale-0" />
-                      <Moon className="absolute h-5 w-5 rotate-90 scale-0 transition-all dark:rotate-0 dark:scale-100" />
-                    </Button>
-                  )}
-                </div>
-
-                <Button
-                  asChild
-                  className="w-full bg-accent hover:bg-accent/90 hover:scale-[1.02] transition-transform shadow-lg min-h-12 touch-manipulation"
-                  onClick={handleLinkClick}
-                >
-                  <Link href="/kontakt" className="flex items-center justify-center gap-2">
-                    <Sparkles className="h-4 w-4" />
-                    Nezávazná poptávka
-                  </Link>
-                </Button>
-              </div>
-            </SheetContent>
-          </Sheet>
+          {/* Mobile Menu Button */}
+          <div className="md:hidden">
+            <button
+              onClick={() => setIsMenuOpen(!isMenuOpen)}
+              className="text-[#0D1B3E] p-2"
+            >
+              <span className="sr-only">Otevřít menu</span>
+              {/* Hamburger Icon */}
+              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
+              </svg>
+            </button>
+          </div>
         </div>
       </div>
-    </header>
-  )
-}
 
-export default Header
+      {/* Mobile Menu */}
+      {isMenuOpen && (
+        <div className="md:hidden bg-white border-b border-gray-100">
+          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
+            {navigation.map((item) => (
+              <Link
+                key={item.name}
+                href={item.href}
+                className="block px-3 py-2 text-base font-medium text-[#1F2937] hover:bg-gray-50 rounded-md"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                {item.name}
+              </Link>
+            ))}
+            <Link
+              href="#kontakt"
+              className="block w-full text-center mt-4 bg-[#3B82F6] text-white px-3 py-3 rounded-lg font-bold"
+              onClick={() => setIsMenuOpen(false)}
+            >
+              Chci konzultaci
+            </Link>
+          </div>
+        </div>
+      )}
+    </header>
+  );
+}
