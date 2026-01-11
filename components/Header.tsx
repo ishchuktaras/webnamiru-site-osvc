@@ -10,6 +10,7 @@ export default function Header() {
     { name: 'Domů', href: '/' },
     { name: 'Služby', href: '/sluzby' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'FAQ', href: '/faq' },
   ];
 
   return (
