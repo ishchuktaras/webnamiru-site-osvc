@@ -9,6 +9,7 @@ export default function Header() {
   const navigation = [
     { name: 'Domů', href: '/' },
     { name: 'Služby', href: '/sluzby' },
+    { name: 'Ceník', href: '/cenik' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'O mně', href: '/o-mne' },
     { name: 'FAQ', href: '/faq' },

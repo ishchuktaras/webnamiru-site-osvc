@@ -26,6 +26,14 @@ export default function Footer() {
                 </Link>
               </li>
               <li>
+                <Link
+                  href="/cenik"
+                  className="text-sm leading-6 text-gray-300 hover:text-white"
+                >
+                  Ceník
+                </Link>
+              </li>
+              <li>
                 <Link href="/portfolio" className="hover:text-[#3B82F6]">
                   Portfolio
                 </Link>
