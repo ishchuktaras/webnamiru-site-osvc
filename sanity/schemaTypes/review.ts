@@ -9,7 +9,7 @@ export default defineType({
       name: 'name',
       title: 'Jméno klienta',
       type: 'string',
-      validation: (Rule) => Rule.required(),
+      validation: (Rule) => Rule.required().error('Jméno je povinné'),
     }),
     defineField({
       name: 'company',
@@ -20,42 +20,39 @@ export default defineType({
       name: 'rating',
       title: 'Hodnocení (Hvězdičky)',
       type: 'number',
-      validation: (Rule) => Rule.required().min(1).max(5),
+      description: 'Počet hvězdiček od 1 do 5',
       options: {
-        list: [1, 2, 3, 4, 5],
-      }
+        list: [5, 4, 3, 2, 1], // Vytvoří výběrové menu
+      },
+      validation: (Rule) => Rule.required().min(1).max(5),
     }),
     defineField({
       name: 'text',
       title: 'Text recenze',
       type: 'text',
-      validation: (Rule) => Rule.required(),
+      rows: 4,
+      validation: (Rule) => Rule.required().error('Text recenze je povinný'),
     }),
     defineField({
       name: 'isApproved',
       title: 'Schváleno (Zobrazit na webu)',
       type: 'boolean',
-      description: 'Pokud je zapnuto, recenze se zobrazí na webu.',
-      initialValue: false, // Nové recenze musí být schváleny ručně
-    }),
-    defineField({
-      name: 'date',
-      title: 'Datum vložení',
-      type: 'datetime',
-      initialValue: () => new Date().toISOString(),
+      description: 'Pokud je zapnuto, recenze se zobrazí na veřejném webu.',
+      initialValue: false,
     }),
   ],
   preview: {
     select: {
       title: 'name',
-      subtitle: 'rating',
-      approved: 'isApproved'
+      subtitle: 'company',
+      rating: 'rating',
     },
-    prepare({ title, subtitle, approved }) {
+    prepare(selection) {
+      const { title, subtitle, rating } = selection
       return {
         title: title,
-        subtitle: `${subtitle} hvězd | ${approved ? '✅ Schváleno' : '⏳ Čeká na schválení'}`
+        subtitle: `${rating}★ | ${subtitle || 'Bez firmy'}`,
       }
-    }
-  }
+    },
+  },
 })

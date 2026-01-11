@@ -4,14 +4,14 @@ import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "next-themes"
 import Script from "next/script"
-import "../globals.css"
+import "../globals.css" 
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import { CookieConsent } from "@/components/CookieConsent" 
 import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"
 
-// Initialize fonts
+// Initialize fonts 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -57,13 +57,16 @@ export const metadata: Metadata = {
   authors: [{ name: "Taras Ishchuk", url: "https://webnamiru.site/o-mne" }],
   creator: "Taras Ishchuk, OSVČ",
   publisher: "webnamiru.site",
+  // OPRAVENÁ SEKCE IKON:
   icons: {
     icon: [
-      { url: "/favicon.ico", sizes: "any" },
-      { url: "/icon-light.svg", type: "image/svg+xml", media: "(prefers-color-scheme: light)" },
+      // Použijeme existující icon.svg jako výchozí
+      { url: "/icon.svg", type: "image/svg+xml" },
+      // Pokud existuje icon-dark.svg, použijeme ho pro dark mode
       { url: "/icon-dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
     ],
-    apple: "/apple-touch-icon.png",
+    // Fallback pro Apple ikonu (použijeme icon.svg, pokud nemáte apple-touch-icon.png)
+    apple: "/icon.svg", 
   },
   robots: {
     index: true,
@@ -97,7 +100,6 @@ export default function RootLayout({
   })
 
   return (
-   
     <html lang="cs" className="scroll-smooth" suppressHydrationWarning>
       <head>
         <Script
@@ -107,7 +109,6 @@ export default function RootLayout({
             __html: JSON.stringify(localBusinessData),
           }}
         />
-        
       </head>
       <body
         className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}

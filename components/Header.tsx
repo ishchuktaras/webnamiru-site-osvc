@@ -11,6 +11,7 @@ export default function Header() {
     { name: 'Služby', href: '/sluzby' },
     { name: 'Portfolio', href: '/portfolio' },
     { name: 'FAQ', href: '/faq' },
+    { name: 'Recenze', href: '/recenze' },
   ];
 
   return (

@@ -1,33 +1,67 @@
-// app/recenze/page.tsx
-
 import type { Metadata } from "next"
 import { Star, Award, ThumbsUp, TrendingUp, Quote, User, MessageSquare } from "lucide-react"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 import { StaggerContainer, StaggerItem } from "@/components/animations/StaggerContainer"
 import { ReviewForm } from "@/components/ReviewForm"
-import { sanityFetch } from "@/lib/sanity.client"
-import { reviewsQuery } from "@/lib/sanity.queries"
-import { Badge } from "@/components/ui/badge"
+import { client } from "@/lib/sanity.client"
+import { groq } from "next-sanity"
 
 export const metadata: Metadata = {
   title: "Recenze a hodnocení | webnamiru.site",
-  description:
-    "Přečtěte si ověřené recenze od spokojených klientů. Hodnocení a reference webových projektů z Jihlavy a Vysočiny.",
+  description: "Přečtěte si ověřené recenze od spokojených klientů.",
 }
 
-// Revalidace každých 60 sekund (ISR)
 export const revalidate = 60
 
 export default async function RecenzePage() {
-  // Načtení schválených recenzí ze Sanity
-  const reviews = await sanityFetch<any[]>({ query: reviewsQuery }) || []
+  // 1. Stažení recenzí ze Sanity
+  const reviews = await client.fetch(
+    groq`*[_type == "review" && isApproved == true] | order(_createdAt desc) {
+      _id,
+      name,
+      company,
+      text,
+      rating,
+      "date": _createdAt
+    }`
+  ) || []
 
+  // 2. VÝPOČET STATISTIK 
+  const reviewCount = reviews.length
+  
+  // Průměrné hodnocení
+  const totalStars = reviews.reduce((acc: number, review: any) => acc + (review.rating || 0), 0)
+  const averageRating = reviewCount > 0 
+    ? (totalStars / reviewCount).toFixed(1) 
+    : "5.0" 
+
+  // Data pro statistické karty
   const stats = [
-    { icon: Star, value: "5.0", label: "Průměrné hodnocení", color: "text-yellow-500" },
-    { icon: Award, value: "100%", label: "Spokojených klientů", color: "text-green-500" },
-    { icon: ThumbsUp, value: "12+", label: "Realizovaných projektů", color: "text-blue-500" },
-    { icon: TrendingUp, value: "5+", label: "Let zkušeností", color: "text-purple-500" },
+    { 
+      icon: Star, 
+      value: averageRating, 
+      label: "Průměrné hodnocení", 
+      color: "text-yellow-500" 
+    },
+    { 
+      icon: Award, 
+      value: reviewCount > 0 ? "100%" : "-", 
+      label: "Spokojených klientů", 
+      color: "text-green-500" 
+    },
+    { 
+      icon: ThumbsUp, 
+      value: reviewCount.toString(), 
+      label: "Počet hodnocení", 
+      color: "text-blue-500" 
+    },
+    { 
+      icon: TrendingUp, 
+      value: "5+", 
+      label: "Let zkušeností", 
+      color: "text-purple-500" 
+    },
   ]
 
   return (
@@ -41,7 +75,7 @@ export default async function RecenzePage() {
             </div>
             <h1 className="text-4xl lg:text-6xl font-bold text-balance">Co říkají moji klienti</h1>
             <p className="text-base lg:text-xl text-muted-foreground max-w-3xl mx-auto text-pretty leading-relaxed">
-              Skutečné hodnocení spolupráce. Žádné externí widgety, ale přímá zpětná vazba od lidí, se kterými jsem pracoval.
+              Skutečné hodnocení spolupráce. Žádné externí widgety, ale přímá zpětná vazba.
             </p>
           </AnimatedSection>
 
@@ -83,9 +117,6 @@ export default async function RecenzePage() {
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           <AnimatedSection className="text-center space-y-6 mb-12">
             <h2 className="text-3xl lg:text-4xl font-bold text-balance">Všechny recenze</h2>
-            <p className="text-base lg:text-lg text-muted-foreground max-w-2xl mx-auto">
-              Seznam ověřených recenzí.
-            </p>
           </AnimatedSection>
 
           {reviews.length > 0 ? (
@@ -111,7 +142,7 @@ export default async function RecenzePage() {
                         {[...Array(5)].map((_, i) => (
                           <Star 
                             key={i} 
-                            className={`h-4 w-4 ${i < review.rating ? "fill-yellow-400 text-yellow-400" : "text-gray-200 dark:text-gray-700"}`} 
+                            className={`h-4 w-4 ${i < (review.rating || 5) ? "fill-yellow-400 text-yellow-400" : "text-gray-200 dark:text-gray-700"}`} 
                           />
                         ))}
                       </div>
@@ -139,7 +170,7 @@ export default async function RecenzePage() {
                 <MessageSquare className="h-12 w-12 text-muted-foreground mb-4" />
                 <h3 className="text-xl font-semibold mb-2">Zatím žádné recenze</h3>
                 <p className="text-muted-foreground max-w-md">
-                  Buďte první, kdo napíše recenzi! Využijte formulář výše.
+                  Zatím nejsou publikované recenze. Buďte první!
                 </p>
               </div>
             </AnimatedSection>
