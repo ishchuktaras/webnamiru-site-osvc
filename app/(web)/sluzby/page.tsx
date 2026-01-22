@@ -117,9 +117,9 @@ export default async function ServicesPage() {
                       </div>
                     )}
 
-                    {/* --- ZMĚNA ZDE: RESPONZIVITA TLAČÍTEK --- */}
-                    {/* flex-col (pod sebou na mobilu) -> sm:flex-row (vedle sebe na tabletu a PC) */}
-                    <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-3">
+                    {/* grid-cols-1 = na mobilu 1 sloupec (tlačítka pod sebou) */}
+                    {/* sm:grid-cols-2 = od tabletu výše 2 sloupce (tlačítka vedle sebe) */}
+                    <div className="mt-auto pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Button asChild className="w-full" variant="outline">
                             <Link href={`/sluzby/${currentSlug}`}>
                                 Více informací
