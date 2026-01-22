@@ -52,7 +52,17 @@ export async function getProjects() {
       title,
       slug,
       clientName,
-      coverImage,
+      coverImage {
+        asset->{
+          _id,
+          url,
+          metadata {
+            lqip,
+            dimensions
+          }
+        },
+        alt
+      },
       gallery,
       description,
       url,

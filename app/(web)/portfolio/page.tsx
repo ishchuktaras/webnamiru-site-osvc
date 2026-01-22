@@ -4,7 +4,8 @@ import { Card, CardContent } from "@/components/ui/card"
 import { ExternalLink, Calendar, CheckCircle2, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { getProjects } from "@/lib/sanity.queries"
-import { urlFor } from "@/lib/sanity.client"
+// ZMĚNA: Importujeme z našeho nového helperu
+import { urlFor, getBlurDataUrl } from "@/lib/sanity-image" 
 import Image from "next/image"
 
 export const metadata: Metadata = {
@@ -15,11 +16,9 @@ export const metadata: Metadata = {
 export const revalidate = 60
 
 export default async function PortfolioPage() {
-  // Načtení dat ze Sanity (ošetřeno proti pádu)
   const projects = await getProjects().catch(() => [])
 
   // 1. FILTROVÁNÍ PROJEKTŮ
-  // "ART DUM" (case insensitive) půjde do hotových, zbytek do rozpracovaných
   const completedProjects = projects.filter((project: any) => 
     project.title && project.title.toUpperCase().includes("ART DUM")
   )
@@ -45,7 +44,7 @@ export default async function PortfolioPage() {
         </div>
       </section>
 
-      {/* SEKCE 1: DOKONČENÉ PROJEKTY (V PROVOZU) */}
+      {/* SEKCE 1: DOKONČENÉ PROJEKTY */}
       {completedProjects.length > 0 && (
         <section className="py-16">
           <div className="container max-w-7xl mx-auto px-4 lg:px-8">
@@ -101,9 +100,10 @@ export default async function PortfolioPage() {
   )
 }
 
-// Komponenta pro kartu projektu
 function ProjectCard({ project, status }: { project: any; status: "completed" | "in-progress" }) {
   const isCompleted = status === "completed"
+  // Získáme blur data pro tento obrázek
+  const blurDataUrl = getBlurDataUrl(project.coverImage)
 
   return (
     <Card className={`overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col h-full border ${isCompleted ? 'border-green-500/20' : 'border-amber-500/20'}`}>
@@ -113,7 +113,11 @@ function ProjectCard({ project, status }: { project: any; status: "completed" | 
             src={urlFor(project.coverImage).width(600).height(400).url() || "/placeholder.svg"}
             alt={project.title}
             fill
+            // ZMĚNA: Přidán placeholder a blurDataURL
+            placeholder={blurDataUrl ? "blur" : "empty"}
+            blurDataURL={blurDataUrl}
             className={`object-cover transition-transform duration-700 group-hover:scale-105 ${!isCompleted ? 'opacity-90 grayscale-[0.3]' : ''}`}
+            sizes="(max-width: 768px) 100vw, (max-width: 1200px) 50vw, 33vw"
           />
         ) : (
           <div className="flex h-full items-center justify-center bg-muted">
@@ -121,7 +125,6 @@ function ProjectCard({ project, status }: { project: any; status: "completed" | 
           </div>
         )}
         
-        {/* Status Badge */}
         <div className="absolute top-4 right-4">
           <span className={`px-3 py-1 rounded-full text-xs font-bold shadow-sm backdrop-blur-md uppercase tracking-wide ${
             isCompleted 
@@ -148,14 +151,12 @@ function ProjectCard({ project, status }: { project: any; status: "completed" | 
         </div>
 
         <div className="flex gap-3 pt-4 mt-auto border-t">
-          {/* Tlačítko detailu */}
           <Button asChild variant={isCompleted ? "default" : "secondary"} className="flex-1">
             <Link href={`/portfolio/${project.slug?.current}`}>
               {isCompleted ? "Detail projektu" : "Více info"}
             </Link>
           </Button>
 
-          {/* Odkaz na živý web */}
           {project.url && (
             <Button asChild variant="outline" size="icon" title="Přejít na web">
               <a href={project.url} target="_blank" rel="noopener noreferrer">
