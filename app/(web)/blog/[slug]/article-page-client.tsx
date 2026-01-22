@@ -1,3 +1,5 @@
+// app/(web)/blog/[slug]/article-page-client.tsx
+
 "use client"
 
 import { useEffect, useState } from "react"

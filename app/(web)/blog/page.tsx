@@ -1,3 +1,5 @@
+// app/(web)/blog/page.tsx
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { Calendar, ArrowRight, Clock } from "lucide-react"
