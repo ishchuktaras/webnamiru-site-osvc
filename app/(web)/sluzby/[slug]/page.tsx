@@ -1,3 +1,5 @@
+// app/(web)/sluzby/[slug]/page.tsx
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { getServiceBySlug, getServices } from "@/lib/sanity.queries"

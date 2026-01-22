@@ -1,3 +1,5 @@
+// app/(web)/sluzby/page.tsx
+
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
 import { ArrowRight, CheckCircle2, Code2, Rocket, Target, Users, Zap, Shield, Sparkles } from "lucide-react"

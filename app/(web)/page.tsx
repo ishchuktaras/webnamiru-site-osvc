@@ -1,3 +1,5 @@
+// app/(web)/page.tsx
+
 import HeroBento from '@/components/sections/HeroBento';
 import ProcessSteps from '@/components/sections/ProcessSteps';
 // import ServicesPreview from '@/components/sections/ServicesPreview'; // Odkomentujte, až budete mít tuto komponentu
