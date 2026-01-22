@@ -6,6 +6,7 @@ import { client } from "./sanity.client"
 // Fetch all services
 export async function getServices() {
   return client.fetch(
+    // Přidal jsem "features", aby se načetly body seznamu
     `*[_type == "sluzba"] | order(_createdAt asc) {
       _id,
       _updatedAt,
@@ -15,6 +16,7 @@ export async function getServices() {
       mainImage,
       content,
       priceFrom,
+      features, 
       seoTitle,
       seoDescription
     }`,
