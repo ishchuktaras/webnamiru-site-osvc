@@ -83,7 +83,7 @@ export default async function ServicesPage() {
                       fill
                       className="object-cover transition-transform duration-500 group-hover:scale-105"
                     />
-                    {/* ZDE JSEM PROVEDL ZMĚNU: bg-linear-to-t místo bg-gradient-to-t */}
+                    {/* Zde je zachována oprava pro Tailwind v4 */}
                     <div className="absolute inset-0 bg-linear-to-t from-background/90 to-transparent" />
                     <div className="absolute bottom-4 left-4 p-2 bg-background/80 backdrop-blur-sm rounded-lg shadow-sm">
                          <IconComponent className="h-6 w-6 text-primary" />
@@ -117,7 +117,9 @@ export default async function ServicesPage() {
                       </div>
                     )}
 
-                    <div className="mt-auto pt-4 flex gap-3">
+                    {/* --- ZMĚNA ZDE: RESPONZIVITA TLAČÍTEK --- */}
+                    {/* flex-col (pod sebou na mobilu) -> sm:flex-row (vedle sebe na tabletu a PC) */}
+                    <div className="mt-auto pt-4 flex flex-col sm:flex-row gap-3">
                         <Button asChild className="w-full" variant="outline">
                             <Link href={`/sluzby/${currentSlug}`}>
                                 Více informací
