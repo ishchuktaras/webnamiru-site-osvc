@@ -10,7 +10,7 @@ export const metadata: Metadata = {
   description: "Transparentní ceník tvorby webů na míru. Balíčky od 19 900 Kč. Moderní technologie Next.js, SEO optimalizace a dlouhodobá podpora pro rok 2026.",
 }
 
-export const revalidate = 60
+export const revalidate = 0
 
 const pricingPackages = [
   {
