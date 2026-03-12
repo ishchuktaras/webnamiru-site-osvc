@@ -1,242 +1,108 @@
-// app/(web)/cookies/page.tsx
-
-import { Card, CardContent } from "@/components/ui/card"
-import Link from "next/link"
+import { Card, CardContent } from "@/components/ui/card";
+import Link from "next/link";
 
 export const metadata = {
   title: "Zásady používání cookies | webnamiru.site",
   description: "Informace o používání cookies na webových stránkách webnamiru.site",
-}
+};
 
 export default function CookiesPage() {
   return (
-    <div className="min-h-screen">
-      <div className="container py-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <div className="container px-4 py-20 mx-auto md:px-8">
         <div className="max-w-4xl mx-auto space-y-8">
+          
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">Zásady používání cookies</h1>
-            <p className="text-muted-foreground">Informace o cookies používaných na našich webových stránkách</p>
+            <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl text-slate-900 dark:text-white">
+              Zásady používání cookies
+            </h1>
+            <p className="text-lg text-slate-600 dark:text-slate-400">
+              Informace o souborech cookies používaných na našich webových stránkách.
+            </p>
           </div>
 
-          <Card>
-            <CardContent className="p-8 space-y-6 prose prose-sm max-w-none">
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Co jsou cookies?</h2>
-                <p className="leading-relaxed">
-                  Cookies jsou malé textové soubory, které se ukládají do vašeho zařízení (počítač, tablet, smartphone)
-                  při návštěvě webových stránek. Cookies umožňují webovým stránkám zapamatovat si vaše akce a preference
-                  (jako je přihlášení, jazyk, velikost písma a další nastavení) po určitou dobu, takže je nemusíte
-                  zadávat znovu při každé návštěvě stránek nebo při procházení z jedné stránky na druhou.
+          <Card className="border-slate-200 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <CardContent className="p-6 md:p-10">
+              <div className="prose prose-slate dark:prose-invert max-w-none">
+                <p>
+                  Tento dokument vysvětluje, jaké soubory cookies a podobné technologie používáme na webových stránkách <strong>webnamiru.site</strong>. Správcem webu a vašich osobních údajů je <strong>Taras Ishchuk</strong>, IČO: 23874694, se sídlem Rantířovská 123/36, 586 01 Jihlava.
                 </p>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Jak používáme cookies?</h2>
-                <p className="leading-relaxed mb-3">Na našich webových stránkách používáme následující typy cookies:</p>
-
-                <div className="space-y-4">
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">1. Nezbytné cookies</h3>
-                    <p className="leading-relaxed">
-                      Tyto cookies jsou nezbytné pro správné fungování webových stránek. Bez těchto cookies by některé
-                      funkce webu nefungovaly správně.
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 mt-2 text-muted-foreground">
-                      <li>
-                        <strong>cookie-consent</strong> - Ukládá vaše preference ohledně cookies (platnost: 1 rok)
-                      </li>
-                      <li>
-                        <strong>theme</strong> - Ukládá vaši preferenci světlého/tmavého režimu (platnost: 1 rok)
-                      </li>
-                    </ul>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">2. Analytické cookies (pouze s vaším souhlasem)</h3>
-                    <p className="leading-relaxed">
-                      Tyto cookies nám pomáhají pochopit, jak návštěvníci používají naše webové stránky, abychom mohli
-                      zlepšovat jejich funkčnost a obsah.
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 mt-2 text-muted-foreground">
-                      <li>
-                        <strong>_ga</strong> - Google Analytics - rozlišuje uživatele (platnost: 2 roky)
-                      </li>
-                      <li>
-                        <strong>_gid</strong> - Google Analytics - rozlišuje uživatele (platnost: 24 hodin)
-                      </li>
-                      <li>
-                        <strong>_gat</strong> - Google Analytics - omezuje rychlost požadavků (platnost: 1 minuta)
-                      </li>
-                      <li>
-                        <strong>Vercel Analytics</strong> - Anonymizované měření návštěvnosti a výkonu webu
-                      </li>
-                    </ul>
-                    <p className="text-sm text-muted-foreground mt-2">
-                      Poznámka: Google Analytics používáme s anonymizací IP adres pro ochranu vašeho soukromí.
-                    </p>
-                  </div>
-
-                  <div>
-                    <h3 className="text-lg font-semibold mb-2">3. Marketingové cookies (pouze s vaším souhlasem)</h3>
-                    <p className="leading-relaxed">
-                      Tyto cookies se používají pro zobrazení relevantních reklam a marketingových kampaní.
-                    </p>
-                    <ul className="list-disc list-inside space-y-1 mt-2 text-muted-foreground">
-                      <li>Aktuálně nepoužíváme marketingové cookies třetích stran</li>
-                    </ul>
-                  </div>
-                </div>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Cookies třetích stran</h2>
-                <p className="leading-relaxed">
-                  Některé cookies mohou být nastaveny třetími stranami, jejichž služby využíváme na našich webových
-                  stránkách:
+                <h2>1. Co jsou cookies?</h2>
+                <p>
+                  Cookies jsou malé textové soubory, které se ukládají do vašeho zařízení (počítač, tablet, smartphone) při návštěvě webových stránek. Umožňují webu zapamatovat si vaše akce a preference (jako je přihlášení, jazyk, velikost písma a další nastavení) po určitou dobu, takže je nemusíte zadávat znovu při každé návštěvě nebo při procházení mezi jednotlivými stránkami.
                 </p>
-                <ul className="list-disc list-inside space-y-2 mt-3">
-                  <li>
-                    <strong>Vercel:</strong> Poskytovatel hostingu a analytických služeb
-                  </li>
-                  <li>
-                    <strong>Sanity.io:</strong> Systém pro správu obsahu
-                  </li>
+
+                <h2>2. Jak používáme cookies?</h2>
+                <p>Na našich webových stránkách používáme následující typy cookies:</p>
+
+                <h3>A. Nezbytné cookies (Technické)</h3>
+                <p>Tyto cookies jsou nezbytné pro správné fungování webových stránek a nelze je v našich systémech vypnout. Bez nich by web nefungoval správně.</p>
+                <ul>
+                  <li><strong>cookie-consent</strong>: Ukládá vaše preference ohledně přijetí/odmítnutí cookies (platnost: 1 rok).</li>
+                  <li><strong>theme</strong>: Ukládá vaši preferenci světlého nebo tmavého režimu webu (platnost: 1 rok).</li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Jak spravovat cookies?</h2>
-                <p className="leading-relaxed mb-3">
-                  Většina webových prohlížečů automaticky přijímá cookies, ale můžete změnit nastavení svého prohlížeče
-                  tak, aby cookies odmítal nebo vás upozornil, když je cookie odesílán. Mějte však na paměti, že pokud
-                  cookies zakážete, některé funkce našich webových stránek nemusí fungovat správně.
-                </p>
-                <p className="leading-relaxed mb-3">Návody pro správu cookies v různých prohlížečích:</p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>
-                    <a
-                      href="https://support.google.com/chrome/answer/95647"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      Google Chrome
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://support.mozilla.org/cs/kb/povoleni-zakazani-cookies"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      Mozilla Firefox
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://support.apple.com/cs-cz/guide/safari/sfri11471/mac"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      Safari
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      href="https://support.microsoft.com/cs-cz/microsoft-edge/odstranění-souborů-cookie-v-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09"
-                      target="_blank"
-                      rel="noopener noreferrer"
-                      className="text-primary hover:underline"
-                    >
-                      Microsoft Edge
-                    </a>
-                  </li>
+                <h3>B. Analytické cookies (Pouze s vaším souhlasem)</h3>
+                <p>Tyto cookies nám pomáhají pochopit, jak návštěvníci používají náš web, abychom mohli zlepšovat jeho funkčnost a obsah. Spouští se pouze v případě, že nám k tomu dáte na cookies liště souhlas.</p>
+                <ul>
+                  <li><strong>_ga</strong> (Google Analytics): Rozlišuje uživatele pro statistické účely (platnost: 2 roky).</li>
+                  <li><strong>_gid</strong> (Google Analytics): Rozlišuje uživatele pro statistické účely (platnost: 24 hodin).</li>
+                  <li><strong>_gat</strong> (Google Analytics): Omezuje rychlost požadavků (platnost: 1 minuta).</li>
+                  <li><strong>Vercel Analytics</strong>: Anonymizované měření návštěvnosti a výkonu webu.</li>
                 </ul>
-              </section>
-
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Google reCAPTCHA</h2>
-                <p className="leading-relaxed">
-                  Pro ochranu našeho kontaktního formuláře před spamem používáme Google reCAPTCHA v3. reCAPTCHA sbírá
-                  hardwarové a softwarové informace, jako je data o zařízení a aplikaci, a odesílá je společnosti Google
-                  za účelem analýzy rizik.
+                <p>
+                  <em>Poznámka: Google Analytics používáme s nastavením anonymizace IP adres pro maximální ochranu vašeho soukromí.</em>
                 </p>
-                <p className="leading-relaxed mt-3">
-                  Používání reCAPTCHA podléhá{" "}
-                  <a
-                    href="https://policies.google.com/privacy"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    Zásadám ochrany osobních údajů Google
-                  </a>{" "}
-                  a{" "}
-                  <a
-                    href="https://policies.google.com/terms"
-                    target="_blank"
-                    rel="noopener noreferrer"
-                    className="text-primary hover:underline"
-                  >
-                    Podmínkám používání služeb Google
-                  </a>
-                  .
-                </p>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Doba platnosti cookies</h2>
-                <p className="leading-relaxed">Různé cookies mají různou dobu platnosti:</p>
-                <ul className="list-disc list-inside space-y-2 mt-3">
-                  <li>
-                    <strong>Session cookies:</strong> Dočasné cookies, které se automaticky smažou po zavření prohlížeče
-                  </li>
-                  <li>
-                    <strong>Persistent cookies:</strong> Zůstávají uloženy po určitou dobu nebo dokud je ručně
-                    neodstraníte:
-                    <ul className="list-circle list-inside ml-6 mt-2 space-y-1 text-muted-foreground">
-                      <li>Preference cookies: 1 rok</li>
-                      <li>Google Analytics: až 2 roky</li>
-                    </ul>
-                  </li>
+                <h3>C. Marketingové cookies (Pouze s vaším souhlasem)</h3>
+                <p>Používají se pro sledování návštěvníků napříč webovými stránkami za účelem zobrazení relevantních reklam.</p>
+                <ul>
+                  <li><em>Aktuálně nepoužíváme žádné marketingové cookies třetích stran.</em></li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Změny těchto zásad</h2>
-                <p className="leading-relaxed">
-                  Tyto zásady používání cookies můžeme čas od času aktualizovat. Doporučujeme pravidelně kontrolovat
-                  tuto stránku, abyste byli informováni o případných změnách.
-                </p>
-                <p className="leading-relaxed mt-3 text-muted-foreground">Poslední aktualizace: 28. 10. 2025</p>
-              </section>
+                <h2>3. Cookies třetích stran</h2>
+                <p>Některé cookies mohou být nastaveny třetími stranami, jejichž služby využíváme pro provoz webu:</p>
+                <ul>
+                  <li><strong>Vercel:</strong> Poskytovatel hostingu a analytických služeb.</li>
+                  <li><strong>Sanity.io:</strong> Systém pro správu obsahu (CMS).</li>
+                </ul>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">Kontakt</h2>
-                <p className="leading-relaxed">
-                  Pokud máte jakékoli dotazy ohledně našeho používání cookies, kontaktujte nás prosím na emailu{" "}
-                  <a href="mailto:info@webnamiru.site" className="text-primary hover:underline">
-                    info@webnamiru.site
-                  </a>
-                  .
+                <h2>4. Google reCAPTCHA</h2>
+                <p>
+                  Pro ochranu našeho kontaktního formuláře před spamem a roboty používáme technologii <strong>Google reCAPTCHA v3</strong>. Tato služba sbírá hardwarové a softwarové informace (např. data o zařízení a aplikaci) a odesílá je společnosti Google za účelem analýzy rizik. Používání reCAPTCHA podléhá <a href="https://policies.google.com/privacy" target="_blank" rel="noopener noreferrer">Zásadám ochrany osobních údajů Google</a> a <a href="https://policies.google.com/terms" target="_blank" rel="noopener noreferrer">Podmínkám používání služeb Google</a>.
                 </p>
-              </section>
 
-              <section className="border-t pt-6">
-                <p className="text-sm text-muted-foreground">
-                  Další informace o ochraně osobních údajů najdete v dokumentu{" "}
-                  <Link href="/ochrana-osobnich-udaju" className="text-primary hover:underline">
-                    Ochrana osobních údajů
-                  </Link>
-                  .
+                <h2>5. Jak spravovat a smazat cookies?</h2>
+                <p>Máte plnou kontrolu nad tím, jaké cookies (kromě těch nezbytných) nám povolíte zpracovávat.</p>
+                
+                <p><strong>Změna souhlasu na webu:</strong><br />
+                Své preference můžete kdykoliv změnit nebo svůj souhlas odvolat kliknutím na odkaz „Nastavení cookies“ (nebo ikonku štítu), který najdete v patičce našeho webu.</p>
+                
+                <p><strong>Nastavení prohlížeče:</strong><br />
+                Většina webových prohlížečů umožňuje správu cookies přímo ve svém nastavení. Můžete je plně zablokovat nebo smazat. Mějte však na paměti, že pokud zablokujete i nezbytné cookies, náš web nemusí fungovat správně. Návody pro nejběžnější prohlížeče:</p>
+                <ul>
+                  <li><a href="https://support.google.com/chrome/answer/95647" target="_blank" rel="noopener noreferrer">Google Chrome</a></li>
+                  <li><a href="https://support.mozilla.org/cs/kb/vymazani-cookies" target="_blank" rel="noopener noreferrer">Mozilla Firefox</a></li>
+                  <li><a href="https://support.apple.com/cs-cz/guide/safari/sfri11471/mac" target="_blank" rel="noopener noreferrer">Safari</a></li>
+                  <li><a href="https://support.microsoft.com/cs-cz/microsoft-edge/odstran%C4%9Bn%C3%AD-soubor%C5%AF-cookie-v-aplikaci-microsoft-edge-63947406-40ac-c3b8-57b9-2a946a29ae09" target="_blank" rel="noopener noreferrer">Microsoft Edge</a></li>
+                </ul>
+                
+                <h2>6. Kontakt</h2>
+                <p>
+                  Máte-li jakékoli dotazy ohledně našeho používání cookies, kontaktujte nás prosím na e-mailu: <a href="mailto:info@webnamiru.site">info@webnamiru.site</a>.
                 </p>
-              </section>
+
+                <hr />
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Poslední aktualizace: 9. března 2026. Další informace naleznete v <Link href="/ochrana-osobnich-udaju">Zásadách ochrany osobních údajů</Link>.
+                </p>
+
+              </div>
             </CardContent>
           </Card>
         </div>
       </div>
     </div>
-  )
+  );
 }

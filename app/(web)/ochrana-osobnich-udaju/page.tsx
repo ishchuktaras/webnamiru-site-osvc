@@ -8,209 +8,101 @@ export const metadata = {
 
 export default function PrivacyPage() {
   return (
-    <div className="min-h-screen">
-      <div className="container py-20">
+    <div className="min-h-screen bg-slate-50 dark:bg-slate-950">
+      <div className="container px-4 py-20 mx-auto md:px-8">
         <div className="max-w-4xl mx-auto space-y-8">
+          
           <div className="space-y-4">
-            <h1 className="text-4xl md:text-5xl font-bold">
+            <h1 className="text-4xl font-extrabold tracking-tight md:text-5xl text-slate-900 dark:text-white">
               Ochrana osobních údajů
             </h1>
-            <p className="text-muted-foreground">
-              Informace o zpracování osobních údajů v souladu s GDPR
+            <p className="text-lg text-slate-600 dark:text-slate-400">
+              Informace o zpracování osobních údajů v souladu s nařízením Evropského parlamentu a Rady (EU) 2016/679 (GDPR)
             </p>
           </div>
 
-          <Card>
-            <CardContent className="p-8 space-y-6 prose prose-sm max-w-none">
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  1. Správce osobních údajů
-                </h2>
-                <p className="leading-relaxed mb-3">
-                  Správcem vašich osobních údajů je:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Jméno a příjmení: Taras Ishchuk</li>
-                  <li>IČO: 23874694</li>
-                  <li>
-                    Sídlo: Rantířovská 123/36, 586 01 Jihlava - Horní Kosov
-                  </li>
-                  <li>Email: info@webnamiru.site</li>
-                  <li>Telefon: +420 777 596 216</li>
+          <Card className="border-slate-200 shadow-sm dark:border-slate-800 dark:bg-slate-900">
+            <CardContent className="p-6 md:p-10">
+              <div className="prose prose-slate dark:prose-invert max-w-none">
+                
+                <h2>1. Správce osobních údajů</h2>
+                <p>Správcem vašich osobních údajů je:</p>
+                <ul>
+                  <li><strong>Jméno a příjmení:</strong> Taras Ishchuk</li>
+                  <li><strong>IČO:</strong> 23874694</li>
+                  <li><strong>Sídlo:</strong> Rantířovská 123/36, 586 01 Jihlava - Horní Kosov</li>
+                  <li><strong>Email:</strong> <a href="mailto:info@webnamiru.site">info@webnamiru.site</a></li>
+                  <li><strong>Telefon:</strong> +420 777 596 216</li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  2. Jaké osobní údaje zpracováváme
-                </h2>
-                <p className="leading-relaxed mb-3">
-                  Zpracováváme následující kategorie osobních údajů:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Identifikační údaje (jméno, příjmení)</li>
-                  <li>Kontaktní údaje (email, telefon)</li>
-                  <li>Údaje o firmě (název firmy, IČO)</li>
-                  <li>Údaje o projektu (popis požadavků, rozpočet)</li>
-                  <li>Technické údaje (IP adresa, cookies)</li>
+                <h2>2. Jaké osobní údaje zpracováváme</h2>
+                <p>V rámci naší činnosti a fungování webu zpracováváme následující kategorie osobních údajů:</p>
+                <ul>
+                  <li><strong>Identifikační údaje:</strong> jméno, příjmení</li>
+                  <li><strong>Kontaktní údaje:</strong> e-mailová adresa, telefonní číslo</li>
+                  <li><strong>Firemní údaje:</strong> název firmy, IČO, DIČ, sídlo</li>
+                  <li><strong>Údaje o projektu a komunikaci:</strong> obsah zpráv z kontaktního formuláře, specifikace požadavků, rozpočet</li>
+                  <li><strong>Technické údaje:</strong> IP adresa, soubory cookies (viz <Link href="/cookies">Zásady používání cookies</Link>)</li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  3. Účel a právní základ zpracování
-                </h2>
-                <p className="leading-relaxed mb-3">
-                  Vaše osobní údaje zpracováváme za následujícími účely:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>
-                    <strong>Plnění smlouvy:</strong> Pro poskytování objednaných
-                    služeb (čl. 6 odst. 1 písm. b) GDPR)
-                  </li>
-                  <li>
-                    <strong>Oprávněný zájem:</strong> Pro komunikaci, marketing
-                    a zlepšování služeb (čl. 6 odst. 1 písm. f) GDPR)
-                  </li>
-                  <li>
-                    <strong>Souhlas:</strong> Pro zasílání newsletteru a
-                    marketingových sdělení (čl. 6 odst. 1 písm. a) GDPR)
-                  </li>
-                  <li>
-                    <strong>Právní povinnost:</strong> Pro účetní a daňové účely
-                    (čl. 6 odst. 1 písm. c) GDPR)
-                  </li>
+                <h2>3. Účel a právní základ zpracování</h2>
+                <p>Vaše osobní údaje zpracováváme výhradně pro tyto účely a na těchto právních základech:</p>
+                <ul>
+                  <li><strong>Vyřízení poptávky a plnění smlouvy:</strong> Pokud nás kontaktujete přes formulář, údaje potřebujeme k tomu, abychom vám mohli odpovědět a případně s vámi uzavřít smlouvu a poskytnout vám IT služby. Právním základem je plnění smlouvy a provedení opatření přijatých před uzavřením smlouvy (čl. 6 odst. 1 písm. b) GDPR).</li>
+                  <li><strong>Plnění právních povinností:</strong> Údaje z faktur a smluv musíme uchovávat pro účetní a daňové účely. Právním základem je splnění právní povinnosti (čl. 6 odst. 1 písm. c) GDPR).</li>
+                  <li><strong>Oprávněný zájem:</strong> Vaše údaje můžeme využít pro ochranu našich právních nároků, zajištění bezpečnosti webu nebo pro přímý marketing (nabídka obdobných služeb stávajícím klientům). Právním základem je náš oprávněný zájem (čl. 6 odst. 1 písm. f) GDPR).</li>
+                  <li><strong>Souhlas:</strong> Pro ukládání analytických a marketingových cookies vyžadujeme váš výslovný souhlas přes cookies lištu (čl. 6 odst. 1 písm. a) GDPR).</li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  4. Doba zpracování
-                </h2>
-                <p className="leading-relaxed">
-                  Osobní údaje zpracováváme po dobu nezbytnou k naplnění účelu
-                  zpracování:
-                </p>
-                <ul className="list-disc list-inside space-y-2 mt-3">
-                  <li>
-                    Údaje pro plnění smlouvy: po dobu trvání smluvního vztahu a
-                    následně po dobu stanovenou právními předpisy (typicky 10
-                    let pro účetní doklady)
-                  </li>
-                  <li>
-                    Údaje pro marketing: do odvolání souhlasu nebo vznešení
-                    námitky
-                  </li>
-                  <li>
-                    Technické údaje (cookies): dle nastavení prohlížeče,
-                    maximálně 2 roky
-                  </li>
+                <h2>4. Doba zpracování</h2>
+                <p>Osobní údaje zpracováváme pouze po dobu nezbytnou k naplnění účelu:</p>
+                <ul>
+                  <li><strong>Komunikace a poptávky:</strong> Pokud nedojde k uzavření spolupráce, mažeme data z poptávkového formuláře nejpozději do 1 roku od poslední komunikace.</li>
+                  <li><strong>Údaje pro plnění smlouvy:</strong> Po dobu trvání smluvního vztahu a následně po dobu stanovenou právními předpisy (typicky 10 let pro účetní doklady a faktury).</li>
+                  <li><strong>Technické údaje (cookies):</strong> Dle nastavení vašeho prohlížeče a preferencí na našem webu, maximálně však po dobu 2 let.</li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  5. Příjemci osobních údajů
-                </h2>
-                <p className="leading-relaxed mb-3">
-                  Vaše osobní údaje můžeme předávat následujícím kategoriím
-                  příjemců:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>Poskytovatelé hostingových služeb (Vercel)</li>
-                  <li>Poskytovatelé emailových služeb (Resend)</li>
-                  <li>
-                    Poskytovatelé analytických nástrojů (Vercel Analytics)
-                  </li>
-                  <li>Účetní a daňoví poradci</li>
+                <h2>5. Příjemci osobních údajů (Zpracovatelé)</h2>
+                <p>Pro zajištění fungování webu a našich služeb můžeme vaše osobní údaje předávat prověřeným partnerům, kteří zajišťují technické zázemí (tzv. zpracovatelé):</p>
+                <ul>
+                  <li><strong>Vercel Inc.:</strong> Poskytovatel hostingových služeb a analytických nástrojů.</li>
+                  <li><strong>Sanity.io:</strong> Poskytovatel cloudového systému pro správu obsahu webu (CMS).</li>
+                  <li><strong>Resend:</strong> Poskytovatel transakčních e-mailových služeb (pro odesílání formulářů).</li>
+                  <li><strong>WEDOS Internet, a.s.:</strong> Poskytovatel domény a hostingu pro naši e-mailovou schránku.</li>
+                  <li><strong>Externí dodavatelé:</strong> Naši účetní či daňoví poradci za účelem plnění zákonných povinností.</li>
                 </ul>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">6. Vaše práva</h2>
-                <p className="leading-relaxed mb-3">
-                  V souvislosti se zpracováním osobních údajů máte následující
-                  práva:
-                </p>
-                <ul className="list-disc list-inside space-y-2">
-                  <li>
-                    <strong>Právo na přístup:</strong> Máte právo získat
-                    informace o zpracování vašich osobních údajů
-                  </li>
-                  <li>
-                    <strong>Právo na opravu:</strong> Máte právo na opravu
-                    nepřesných osobních údajů
-                  </li>
-                  <li>
-                    <strong>Právo na výmaz:</strong> Máte právo požadovat výmaz
-                    osobních údajů
-                  </li>
-                  <li>
-                    <strong>Právo na omezení zpracování:</strong> Máte právo
-                    požadovat omezení zpracování
-                  </li>
-                  <li>
-                    <strong>Právo na přenositelnost:</strong> Máte právo získat
-                    osobní údaje v strukturovaném formátu
-                  </li>
-                  <li>
-                    <strong>Právo vznést námitku:</strong> Máte právo vznést
-                    námitku proti zpracování
-                  </li>
-                  <li>
-                    <strong>Právo odvolat souhlas:</strong> Pokud je zpracování
-                    založeno na souhlasu, máte právo jej kdykoli odvolat
-                  </li>
+                <h2>6. Vaše práva</h2>
+                <p>V souvislosti se zpracováním vašich osobních údajů máte široká práva:</p>
+                <ul>
+                  <li><strong>Právo na přístup:</strong> Máte právo vědět, jaké údaje o vás zpracováváme.</li>
+                  <li><strong>Právo na opravu:</strong> Máte právo požádat o opravu nepřesných nebo neaktuálních údajů.</li>
+                  <li><strong>Právo na výmaz („právo být zapomenut“):</strong> Pokud již údaje nepotřebujeme nebo odvoláte souhlas, na požádání je smažeme (pokud nám v tom nebrání zákon).</li>
+                  <li><strong>Právo na omezení zpracování:</strong> Máte právo požadovat, abychom omezili rozsah zpracování.</li>
+                  <li><strong>Právo na přenositelnost:</strong> Máte právo získat své údaje ve strukturovaném formátu.</li>
+                  <li><strong>Právo vznést námitku:</strong> Proti zpracování na základě našeho oprávněného zájmu.</li>
+                  <li><strong>Právo odvolat souhlas:</strong> Pokud zpracováváme údaje na základě vašeho souhlasu (např. cookies), můžete jej kdykoli odvolat.</li>
                 </ul>
-                <p className="leading-relaxed mt-4">
-                  Pro uplatnění svých práv nás kontaktujte na emailu
-                  info@webnamiru.site. Máte také právo podat stížnost u Úřadu
-                  pro ochranu osobních údajů (www.uoou.cz).
+                <p>
+                  Pro uplatnění svých práv nás kdykoli kontaktujte na e-mailu: <a href="mailto:info@webnamiru.site">info@webnamiru.site</a>. Pokud se domníváte, že s vašimi daty nenakládáme správně, máte právo podat stížnost u Úřadu pro ochranu osobních údajů (www.uoou.cz).
                 </p>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  7. Zabezpečení osobních údajů
-                </h2>
-                <p className="leading-relaxed">
-                  Přijali jsme vhodná technická a organizační opatření k
-                  zabezpečení osobních údajů proti neoprávněnému přístupu,
-                  ztrátě, zničení nebo pozměnění. Používáme šifrované připojení
-                  (HTTPS), bezpečné hostingové služby a pravidelně aktualizujeme
-                  bezpečnostní opatření.
+                <h2>7. Zabezpečení osobních údajů</h2>
+                <p>
+                  Přijali jsme vhodná technická a organizační opatření, abychom vaše data ochránili před neoprávněným přístupem, ztrátou nebo zničením. Veškerá komunikace s webem je šifrována (HTTPS), využíváme spolehlivé cloudové poskytovatele a přístupy do administrace jsou chráněny.
                 </p>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">8. Cookies</h2>
-                <p className="leading-relaxed">
-                  Naše webové stránky používají cookies pro zajištění funkčnosti
-                  a analýzu návštěvnosti. Podrobné informace o používání cookies
-                  najdete v dokumentu{" "}
-                  <Link
-                    href="/cookies"
-                    className="text-primary hover:underline"
-                  >
-                    Zásady používání cookies
-                  </Link>
-                  .
+                <h2>8. Změny těchto zásad</h2>
+                <p>
+                  Tyto zásady ochrany osobních údajů můžeme průběžně aktualizovat. Aktuální verze je vždy dostupná na této stránce.
                 </p>
-              </section>
 
-              <section>
-                <h2 className="text-2xl font-semibold mb-4">
-                  9. Změny těchto zásad
-                </h2>
-                <p className="leading-relaxed">
-                  Tyto zásady ochrany osobních údajů můžeme čas od času
-                  aktualizovat. Aktuální verze je vždy dostupná na této stránce.
-                  Doporučujeme ji pravidelně kontrolovat.
+                <hr />
+                <p className="text-sm text-slate-500 dark:text-slate-400">
+                  Poslední aktualizace: 9. března 2026
                 </p>
-                <p className="leading-relaxed mt-3 text-muted-foreground">
-                  Poslední aktualizace: 1. 1. 2025
-                </p>
-              </section>
+
+              </div>
             </CardContent>
           </Card>
         </div>
