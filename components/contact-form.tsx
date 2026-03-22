@@ -35,7 +35,7 @@ declare global {
   }
 }
 
-export function ContactForm() {
+export default function ContactForm() {
   const [isSubmitting, setIsSubmitting] = useState(false)
   const { toast } = useToast()
 

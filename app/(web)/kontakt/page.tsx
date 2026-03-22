@@ -1,9 +1,5 @@
-// app/kontakt/page.tsx
-
-import Link from "next/link"
 import type { Metadata } from "next"
-import { ContactForm } from "@/components/contact-form"
-import { Card, CardContent } from "@/components/ui/card"
+import ContactForm from "@/components/contact-form"
 import { Mail, MapPin, Phone, ShieldCheck, Zap, Clock } from "lucide-react"
 import { AnimatedSection } from "@/components/animations/AnimatedSection"
 
@@ -14,113 +10,120 @@ export const metadata: Metadata = {
 
 export default function ContactPage() {
   return (
-    <div className="flex flex-col min-h-screen">
-      <div className="container max-w-7xl mx-auto px-4 lg:px-8 py-16 md:py-24">
+    // Používáme specifické tmavé pozadí podle návrhu (navy blue)
+    <div className="flex flex-col min-h-screen bg-[#0B142F] text-slate-50">
+      <div className="container max-w-6xl mx-auto px-4 lg:px-8 py-20 md:py-32">
         
-        {/* Header Section */}
-        <div className="max-w-4xl mx-auto text-center space-y-6 mb-16">
+        {/* Hlavička sekce */}
+        <div className="max-w-3xl mx-auto text-center space-y-4 mb-16 md:mb-20">
           <AnimatedSection direction="up">
-            <h1 className="text-4xl md:text-6xl font-bold tracking-tight text-balance">
-              Začněte svůj projekt <span className="text-primary">správně</span>
+            <h1 className="text-4xl md:text-5xl lg:text-6xl font-extrabold tracking-tight text-white mb-6">
+              Začněte svůj projekt
             </h1>
-            <p className="text-xl text-muted-foreground max-w-2xl mx-auto text-pretty mt-4">
-              Vyplňte krátký průvodce níže. Pomůže mi to pochopit vaše potřeby ještě předtím, než se poprvé spojíme.
+            <p className="text-lg md:text-xl text-slate-400 text-pretty">
+              Vyplňte krátký průvodce níže. Pomůže mi to pochopit vaše potřeby 
+              ještě předtím, než se poprvé spojíme.
             </p>
           </AnimatedSection>
         </div>
 
-        <div className="grid lg:grid-cols-12 gap-12 max-w-6xl mx-auto items-start">
+        <div className="grid lg:grid-cols-12 gap-10 lg:gap-16 items-start">
           
-          {/* Levý sloupec - Formulář (Širší) */}
-          <div className="lg:col-span-7 xl:col-span-8">
+          {/* Levý sloupec - Bílý formulář */}
+          <div className="lg:col-span-7">
             <AnimatedSection direction="up" delay={0.2}>
-              <div className="bg-card border rounded-2xl shadow-lg p-6 md:p-8">
+              {/* Bílý box s formulářem, nucený světlý režim pro kontrast */}
+              <div className="bg-white rounded-[24px] shadow-2xl p-6 md:p-10 text-slate-900">
                 <ContactForm />
               </div>
             </AnimatedSection>
           </div>
 
-          {/* Pravý sloupec - Info a Benefity */}
-          <div className="lg:col-span-5 xl:col-span-4 space-y-6 lg:sticky lg:top-8">
+          {/* Pravý sloupec - Informace */}
+          <div className="lg:col-span-5 space-y-10 lg:sticky lg:top-24">
             <AnimatedSection direction="left" delay={0.3}>
               
-              {/* Kontaktní údaje */}
-              <Card className="border-none shadow-md bg-secondary/30">
-                <CardContent className="p-6 space-y-6">
-                  <h3 className="font-semibold text-lg mb-4">Rychlý kontakt</h3>
-                  
-                  <div className="flex items-center gap-4 group">
-                    <div className="h-10 w-10 rounded-full bg-background flex items-center justify-center border group-hover:border-primary transition-colors">
-                      <Mail className="h-5 w-5 text-primary" />
+              {/* Box Rychlý kontakt */}
+              <div className="bg-[#475569]/40 backdrop-blur-sm rounded-[24px] p-8 md:p-10 border border-white/5 shadow-lg">
+                <h3 className="font-semibold text-xl mb-8 text-white/90">Rychlý kontakt</h3>
+                
+                <div className="space-y-8">
+                  <div className="flex items-center gap-5 group">
+                    <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform">
+                      <Mail className="h-5 w-5 text-[#0B142F]" />
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Email</div>
-                      <a href="mailto:info@webnamiru.site" className="font-medium hover:text-primary transition-colors">
+                      <div className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">Email</div>
+                      <a href="mailto:info@webnamiru.site" className="text-lg font-medium text-white hover:text-blue-400 transition-colors">
                         info@webnamiru.site
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4 group">
-                    <div className="h-10 w-10 rounded-full bg-background flex items-center justify-center border group-hover:border-primary transition-colors">
-                      <Phone className="h-5 w-5 text-primary" />
+                  <div className="flex items-center gap-5 group">
+                    <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform">
+                      <Phone className="h-5 w-5 text-[#0B142F]" />
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Telefon</div>
-                      <a href="tel:+420777596216" className="font-medium hover:text-primary transition-colors">
+                      <div className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">Telefon</div>
+                      <a href="tel:+420777596216" className="text-lg font-medium text-white hover:text-blue-400 transition-colors">
                         +420 777 596 216
                       </a>
                     </div>
                   </div>
 
-                  <div className="flex items-center gap-4">
-                    <div className="h-10 w-10 rounded-full bg-background flex items-center justify-center border">
-                      <MapPin className="h-5 w-5 text-primary" />
+                  <div className="flex items-center gap-5 group">
+                    <div className="h-12 w-12 rounded-full bg-white flex items-center justify-center shrink-0 shadow-sm group-hover:scale-110 transition-transform">
+                      <MapPin className="h-5 w-5 text-[#0B142F]" />
                     </div>
                     <div>
-                      <div className="text-xs text-muted-foreground font-medium uppercase tracking-wider">Sídlo</div>
-                      <div className="font-medium text-sm">Jihlava - Horní Kosov</div>
+                      <div className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">Sídlo</div>
+                      <div className="text-lg font-medium text-white/90">Jihlava - Horní Kosov</div>
                     </div>
                   </div>
-                </CardContent>
-              </Card>
+                </div>
+              </div>
 
-              {/* Proč spolupracovat */}
-              <div className="space-y-4 pt-4">
+              {/* Benefity pod boxem */}
+              <div className="space-y-6 pt-10 px-2">
                 <div className="flex gap-4">
-                  <Zap className="h-6 w-6 text-yellow-500 shrink-0" />
+                  <Zap className="h-6 w-6 text-yellow-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-sm">Rychlost doručení</h4>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <h4 className="font-semibold text-white">Rychlost doručení</h4>
+                    <p className="text-sm text-slate-400 mt-1.5 leading-relaxed">
                       Díky modernímu stacku (Next.js) doručuji weby rychleji než tradiční agentury.
                     </p>
                   </div>
                 </div>
+                
                 <div className="flex gap-4">
-                  <Clock className="h-6 w-6 text-blue-500 shrink-0" />
+                  <Clock className="h-6 w-6 text-blue-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-sm">Odpověď do 24h</h4>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <h4 className="font-semibold text-white">Odpověď do 24h</h4>
+                    <p className="text-sm text-slate-400 mt-1.5 leading-relaxed">
                       Vážím si vašeho času. Na každou poptávku reaguji nejpozději do druhého dne.
                     </p>
                   </div>
                 </div>
+                
                 <div className="flex gap-4">
-                  <ShieldCheck className="h-6 w-6 text-green-500 shrink-0" />
+                  <ShieldCheck className="h-6 w-6 text-emerald-400 shrink-0 mt-0.5" />
                   <div>
-                    <h4 className="font-semibold text-sm">Transparentnost</h4>
-                    <p className="text-xs text-muted-foreground mt-1">
+                    <h4 className="font-semibold text-white">Transparentnost</h4>
+                    <p className="text-sm text-slate-400 mt-1.5 leading-relaxed">
                       Žádné skryté poplatky. Od začátku víte, za co platíte. Jsem OSVČ, neplátce DPH.
                     </p>
                   </div>
                 </div>
               </div>
 
-              {/* Fakturační údaje - Minimalizované */}
-              <div className="text-xs text-muted-foreground pt-8 border-t">
-                <p className="font-semibold mb-1 text-foreground">Fakturační údaje:</p>
-                <p>Taras Ishchuk, IČO: 23874694</p>
-                <p>Rantířovská 123/36, 586 01 Jihlava</p>
+              {/* Fakturační údaje */}
+              <div className="mt-10 pt-6 border-t border-slate-700/50 px-2">
+                <p className="text-xs font-medium text-slate-500 mb-2">Fakturační údaje:</p>
+                <div className="text-xs text-slate-500 space-y-1">
+                  <p>Taras Ishchuk, IČO: 23874694</p>
+                  <p>Rantířovská 123/36, 586 01 Jihlava</p>
+                </div>
               </div>
 
             </AnimatedSection>

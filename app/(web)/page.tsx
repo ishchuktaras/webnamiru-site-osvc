@@ -9,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getServices, getProjects } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
+import ContactPage from './kontakt/page';
 
 
 // Mapa ikon pro služby
@@ -157,45 +158,8 @@ export default async function HomePage() {
             <div className="absolute top-0 right-0 -mt-32 -mr-32 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
             <div className="absolute bottom-0 left-0 -mb-32 -ml-32 w-96 h-96 bg-white/5 rounded-full blur-3xl"></div>
         </div>
-
-        <div className="max-w-4xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10">
-          
-          <h2 className="text-3xl md:text-5xl font-extrabold mb-8 tracking-tight text-white">
-            Máte projekt? Pojďme ho probrat.
-          </h2>
-          
-          <p className="text-xl text-primary-foreground/90 mb-12 max-w-2xl mx-auto leading-relaxed font-light">
-            Napište mi stručně, co potřebujete. Ozvu se vám do 24 hodin a domluvíme si nezávaznou konzultaci (online nebo v Jihlavě).
-          </p>
-
-          <div className="flex flex-col sm:flex-row gap-5 justify-center items-center">
-             <Button 
-               size="lg" 
-               className="bg-white text-primary hover:bg-gray-100 font-bold text-lg px-8 py-7 h-auto shadow-2xl hover:shadow-white/20 hover:-translate-y-1 transition-all rounded-xl"
-               asChild
-             >
-               <a href="mailto:info@webnamiru.site">
-                 Napsat na info@webnamiru.site
-               </a>
-             </Button>
-             
-             <Button 
-               variant="outline" 
-               size="lg"
-               className="bg-transparent border-white/20 text-white hover:bg-white/10 hover:text-white font-medium text-lg px-8 py-7 h-auto rounded-xl backdrop-blur-sm"
-               asChild
-             >
-               <a href="tel:+420777596216">
-                 Zavolat: +420 777 596 216
-               </a>
-             </Button>
-          </div>
-          
-          <div className="mt-16 pt-8 border-t border-white/10 text-sm text-primary-foreground/60 flex flex-col md:flex-row gap-4 justify-center items-center">
-            <p>Těším se na spolupráci.</p>
-      </div>
-
-        </div>
+<ContactPage />
+       
       </section>
     </main>
   );

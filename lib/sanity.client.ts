@@ -1,6 +1,9 @@
+// lib/sanity.client.ts
+
 import { createClient } from "next-sanity"
-import imageUrlBuilder from "@sanity/image-url"
-import type { SanityImageSource } from "@sanity/image-url/lib/types/types"
+import { createImageUrlBuilder } from "@sanity/image-url"
+
+
 
 const projectId = process.env.NEXT_PUBLIC_SANITY_PROJECT_ID
 const dataset = process.env.NEXT_PUBLIC_SANITY_DATASET || "production"
@@ -19,9 +22,9 @@ export const client = createClient({
 export const isSanityConfigured = () => !!projectId
 
 // 3. Helper pro obrázky (Potřebuje to portfolio a blog)
-const builder = imageUrlBuilder(client)
+const builder = createImageUrlBuilder(client)
 
-export function urlFor(source: SanityImageSource) {
+export function urlFor(source: any) {
   return builder.image(source)
 }
 
@@ -37,7 +40,7 @@ export async function sanityFetch<QueryResponse>({
 }): Promise<QueryResponse> {
   return client.fetch<QueryResponse>(query, params, {
     next: {
-      revalidate: 60, // Obnovení dat každých 60s
+      revalidate: 600, // Obnovení dat každých 600s
       tags,
     },
   })

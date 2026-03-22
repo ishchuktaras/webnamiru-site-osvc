@@ -1,93 +1,141 @@
 'use client'
 
-import Link from 'next/link';
-import { useState } from 'react';
+import { useState, useEffect } from 'react';
+import { Menu, X } from 'lucide-react';
 
 export default function Header() {
   const [isMenuOpen, setIsMenuOpen] = useState(false);
+  const [isScrolled, setIsScrolled] = useState(false);
+  const [pathname, setPathname] = useState("");
+
+  // Detekce scrollování pro zmenšení a stín hlavičky
+  useEffect(() => {
+    setPathname(window.location.pathname);
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 20);
+    };
+    window.addEventListener('scroll', handleScroll, { passive: true });
+    return () => window.removeEventListener('scroll', handleScroll);
+  }, []);
 
   const navigation = [
-    { name: 'Domů', href: '/' },
     { name: 'Služby', href: '/sluzby' },
-    { name: 'Ceník', href: '/cenik' },
     { name: 'Portfolio', href: '/portfolio' },
+    { name: 'Ceník', href: '/cenik' },
     { name: 'O mně', href: '/o-mne' },
-    { name: 'FAQ', href: '/faq' },
-    { name: 'Recenze', href: '/recenze' },
-    { name: 'Kontakt', href: '/kontakt' },
     { name: 'Blog', href: '/blog' },
   ];
 
   return (
-    <header className="sticky top-0 z-50 w-full bg-white/90 backdrop-blur-sm border-b border-gray-100">
+    <header 
+      className={`fixed top-0 inset-x-0 z-50 transition-all duration-300 ease-in-out border-b ${
+        isScrolled 
+          ? 'bg-white/80 backdrop-blur-md border-gray-200/50 shadow-sm py-2' 
+          : 'bg-white/0 border-transparent py-4'
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
-        <div className="flex justify-between items-center h-16">
-          {/* Logo */}
-          <div className="flex-shrink-0">
-            <Link href="/" className="font-extrabold text-2xl text-[#0D1B3E]">
+        <div className="flex justify-between items-center">
+          
+          {/* Logo s hover efektem */}
+          <div className="flex-shrink-0 z-50">
+            <a 
+              href="/" 
+              className="font-extrabold text-2xl tracking-tight text-[#0D1B3E] hover:opacity-80 transition-opacity"
+              onClick={() => setIsMenuOpen(false)}
+            >
               webnamiru<span className="text-[#3B82F6]">.site</span>
-            </Link>
+            </a>
           </div>
 
-          {/* Desktop Menu */}
-          <nav className="hidden md:flex space-x-8 items-center">
-            {navigation.map((item) => (
-              <Link 
-                key={item.name} 
-                href={item.href}
-                className="text-[#1F2937] hover:text-[#3B82F6] font-medium transition-colors"
-              >
-                {item.name}
-              </Link>
-            ))}
-            {/* CTA Button - Používáme <a> pro spolehlivý scroll */}
+          {/* Desktop Navigace */}
+          <nav className="hidden md:flex items-center space-x-8">
+            {navigation.map((item) => {
+              const isActive = pathname === item.href;
+              return (
+                <a 
+                  key={item.name} 
+                  href={item.href}
+                  className={`relative group px-1 py-2 text-[15px] font-medium transition-colors ${
+                    isActive ? 'text-[#3B82F6]' : 'text-slate-600 hover:text-[#0D1B3E]'
+                  }`}
+                >
+                  {item.name}
+                  {/* Animovaná linka pod textem */}
+                  <span 
+                    className={`absolute inset-x-0 -bottom-1 h-0.5 rounded-full bg-[#3B82F6] transition-all duration-300 ease-out ${
+                      isActive ? 'w-full opacity-100' : 'w-0 opacity-0 group-hover:w-full group-hover:opacity-100'
+                    }`}
+                  ></span>
+                </a>
+              );
+            })}
+            
+            {/* Desktop CTA Tlačítko */}
             <a 
-              href="#kontakt" 
-              className="bg-[#3B82F6] hover:bg-blue-700 text-white px-5 py-2.5 rounded-lg font-semibold transition-colors shadow-sm"
+              href="/kontakt" 
+              className="ml-4 bg-[#3B82F6] hover:bg-[#2563EB] text-white px-6 py-2.5 rounded-xl font-semibold transition-all duration-300 shadow-[0_4px_14px_0_rgba(59,130,246,0.39)] hover:shadow-[0_6px_20px_rgba(59,130,246,0.23)] hover:-translate-y-0.5 active:translate-y-0"
             >
               Nezávazná konzultace
             </a>
           </nav>
 
-          {/* Mobile Menu Button */}
-          <div className="md:hidden">
+          {/* Mobile Menu Button s animovanými ikonami */}
+          <div className="md:hidden z-50 flex items-center">
             <button
               onClick={() => setIsMenuOpen(!isMenuOpen)}
-              className="text-[#0D1B3E] p-2"
+              className="text-[#0D1B3E] p-2 focus:outline-none rounded-lg hover:bg-slate-100 transition-colors"
+              aria-label="Přepnout menu"
             >
-              <span className="sr-only">Otevřít menu</span>
-              <svg className="h-6 w-6" fill="none" viewBox="0 0 24 24" stroke="currentColor">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d="M4 6h16M4 12h16M4 18h16" />
-              </svg>
+              <div className="relative w-6 h-6 flex items-center justify-center">
+                <span className={`absolute transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-0 rotate-90 scale-50' : 'opacity-100 rotate-0 scale-100'}`}>
+                  <Menu className="w-6 h-6" />
+                </span>
+                <span className={`absolute transition-all duration-300 ease-in-out ${isMenuOpen ? 'opacity-100 rotate-0 scale-100' : 'opacity-0 -rotate-90 scale-50'}`}>
+                  <X className="w-6 h-6" />
+                </span>
+              </div>
             </button>
           </div>
         </div>
       </div>
 
-      {/* Mobile Menu */}
-      {isMenuOpen && (
-        <div className="md:hidden bg-white border-b border-gray-100">
-          <div className="px-2 pt-2 pb-3 space-y-1 sm:px-3">
-            {navigation.map((item) => (
-              <Link
+      {/* Mobile Menu (Hladký slide-down efekt) */}
+      <div 
+        className={`md:hidden absolute top-full left-0 w-full bg-white/95 backdrop-blur-xl border-b border-gray-100 shadow-2xl transition-all duration-400 ease-[0.22,1,0.36,1] overflow-hidden ${
+          isMenuOpen ? 'max-h-[500px] opacity-100' : 'max-h-0 opacity-0'
+        }`}
+      >
+        <div className="px-4 pt-4 pb-6 space-y-2">
+          {navigation.map((item) => {
+            const isActive = pathname === item.href;
+            return (
+              <a
                 key={item.name}
                 href={item.href}
-                className="block px-3 py-2 text-base font-medium text-[#1F2937] hover:bg-gray-50 rounded-md"
+                className={`block px-4 py-3 text-base font-semibold rounded-xl transition-all duration-200 ${
+                  isActive 
+                    ? 'bg-blue-50 text-[#3B82F6]' 
+                    : 'text-slate-600 hover:bg-slate-50 hover:text-[#0D1B3E] hover:translate-x-1'
+                }`}
                 onClick={() => setIsMenuOpen(false)}
               >
                 {item.name}
-              </Link>
-            ))}
+              </a>
+            );
+          })}
+          
+          <div className="pt-4 mt-2 border-t border-slate-100">
             <a
-              href="#kontakt"
-              className="block w-full text-center mt-4 bg-[#3B82F6] text-white px-3 py-3 rounded-lg font-bold"
+              href="/kontakt"
+              className="flex justify-center w-full bg-[#0D1B3E] hover:bg-[#1a2b5e] text-white px-4 py-4 rounded-xl font-bold transition-all duration-300 shadow-md active:scale-[0.98]"
               onClick={() => setIsMenuOpen(false)}
             >
-              Chci konzultaci
+              Chci nezávaznou konzultaci
             </a>
           </div>
         </div>
-      )}
+      </div>
     </header>
   );
 }
