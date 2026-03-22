@@ -12,6 +12,7 @@ import Header from "@/components/Header"
 import { CookieConsent } from "@/components/CookieConsent" 
 import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"
+import { WhatsAppButton } from "@/components/WhatsAppButton"
 
 // Initialize fonts 
 const inter = Inter({
@@ -120,6 +121,7 @@ export default function RootLayout({
           <Header />
           {children}
           <Footer />
+          <WhatsAppButton />
           <CookieConsent />
           <Toaster />
           <Analytics />

@@ -1,3 +1,5 @@
+// app/(web)/page.tsx
+
 import HeroBento from '@/components/sections/HeroBento';
 import ProcessSteps from '@/components/sections/ProcessSteps';
 import { Button } from "@/components/ui/button";
@@ -7,6 +9,7 @@ import Link from "next/link";
 import Image from "next/image";
 import { getServices, getProjects } from "@/lib/sanity.queries";
 import { urlFor } from "@/lib/sanity.client";
+
 
 // Mapa ikon pro služby
 const iconMap: Record<string, any> = {
