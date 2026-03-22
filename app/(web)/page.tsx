@@ -193,9 +193,7 @@ export default async function HomePage() {
           
           <div className="mt-16 pt-8 border-t border-white/10 text-sm text-primary-foreground/60 flex flex-col md:flex-row gap-4 justify-center items-center">
             <p>Těším se na spolupráci.</p>
-            <span className="hidden md:block">•</span>
-            <p>Taras Ishchuk, OSVČ</p>
-          </div>
+      </div>
 
         </div>
       </section>
