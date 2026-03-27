@@ -1,5 +1,3 @@
-// app/(web)/layout.tsx
-
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
@@ -60,17 +58,40 @@ export const metadata: Metadata = {
   authors: [{ name: "Taras Ishchuk", url: "https://webnamiru.site/o-mne" }],
   creator: "Taras Ishchuk, OSVČ",
   publisher: "webnamiru.site",
-  // OPRAVENÁ SEKCE IKON:
   icons: {
     icon: [
-      // Použijeme existující icon.svg jako výchozí
       { url: "/icon.svg", type: "image/svg+xml" },
-      // Pokud existuje icon-dark.svg, použijeme ho pro dark mode
       { url: "/icon-dark.svg", type: "image/svg+xml", media: "(prefers-color-scheme: dark)" },
     ],
-    // Fallback pro Apple ikonu (použijeme icon.svg, pokud nemáte apple-touch-icon.png)
     apple: "/icon.svg", 
   },
+  
+  // PŘIDÁNO: OpenGraph metadata pro Facebook a LinkedIn
+  openGraph: {
+    type: "website",
+    locale: "cs_CZ",
+    url: "https://webnamiru.site",
+    title: "Tvorba webů na míru Jihlava a Vysočina | webnamiru.site",
+    description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině.",
+    siteName: "webnamiru.site",
+    images: [
+      {
+        url: "/opengraph-image.png", // Obrázek musí být ve složce 'public'
+        width: 1200,
+        height: 630,
+        alt: "webnamiru.site - Tvorba webů na míru",
+      },
+    ],
+  },
+
+  // PŘIDÁNO: Twitter (X) metadata
+  twitter: {
+    card: "summary_large_image",
+    title: "Tvorba webů na míru Jihlava a Vysočina | webnamiru.site",
+    description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině.",
+    images: ["/opengraph-image.png"],
+  },
+
   robots: {
     index: true,
     follow: true,
