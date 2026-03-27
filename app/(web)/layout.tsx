@@ -42,7 +42,8 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  metadataBase: new URL("https://webnamiru.site"),
+  // Aktualizováno na www verzi, jelikož tam směřuje redirect
+  metadataBase: new URL("https://www.webnamiru.site"),
   title: {
     default: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
     template: "%s | webnamiru.site",
@@ -66,17 +67,17 @@ export const metadata: Metadata = {
     apple: "/icon.svg", 
   },
   
-  // PŘIDÁNO: OpenGraph metadata pro Facebook a LinkedIn
   openGraph: {
     type: "website",
     locale: "cs_CZ",
-    url: "https://webnamiru.site",
+    url: "https://www.webnamiru.site",
     title: "Tvorba webů na míru Jihlava a Vysočina | webnamiru.site",
     description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině.",
     siteName: "webnamiru.site",
     images: [
       {
-        url: "/opengraph-image.png", // Obrázek musí být ve složce 'public'
+        // ABSOLUTNÍ URL řeší problém s nenalezením obrázku
+        url: "https://www.webnamiru.site/opengraph-image.png",
         width: 1200,
         height: 630,
         alt: "webnamiru.site - Tvorba webů na míru",
@@ -84,12 +85,12 @@ export const metadata: Metadata = {
     ],
   },
 
-  // PŘIDÁNO: Twitter (X) metadata
   twitter: {
     card: "summary_large_image",
     title: "Tvorba webů na míru Jihlava a Vysočina | webnamiru.site",
     description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině.",
-    images: ["/opengraph-image.png"],
+    // ABSOLUTNÍ URL
+    images: ["https://www.webnamiru.site/opengraph-image.png"],
   },
 
   robots: {
