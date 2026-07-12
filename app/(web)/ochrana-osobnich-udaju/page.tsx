@@ -31,7 +31,7 @@ export default function PrivacyPage() {
                   <li><strong>Jméno a příjmení:</strong> Taras Ishchuk</li>
                   <li><strong>IČO:</strong> 23874694</li>
                   <li><strong>Sídlo:</strong> Rantířovská 123/36, 586 01 Jihlava - Horní Kosov</li>
-                  <li><strong>Email:</strong> <a href="mailto:info@webnamiru.site">info@webnamiru.site</a></li>
+                  <li><strong>Email:</strong> <a href="mailto:ishchuktaras@gmail.com">ishchuktaras@gmail.com</a></li>
                   <li><strong>Telefon:</strong> +420 777 596 216</li>
                 </ul>
 
@@ -84,7 +84,7 @@ export default function PrivacyPage() {
                   <li><strong>Právo odvolat souhlas:</strong> Pokud zpracováváme údaje na základě vašeho souhlasu (např. cookies), můžete jej kdykoli odvolat.</li>
                 </ul>
                 <p>
-                  Pro uplatnění svých práv nás kdykoli kontaktujte na e-mailu: <a href="mailto:info@webnamiru.site">info@webnamiru.site</a>. Pokud se domníváte, že s vašimi daty nenakládáme správně, máte právo podat stížnost u Úřadu pro ochranu osobních údajů (www.uoou.cz).
+                  Pro uplatnění svých práv nás kdykoli kontaktujte na e-mailu: <a href="mailto:ishchuktaras@gmail.com">ishchuktaras@gmail.com</a>. Pokud se domníváte, že s vašimi daty nenakládáme správně, máte právo podat stížnost u Úřadu pro ochranu osobních údajů (www.uoou.cz).
                 </p>
 
                 <h2>7. Zabezpečení osobních údajů</h2>

@@ -569,7 +569,7 @@ export function Logo({ variant = 'default' }) {
 ## Kontakt a podpora
 
 Pokud máte otázky k implementaci:
-- Email: info@webnamiru.site
+- Email: ishchuktaras@gmail.com
 - Web: https://webnamiru.site
 
 **Vytvořeno pro:** webnamiru.site - Taras Ishchuk, OSVČ  

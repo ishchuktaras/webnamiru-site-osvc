@@ -108,5 +108,5 @@ Obě služby jsou implementovány v souladu s GDPR:
 ## Kontakt
 
 Pokud máte problémy s nastavením, kontaktujte:
-- Email: info@webnamiru.site
+- Email: ishchuktaras@gmail.com
 - Telefon: +420 777 596 216

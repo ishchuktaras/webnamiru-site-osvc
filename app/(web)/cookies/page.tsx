@@ -90,7 +90,7 @@ export default function CookiesPage() {
                 
                 <h2>6. Kontakt</h2>
                 <p>
-                  Máte-li jakékoli dotazy ohledně našeho používání cookies, kontaktujte nás prosím na e-mailu: <a href="mailto:info@webnamiru.site">info@webnamiru.site</a>.
+                  Máte-li jakékoli dotazy ohledně našeho používání cookies, kontaktujte nás prosím na e-mailu: <a href="mailto:ishchuktaras@gmail.com">ishchuktaras@gmail.com</a>.
                 </p>
 
                 <hr />

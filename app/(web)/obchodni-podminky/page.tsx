@@ -34,7 +34,7 @@ export default function TermsPage() {
                   <li><strong>Jméno a příjmení:</strong> Taras Ishchuk</li>
                   <li><strong>IČO:</strong> 23874694</li>
                   <li><strong>Sídlo:</strong> Rantířovská 123/36, 586 01 Jihlava - Horní Kosov</li>
-                  <li><strong>Email:</strong> <a href="mailto:info@webnamiru.site">info@webnamiru.site</a></li>
+                  <li><strong>Email:</strong> <a href="mailto:ishchuktaras@gmail.com">ishchuktaras@gmail.com</a></li>
                   <li><strong>Telefon:</strong> +420 777 596 216</li>
                   <li><strong>Zápis v rejstříku:</strong> Fyzická osoba zapsaná v Živnostenském rejstříku vedeném Magistrátem města Jihlavy.</li>
                 </ul>
@@ -81,7 +81,7 @@ export default function TermsPage() {
                 </ul>
 
                 <h2>8. Reklamace</h2>
-                <p>Zákazník má právo reklamovat vady poskytnutých služeb. Reklamace musí být uplatněna písemně na e-mail info@webnamiru.site s přesným popisem vady.</p>
+                <p>Zákazník má právo reklamovat vady poskytnutých služeb. Reklamace musí být uplatněna písemně na e-mail ishchuktaras@gmail.com s přesným popisem vady.</p>
                 <ul>
                   <li><strong>Je-li zákazník spotřebitelem:</strong> Poskytovatel se zavazuje vyřídit reklamaci bez zbytečného odkladu, nejpozději však do 30 dnů od jejího doručení, pokud se se zákazníkem nedohodne na delší lhůtě.</li>
                   <li><strong>Je-li zákazník podnikatelem:</strong> Lhůta pro vyřízení reklamace závisí na vzájemné dohodě a složitosti vady; poskytovatel se zavazuje vady odstranit v přiměřené lhůtě.</li>

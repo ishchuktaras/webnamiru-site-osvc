@@ -54,8 +54,8 @@ export default function ContactPage() {
                     </div>
                     <div>
                       <div className="text-xs text-slate-400 font-medium uppercase tracking-wider mb-1">Email</div>
-                      <a href="mailto:info@webnamiru.site" className="text-lg font-medium text-white hover:text-blue-400 transition-colors">
-                        info@webnamiru.site
+                      <a href="mailto:ishchuktaras@gmail.com" className="text-lg font-medium text-white hover:text-blue-400 transition-colors">
+                        ishchuktaras@gmail.com
                       </a>
                     </div>
                   </div>

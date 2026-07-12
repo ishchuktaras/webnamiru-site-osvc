@@ -126,7 +126,7 @@
 ### Chyba: "Email failed to send"
 **Řešení:** 
 1. Zkontrolujte Resend Dashboard pro detaily chyby
-2. Ověřte, že email adresa `info@webnamiru.site` je ověřená v Resend
+2. Ověřte, že email adresa `ishchuktaras@gmail.com` je ověřená v Resend
 3. Zkontrolujte, že `RESEND_API_KEY` je platný
 
 ---

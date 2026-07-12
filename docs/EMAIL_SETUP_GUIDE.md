@@ -84,6 +84,6 @@ Pokud nechcete nastavovat Resend, můžete použít Gmail:
 ## Kontrola spamu
 
 Pokud email přišel, ale je ve spamu:
-1. Zkontrolujte spam složku v `info@webnamiru.site`
+1. Zkontrolujte spam složku v `ishchuktaras@gmail.com`
 2. Označte email jako "Not spam"
 3. Přidejte `noreply@webnamiru.site` do kontaktů

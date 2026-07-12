@@ -110,7 +110,8 @@ export default function RootLayout({
   const localBusinessData = generateLocalBusinessSchema({
     name: "webnamiru.site - Taras Ishchuk, OSVČ",
     description: "Tvorba webových stránek a e-shopů na míru.",
-    email: "info@webnamiru.site",
+    email: "ishchuktaras@gmail.com",
+    url: "https://www.webnamiru.site",
     address: {
       streetAddress: "Rantířovská 123/36",
       addressLocality: "Jihlava - Horní Kosov",

@@ -175,7 +175,7 @@ Web je postaven podle strategického rámce pro tvorbu webů s vysokou hodnotou:
 
 - **Provozovatel**: Taras Ishchuk, OSVČ
 - **IČO**: 21609845
-- **Email**: info@webnamiru.site
+- **Email**: ishchuktaras@gmail.com
 - **Sídlo**: Česká republika
 
 ## Další Kroky

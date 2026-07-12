@@ -48,10 +48,10 @@ export default function LegalInfoPage() {
                     Email
                   </div>
                   <a
-                    href="mailto:info@webnamiru.site"
+                    href="mailto:ishchuktaras@gmail.com"
                     className="text-primary hover:underline"
                   >
-                    info@webnamiru.site
+                    ishchuktaras@gmail.com
                   </a>
                 </div>
                 <div>

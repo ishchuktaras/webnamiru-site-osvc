@@ -60,7 +60,7 @@ Tento dokument popisuje implementaci GDPR (General Data Protection Regulation) c
 
 1. **Informační povinnost (Čl. 13 GDPR):**
    - ✅ Identifikace správce (Taras Ishchuk, OSVČ)
-   - ✅ Kontaktní údaje (info@webnamiru.site, +420 777 596 216)
+   - ✅ Kontaktní údaje (ishchuktaras@gmail.com, +420 777 596 216)
    - ✅ Účel zpracování osobních údajů
    - ✅ Právní základ zpracování
    - ✅ Doba uložení dat
@@ -201,7 +201,7 @@ Aktualizujte `/app/cookies/page.tsx` s konkrétními cookies, které používát
 **Správce osobních údajů:**
 Taras Ishchuk, OSVČ  
 IČO: 23874694  
-Email: info@webnamiru.site  
+Email: ishchuktaras@gmail.com  
 Telefon: +420 777 596 216  
 Adresa: Rantířovská 123/36, 586 01 Jihlava - Horní Kosov
 

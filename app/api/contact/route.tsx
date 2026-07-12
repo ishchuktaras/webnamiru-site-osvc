@@ -71,8 +71,8 @@ export async function POST(request: Request) {
 
     try {
       const emailResult = await resend.emails.send({
-        from: "webnamiru.site <info@webnamiru.site>",
-        to: "info@webnamiru.site", // Change this to your verified email in Resend for testing
+        from: "webnamiru.site <ishchuktaras@gmail.com>",
+        to: "ishchuktaras@gmail.com", // Change this to your verified email in Resend for testing
         replyTo: validatedData.email,
         subject: `Nová poptávka od ${validatedData.name}`,
         html: `

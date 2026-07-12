@@ -41,7 +41,7 @@ export default function Footer() {
             <h4 className="text-white font-semibold mb-4">Kontakt</h4>
             <ul className="space-y-2 text-sm">
               <li>
-                <a href="mailto:info@webnamiru.site" className="hover:text-[#3B82F6]">info@webnamiru.site</a>
+                <a href="mailto:ishchuktaras@gmail.com" className="hover:text-[#3B82F6]">ishchuktaras@gmail.com</a>
               </li>
               <li>
                 <a href="tel:+420777596216" className="hover:text-[#3B82F6]">+420 777 596 216</a>
