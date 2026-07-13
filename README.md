@@ -159,6 +159,7 @@ Pro přidání dynamického obsahu (služby, portfolio, blog):
 
 4. **Přidejte environment variables** do Vercel
 
+
 Podrobný návod najdete v souboru `SANITY_SETUP.md`.
 
 ## Strategický přístup
