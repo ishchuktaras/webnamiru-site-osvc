@@ -20,11 +20,11 @@ export default async function PortfolioPage() {
 
   // 1. FILTROVÁNÍ PROJEKTŮ
   const completedProjects = projects.filter((project: any) => 
-    project.title && project.title.toUpperCase().includes("ART DUM")
+    project.title && project.title.toUpperCase().includes("ART DUM") || project.title.toUpperCase().includes("TAPAYA")
   )
 
   const inProgressProjects = projects.filter((project: any) => 
-    !project.title || !project.title.toUpperCase().includes("ART DUM")
+    !project.title || !project.title.toUpperCase().includes("ART DUM") && !project.title.toUpperCase().includes("TAPAYA")
   )
 
   return (

@@ -8,6 +8,7 @@ export interface LocalBusinessData {
   image?: string
   telephone?: string
   email: string
+  url: string // 1. Přidáno do rozhraní, aby TypeScript neprotestoval
   address: {
     streetAddress: string
     addressLocality: string
@@ -69,7 +70,7 @@ export function generateLocalBusinessSchema(data: LocalBusinessData) {
     name: data.name,
     description: data.description,
     image: data.image,
-    url: "https://webnamiru.site",
+    url: data.url, // 2. Nyní se dynamicky použije hodnota předaná z layoutu
     telephone: data.telephone,
     email: data.email,
     address: {
