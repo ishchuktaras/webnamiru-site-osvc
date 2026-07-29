@@ -1,12 +1,10 @@
 // app/(web)/layout.tsx
-
 import type React from "react"
 import type { Metadata, Viewport } from "next"
 import { Analytics } from "@vercel/analytics/next"
 import { Toaster } from "@/components/ui/toaster"
 import { ThemeProvider } from "next-themes"
 import Script from "next/script"
-import "@/app/globals.css"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
 import { CookieConsent } from "@/components/CookieConsent" 
@@ -14,7 +12,6 @@ import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"
 import { WhatsAppButton } from "@/components/WhatsAppButton"
 
-// Initialize fonts 
 const inter = Inter({
   subsets: ["latin"],
   weight: ["400", "500", "600", "700", "800"],
@@ -44,20 +41,13 @@ export const viewport: Viewport = {
 }
 
 export const metadata: Metadata = {
-  // Aktualizováno na www verzi, jelikož tam směřuje redirect
   metadataBase: new URL("https://www.webnamiru.site"),
   title: {
     default: "webnamiru.site | Tvorba webů na míru Jihlava a Vysočina",
     template: "%s | webnamiru.site",
   },
-  description:
-    "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky.",
-  keywords: [
-    "tvorba webů Jihlava",
-    "webdesign Vysočina",
-    "Next.js",
-    "Sanity.io",
-  ],
+  description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině. Next.js, Sanity.io, měřitelné výsledky.",
+  keywords: ["tvorba webů Jihlava", "webdesign Vysočina", "Next.js", "Sanity.io", "PCI MPoC"],
   authors: [{ name: "Taras Ishchuk", url: "https://webnamiru.site/o-mne" }],
   creator: "Taras Ishchuk, OSVČ",
   publisher: "webnamiru.site",
@@ -68,7 +58,6 @@ export const metadata: Metadata = {
     ],
     apple: "/icon.svg", 
   },
-  
   openGraph: {
     type: "website",
     locale: "cs_CZ",
@@ -76,49 +65,23 @@ export const metadata: Metadata = {
     title: "Tvorba webů na míru Jihlava a Vysočina | webnamiru.site",
     description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině.",
     siteName: "webnamiru.site",
-    images: [
-      {
-        // ABSOLUTNÍ URL řeší problém s nenalezením obrázku
-        url: "https://www.webnamiru.site/opengraph-image.png",
-        width: 1200,
-        height: 630,
-        alt: "webnamiru.site - Tvorba webů na míru",
-      },
-    ],
+    images: [{ url: "https://www.webnamiru.site/opengraph-image.png", width: 1200, height: 630, alt: "webnamiru.site" }],
   },
-
-  twitter: {
-    card: "summary_large_image",
-    title: "Tvorba webů na míru Jihlava a Vysočina | webnamiru.site",
-    description: "Strategický partner pro tvorbu profesionálních webových stránek v Jihlavě a na Vysočině.",
-    // ABSOLUTNÍ URL
-    images: ["https://www.webnamiru.site/opengraph-image.png"],
-  },
-
-  robots: {
-    index: true,
-    follow: true,
-  },
-  verification: {
-    google: process.env.NEXT_PUBLIC_GOOGLE_SITE_VERIFICATION,
-  },
+  robots: { index: true, follow: true },
 }
 
-export default function RootLayout({
-  children,
-}: Readonly<{
-  children: React.ReactNode
-}>) {
+export default function WebLayout({ children }: { children: React.ReactNode }) {
   const localBusinessData = generateLocalBusinessSchema({
     name: "webnamiru.site - Taras Ishchuk, OSVČ",
-    description: "Tvorba webových stránek a e-shopů na míru.",
+    description: "Tvorba webových stránek, aplikací a fintech systémů na míru v Next.js.",
     email: "ishchuktaras@gmail.com",
+    telephone: "+420777596216",
     url: "https://www.webnamiru.site",
     address: {
       streetAddress: "Rantířovská 123/36",
-      addressLocality: "Jihlava - Horní Kosov",
+      addressLocality: "Jihlava",
       postalCode: "586 01",
-      addressRegion: "Vysočina",
+      addressRegion: "Kraj Vysočina",
       addressCountry: "CZ",
     },
     founder: {
@@ -128,7 +91,7 @@ export default function RootLayout({
   })
 
   return (
-    <html lang="cs" className="scroll-smooth" suppressHydrationWarning>
+    <div className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased min-h-screen flex flex-col`}>
       <head>
         <Script
           id="schema-local-business"
@@ -138,20 +101,15 @@ export default function RootLayout({
           }}
         />
       </head>
-      <body
-        className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased`}
-        suppressHydrationWarning
-      >
-        <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
-          <Header />
-          {children}
-          <Footer />
-          <WhatsAppButton />
-          <CookieConsent />
-          <Toaster />
-          <Analytics />
-        </ThemeProvider>
-      </body>
-    </html>
+      <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        <Header />
+        <main className="flex-1">{children}</main>
+        <Footer />
+        <WhatsAppButton />
+        <CookieConsent />
+        <Toaster />
+        <Analytics />
+      </ThemeProvider>
+    </div>
   )
 }
