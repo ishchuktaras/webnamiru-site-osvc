@@ -1,10 +1,10 @@
+// app/(web)/portfolio/page.tsx
 import type { Metadata } from "next"
 import { Button } from "@/components/ui/button"
 import { Card, CardContent } from "@/components/ui/card"
 import { ExternalLink, Calendar, CheckCircle2, Loader2 } from "lucide-react"
 import Link from "next/link"
 import { getProjects } from "@/lib/sanity.queries"
-// ZMĚNA: Importujeme z našeho nového helperu
 import { urlFor, getBlurDataUrl } from "@/lib/sanity-image" 
 import Image from "next/image"
 
@@ -18,13 +18,15 @@ export const revalidate = 60
 export default async function PortfolioPage() {
   const projects = await getProjects().catch(() => [])
 
-  // 1. FILTROVÁNÍ PROJEKTŮ
+  // 1. FILTROVÁNÍ PROJEKTŮ - Refaktorováno pro snadnější přidávání
+  const completedKeywords = ["ART DUM", "TAPAYA", "YURIJ", "IZOLACE"]
+
   const completedProjects = projects.filter((project: any) => 
-    project.title && project.title.toUpperCase().includes("ART DUM") || project.title.toUpperCase().includes("TAPAYA")
+    project.title && completedKeywords.some(keyword => project.title.toUpperCase().includes(keyword))
   )
 
   const inProgressProjects = projects.filter((project: any) => 
-    !project.title || !project.title.toUpperCase().includes("ART DUM") && !project.title.toUpperCase().includes("TAPAYA")
+    !project.title || !completedKeywords.some(keyword => project.title.toUpperCase().includes(keyword))
   )
 
   return (
@@ -102,18 +104,17 @@ export default async function PortfolioPage() {
 
 function ProjectCard({ project, status }: { project: any; status: "completed" | "in-progress" }) {
   const isCompleted = status === "completed"
-  // Získáme blur data pro tento obrázek
   const blurDataUrl = getBlurDataUrl(project.coverImage)
 
   return (
     <Card className={`overflow-hidden transition-all hover:shadow-xl hover:-translate-y-1 flex flex-col h-full border ${isCompleted ? 'border-green-500/20' : 'border-amber-500/20'}`}>
+      {/* Zbytek komponenty ProjectCard zůstává beze změny */}
       <div className="relative h-64 w-full bg-muted overflow-hidden group">
         {project.coverImage ? (
           <Image
             src={urlFor(project.coverImage).width(600).height(400).url() || "/placeholder.svg"}
             alt={project.title}
             fill
-            // ZMĚNA: Přidán placeholder a blurDataURL
             placeholder={blurDataUrl ? "blur" : "empty"}
             blurDataURL={blurDataUrl}
             className={`object-cover transition-transform duration-700 group-hover:scale-105 ${!isCompleted ? 'opacity-90 grayscale-[0.3]' : ''}`}

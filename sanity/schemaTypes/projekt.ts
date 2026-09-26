@@ -96,6 +96,21 @@ export default defineType({
       type: 'datetime',
       validation: (Rule) => Rule.required(),
     }),
+    // NOVÉ POLE: Stav projektu pro filtrování na frontendu
+    defineField({
+      name: 'status',
+      title: 'Stav projektu',
+      type: 'string',
+      options: {
+        list: [
+          { title: 'Dokončeno (V provozu)', value: 'completed' },
+          { title: 'Aktuálně vyvíjím', value: 'in-progress' }
+        ],
+        layout: 'radio'
+      },
+      initialValue: 'completed',
+      validation: (Rule) => Rule.required(),
+    }),
     defineField({
       name: 'featured',
       title: 'Zvýrazněný projekt',
@@ -108,14 +123,18 @@ export default defineType({
       title: 'title',
       client: 'clientName',
       media: 'coverImage',
+      status: 'status', // Přidáno pro zobrazení v CMS přehledu
     },
     prepare(selection) {
-      const { title, client } = selection
+      const { title, client, status } = selection
+      // Vizuální odlišení rozpracovaných projektů přímo v seznamu Sanity
+      const statusIndicator = status === 'in-progress' ? ' 🚧 (Ve vývoji)' : ''
+      
       return {
-    title, 
-    media: selection.media,
-    subtitle: client && `Klient: ${client}`,
-  }
+        title: `${title}${statusIndicator}`, 
+        media: selection.media,
+        subtitle: client && `Klient: ${client}`,
+      }
     },
   },
 })
