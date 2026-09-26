@@ -10,12 +10,7 @@ export default function HeroBento() {
       <div className="container px-4 mx-auto">
         <div className="max-w-4xl mx-auto text-center mb-12">
           
-          {/* Badge */}
-          <div className="inline-flex items-center px-3 py-1 rounded-full border border-blue-100 bg-blue-50 text-blue-600 text-sm font-medium mb-6">
-            <span className="flex h-2 w-2 rounded-full bg-blue-600 mr-2 animate-pulse"></span>
-            Tvorba webů Jihlava & Vysočina
-          </div>
-
+          
           {/* H1 Hlavní nadpis */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6 text-balance">
             Tvořím weby, které <span className="text-blue-600">vydělávají</span>.
@@ -71,7 +66,7 @@ export default function HeroBento() {
                 <div className="h-10 w-10 bg-purple-100 rounded-lg flex items-center justify-center mb-4">
                     <ShieldCheck className="h-6 w-6 text-purple-600" />
                 </div>
-                <h3 className="text-xl font-bold mb-2">Bezpečnost a HTTPS</h3>
+                <h3 className="text-xl font-bold mb-2">Bezpečnost</h3>
                 <p className="text-gray-600 text-sm">Statické generování a moderní architektura Next.js znamená maximální odolnost proti útokům.</p>
             </div>
         </div>
