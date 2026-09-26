@@ -1,15 +1,11 @@
-// components/sections/HeroBento.tsx
-
 import Link from "next/link";
-import { ArrowRight, CheckCircle2, MonitorSmartphone, Rocket, ShieldCheck } from "lucide-react";
-import Image from "next/image";
+import { ArrowRight, MonitorSmartphone, Rocket, ShieldCheck } from "lucide-react";
 
 export default function HeroBento() {
   return (
-    <section className="relative pt-24 pb-12 lg:pt-32 lg:pb-20 overflow-hidden bg-white">
+    <section className="relative min-h-[100dvh] flex items-center pt-24 pb-12 overflow-hidden bg-white">
       <div className="container px-4 mx-auto">
         <div className="max-w-4xl mx-auto text-center mb-12">
-          
           
           {/* H1 Hlavní nadpis */}
           <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight text-gray-900 mb-6 text-balance">
