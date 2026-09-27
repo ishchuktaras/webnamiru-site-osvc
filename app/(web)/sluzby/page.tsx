@@ -1,6 +1,6 @@
 import { Button } from "@/components/ui/button"
 import { Card, CardContent, CardHeader, CardTitle } from "@/components/ui/card"
-import { ArrowRight, CheckCircle2, Code2, Target, Users, Zap, Shield, Sparkles, Camera, Server, Lightbulb, Palette, Database, Globe } from "lucide-react"
+import { ArrowRight, CheckCircle2, Code2, Target, Shield, Sparkles, LayoutTemplate } from "lucide-react"
 import Link from "next/link"
 import { getServices } from "@/lib/sanity.queries"
 import Image from "next/image"
@@ -8,50 +8,56 @@ import { urlFor } from "@/lib/sanity.client"
 import type { Metadata } from "next"
 
 export const metadata: Metadata = {
-  title: "Služby | Webnamiru.site - Profesionální řešení",
-  description: "Komplexní digitální služby od vývoje softwaru po marketing a správu obsahu.",
+  title: "Služby | webnamiru.site",
+  description: "Vývoj rychlých webových aplikací v Next.js, strategické plánování a integrace AI.",
 }
 
 export const revalidate = 60
 
-// Mapa ikon podle slugu
+// Mapa ikon bez CMS
 const iconMap: Record<string, any> = {
-  "vyvoj-softwaru-a-webu": Code2,
-  "design-a-grafika": Palette,
-  "marketing-a-seo": Target,
-  "hosting-a-sprava": Server,
-  "konzultace-it": Lightbulb,
-  "fotograficke-sluzby": Camera,
-  "integrace-cms-systemu": Database,
-  "e-commerce-reseni": Globe,
+  "vyvoj-webu-na-miru": Code2,
+  "ai-integrace": Sparkles,
+  "ux-ui-strategie": Target,
+  "sprava-a-rozvoj": Shield,
+  // Zpětná kompatibilita pro stávající slugy
+  "podpora-a-udrzba": Shield,
+  "ux-ui-design": LayoutTemplate,
+  "strategicke-planovani-webu": Target,
 }
 
 export default async function ServicesPage() {
-  const services = await getServices().catch(() => [])
+  const allServices = await getServices().catch(() => [])
+  
+  // Bezpečnostní filtr: Skryjeme E-commerce a CMS integrace
+  const services = allServices.filter(
+    (service: any) => {
+      const slug = service.slug?.current || service.slug;
+      return !["e-commerce-reseni", "integrace-cms-systemu", "headless-cms-sanity"].includes(slug);
+    }
+  )
 
   return (
     <div className="flex flex-col min-h-screen">
-      {/* Hero Sekce */}
       <section className="py-20 md:py-32 relative overflow-hidden">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8 relative z-10">
           <div className="max-w-3xl mx-auto text-center space-y-8">
             <div className="inline-block">
-              <span className="inline-flex items-center rounded-full border border-primary/20 bg-primary/10 px-4 py-1.5 text-sm font-medium text-primary">
+              <span className="inline-flex items-center rounded-full border border-[#3B82F6]/20 bg-[#3B82F6]/10 px-4 py-1.5 text-sm font-medium text-[#3B82F6]">
                 <Sparkles className="mr-2 h-4 w-4" />
-                Služby na míru
+                Moderní webové technologie
               </span>
             </div>
             <h1 className="text-4xl md:text-5xl lg:text-7xl font-extrabold tracking-tight text-balance leading-tight">
               {services.length > 0 ? "Aktuální nabídka služeb" : "Digitální služby na míru"}
             </h1>
             <p className="text-base lg:text-lg text-muted-foreground text-pretty leading-relaxed">
-              Komplexní řešení pro váš byznys. Od strategie, přes vývoj, až po dlouhodobou správu.
+              Žádné pomalé šablony. Tvořím rychlá, bezpečná a škálovatelná řešení v Next.js, která se zaměřují na reálnou návratnost investice (ROI).
             </p>
           </div>
         </div>
       </section>
 
-      {/* Grid Služeb */}
       <section className="py-20 bg-muted/30">
         <div className="container max-w-7xl mx-auto px-4 lg:px-8">
           
@@ -74,26 +80,25 @@ export default async function ServicesPage() {
               return (
                 <Card
                   key={service._id}
-                  className="border hover:border-primary/50 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col overflow-hidden group h-full"
+                  className="border hover:border-[#3B82F6]/50 transition-all duration-300 shadow-sm hover:shadow-xl flex flex-col overflow-hidden group h-full"
                 >
-                  <div className="relative w-full h-48 overflow-hidden bg-muted">
+                  <div className="relative w-full h-48 overflow-hidden bg-[#0D1B3E]">
                     <Image
                       src={imageUrl}
                       alt={service.title}
                       fill
-                      className="object-cover transition-transform duration-500 group-hover:scale-105"
+                      className="object-cover opacity-90 transition-transform duration-500 group-hover:scale-105"
                     />
-                    {/* Zde je zachována oprava pro Tailwind v4 */}
-                    <div className="absolute inset-0 bg-linear-to-t from-background/90 to-transparent" />
-                    <div className="absolute bottom-4 left-4 p-2 bg-background/80 backdrop-blur-sm rounded-lg shadow-sm">
-                         <IconComponent className="h-6 w-6 text-primary" />
+                    <div className="absolute inset-0 bg-gradient-to-t from-background/95 to-transparent" />
+                    <div className="absolute bottom-4 left-4 p-2 bg-background/90 backdrop-blur-sm rounded-lg shadow-sm border">
+                         <IconComponent className="h-6 w-6 text-[#3B82F6]" />
                     </div>
                   </div>
 
                   <CardHeader>
                     <CardTitle className="text-2xl font-bold">{service.title}</CardTitle>
                     {service.priceFrom && (
-                      <div className="text-sm text-muted-foreground mt-2">
+                      <div className="text-sm font-medium text-[#3B82F6] mt-2">
                         od {Number(service.priceFrom).toLocaleString("cs-CZ")} Kč
                       </div>
                     )}
@@ -109,23 +114,21 @@ export default async function ServicesPage() {
                         <ul className="space-y-2">
                           {service.features.slice(0, 4).map((feature: any, i: number) => (
                             <li key={i} className="flex items-start text-sm">
-                              <CheckCircle2 className="h-4 w-4 mr-2 text-primary shrink-0 mt-0.5" />
-                              <span>{typeof feature === 'string' ? feature : feature.title}</span>
+                              <CheckCircle2 className="h-4 w-4 mr-2 text-[#3B82F6] shrink-0 mt-0.5" />
+                              <span className="font-medium">{typeof feature === 'string' ? feature : feature.title}</span>
                             </li>
                           ))}
                         </ul>
                       </div>
                     )}
 
-                    {/* grid-cols-1 = na mobilu 1 sloupec (tlačítka pod sebou) */}
-                    {/* sm:grid-cols-2 = od tabletu výše 2 sloupce (tlačítka vedle sebe) */}
-                    <div className="mt-auto pt-4 grid grid-cols-1 sm:grid-cols-2 gap-3">
+                    <div className="mt-auto pt-6 grid grid-cols-1 sm:grid-cols-2 gap-3">
                         <Button asChild className="w-full" variant="outline">
                             <Link href={`/sluzby/${currentSlug}`}>
                                 Více informací
                             </Link>
                         </Button>
-                        <Button asChild className="w-full" variant="default">
+                        <Button asChild className="w-full bg-[#3B82F6] hover:bg-[#2563EB] text-white">
                             <Link href="/kontakt">
                                 Poptat <ArrowRight className="ml-2 h-4 w-4" />
                             </Link>

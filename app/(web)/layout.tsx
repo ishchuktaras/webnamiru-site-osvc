@@ -92,15 +92,14 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased min-h-screen flex flex-col`}>
-      <head>
-        <Script
-          id="schema-local-business"
-          type="application/ld+json"
-          dangerouslySetInnerHTML={{
-            __html: JSON.stringify(localBusinessData),
-          }}
-        />
-      </head>
+      {/* Script necháme volně, Next.js si ho zpracuje */}
+      <Script
+        id="schema-local-business"
+        type="application/ld+json"
+        dangerouslySetInnerHTML={{
+          __html: JSON.stringify(localBusinessData),
+        }}
+      />
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
         <Header />
         <main className="flex-1">{children}</main>
