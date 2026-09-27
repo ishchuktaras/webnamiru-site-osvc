@@ -93,12 +93,12 @@ export default async function ProjectPage({
       {project.coverImage && (
         <section className="py-12">
           <div className="container max-w-6xl mx-auto px-4 lg:px-8">
-            <div className="relative h-[300px] md:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800">
+            <div className="relative h-[300px] md:h-[600px] w-full rounded-2xl overflow-hidden shadow-2xl border border-slate-100 dark:border-slate-800 bg-slate-50 dark:bg-slate-900">
               <Image
                 src={urlFor(project.coverImage).width(1200).height(800).url() || "/placeholder.svg"}
                 alt={project.title}
                 fill
-                className="object-cover hover:scale-105 transition-transform duration-700"
+                className="object-contain hover:scale-105 transition-transform duration-700"
                 priority
               />
             </div>
