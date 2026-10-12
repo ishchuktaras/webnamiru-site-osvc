@@ -7,6 +7,8 @@ import { ThemeProvider } from "next-themes"
 import Script from "next/script"
 import Footer from "@/components/Footer"
 import Header from "@/components/Header"
+// 1. PŘIDÁME IMPORT BANNERU:
+import { MigrationBanner } from "@/components/MigrationBanner" 
 import { CookieConsent } from "@/components/CookieConsent" 
 import { generateLocalBusinessSchema } from "@/lib/seo/structured-data"
 import { Inter, Geist_Mono, Source_Serif_4 } from "next/font/google"
@@ -92,7 +94,6 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
 
   return (
     <div className={`${inter.variable} ${geistMono.variable} ${sourceSerif.variable} font-sans antialiased min-h-screen flex flex-col`}>
-      {/* Script necháme volně, Next.js si ho zpracuje */}
       <Script
         id="schema-local-business"
         type="application/ld+json"
@@ -101,6 +102,9 @@ export default function WebLayout({ children }: { children: React.ReactNode }) {
         }}
       />
       <ThemeProvider attribute="class" defaultTheme="light" enableSystem disableTransitionOnChange>
+        {/* 2. ZDE JE BANNER VLOŽENÝ NAD HLAVNÍ NAVIGACI */}
+        <MigrationBanner />
+        
         <Header />
         <main className="flex-1">{children}</main>
         <Footer />
